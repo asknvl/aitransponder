@@ -1,0 +1,95 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="botplatform.Views.pmprocessor.addPmView">
+  
+     <UserControl.Styles>
+        <StyleInclude Source="/Views/Styles/WindowStyle.axaml" />
+    </UserControl.Styles>
+
+    <Grid
+        Height="150"
+        VerticalAlignment="Top"
+        RowDefinitions="*, 30">
+
+        <StackPanel
+            Grid.Row="0"
+            Orientation="Vertical">
+            <Grid
+                ColumnDefinitions="100, 80">
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="0">
+                    Геотег:
+                </TextBlock>
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="{Binding geotag}"/>
+            </Grid>
+            <Grid
+                ColumnDefinitions="100, 150">
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="0">
+                    Токен:
+                </TextBlock>
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="{Binding bot_token}"/>
+            </Grid>
+            <Grid
+                ColumnDefinitions="100, 150">
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="0">
+                    Номер:
+                </TextBlock>
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="{Binding phone_number}"/>
+            </Grid>
+            <Grid
+                ColumnDefinitions="100, 80">
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="0">
+                    Тип:
+                </TextBlock>
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="2"
+                    Width="150"
+                    Items="{Binding posting_types}"
+                    SelectedItem="{Binding posting_type}">
+                </ComboBox>
+            </Grid>
+        </StackPanel>
+        <Grid
+           ColumnDefinitions="Auto, Auto"
+           Grid.Row="1">
+            <Button
+                Grid.Column="0"
+                Command="{Binding addCmd}">
+                Создать
+            </Button>
+            <Button
+                Grid.Column="1"
+                Command="{Binding cancelCmd}">
+                Отмена
+            </Button>
+        </Grid>
+        <Grid.Styles>
+            <Style Selector="TextBlock">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style>
+        </Grid.Styles>
+    </Grid>
+    
+</UserControl>
