@@ -14,7 +14,7 @@ namespace botplatform.Models.storage
         void Save();
         void Add(PmModel pm);
         void Remove(string geotag);
-        void Update(PmModel pm);
+        void Update(string geotag, PmModel newPmModel);
         List<PmModel> GetAll();
     }
 }

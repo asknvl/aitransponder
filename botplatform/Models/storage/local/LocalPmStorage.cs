@@ -65,16 +65,17 @@ namespace botplatform.Models.storage.local
             }
         }
 
-        public void Update(PmModel pm)
+        public void Update(string geotag, PmModel pm)
         {
             try
             {
-                var found = PmModels.FirstOrDefault(m => m.geotag.Equals(pm.geotag));
+                var found = PmModels.FirstOrDefault(m => m.geotag.Equals(geotag));
                 if (found != null)
                 {
                     found.geotag = pm.geotag;
                     found.bot_token = pm.bot_token;
                     found.phone_number = pm.phone_number;                    
+                    found.posting_type = pm.posting_type;
 
                     storage.save(PmModels);
                 }

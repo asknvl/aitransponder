@@ -1,4 +1,5 @@
 ﻿using asknvl.logger;
+using botplatform.Models.storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace botplatform.Models.pmprocessor
 {
     public class pm_processor_v0 : PMBase
     {
-        public pm_processor_v0(PmModel model, ILogger logger) : base(model, logger)
+        public pm_processor_v0(PmModel model, IOperatorStorage operatorStorage, IPMStorage pmStorage, ILogger logger) : base(model, operatorStorage, pmStorage, logger)
         {
         }
     }

@@ -1,6 +1,8 @@
-﻿using botplatform.Model.bot;
+﻿using aksnvl.storage;
+using botplatform.Model.bot;
 using botplatform.Models.bot;
 using botplatform.Models.pmprocessor;
+using botplatform.Models.settings;
 using botplatform.Models.storage;
 using botplatform.Models.storage.local;
 using botplatform.Operators;
@@ -86,6 +88,13 @@ namespace botplatform.ViewModels
             set => this.RaiseAndSetIfChanged(ref logger, value);
         }
 
+        settingsVM appSettings;
+        public settingsVM AppSettings
+        {
+            get => appSettings;
+            set => this.RaiseAndSetIfChanged(ref appSettings, value);  
+        }
+
         operatorsVM operators;
         public operatorsVM OperatorsVM
         {
@@ -102,10 +111,16 @@ namespace botplatform.ViewModels
         public mainVM()
         {
 
-            Logger = new loggerVM();
-            pmStorage = new LocalPmStorage();
-            pmFactory = new PmFactory();
+            AppSettings = new settingsVM();
 
+            Logger = new loggerVM();
+            pmStorage = new LocalPmStorage();            
+            operatorStorage = new LocalOperatorStorage();
+
+            pmFactory = new PmFactory(operatorStorage, pmStorage, Logger);
+
+            var settings = Settings.getInstance();            
+            
 
             //RestService restService = new RestService(Logger);
 
@@ -120,21 +135,32 @@ namespace botplatform.ViewModels
 
             //restService.Listen();
 
-            botStorage = new LocalBotStorage();
-            operatorStorage = new LocalOperatorStorage();
+            //botStorage = new LocalBotStorage();
+            //operatorStorage = new LocalOperatorStorage();
 
-            botFactory = new BotFactory(operatorStorage, botStorage);
+            //botFactory = new BotFactory(operatorStorage, botStorage);
 
-            var models = botStorage.GetAll();
+            //var models = botStorage.GetAll();
 
-            OperatorsVM = new operatorsVM(operatorStorage);            
-            
+            //OperatorsVM = new operatorsVM(operatorStorage);            
+
+            //foreach (var model in models)
+            //{                
+            //    var bot = botFactory.Get(model, logger);
+            //    Bots.Add(bot);
+            //    operatorStorage.Add(model.geotag);                
+            //}
+
+
+            var models = pmStorage.GetAll();
             foreach (var model in models)
-            {                
-                var bot = botFactory.Get(model, logger);
-                Bots.Add(bot);
-                operatorStorage.Add(model.geotag);                
+            {
+                var pm = pmFactory.Get(model);
+                PMs.Add(pm);
+                operatorStorage.Add(model.geotag);
             }
+
+
 
             #region commands
             addCmd = ReactiveCommand.Create(() => {
@@ -162,7 +188,7 @@ namespace botplatform.ViewModels
 
                 //SubContent = addvm;
 
-                SelectedPm = null;
+                //SelectedPm = null;
 
                 var addvm = new addPmVM();
                 addvm.CreatedEvent += (model) => { 
@@ -175,14 +201,14 @@ namespace botplatform.ViewModels
                         throw;
                     }
 
-                    var pm = pmFactory.Get(model, logger);
+                    var pm = pmFactory.Get(model);
                     PMs.Add(pm);
 
                     operatorStorage.Add(model.geotag);
                 };
 
                 SubContent = addvm;
-                SelectedPm = null;
+                //SelectedPm = null;
             });
 
             removeCmd = ReactiveCommand.Create(() =>

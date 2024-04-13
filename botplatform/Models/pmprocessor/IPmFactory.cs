@@ -10,6 +10,6 @@ namespace botplatform.Models.pmprocessor
 {
     public interface IPmFactory
     {
-        PMBase Get(PmModel model, ILogger logger);
+        PMBase Get(PmModel model);
     }
 }

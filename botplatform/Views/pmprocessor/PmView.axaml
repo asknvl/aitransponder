@@ -29,7 +29,7 @@
                     Text="{Binding geotag}"/>
             </Grid>
             <Grid
-                ColumnDefinitions="100, 150">
+                ColumnDefinitions="100, 220">
                 <TextBlock
                     Grid.Column="0"
                     Grid.Row="0">
@@ -41,7 +41,7 @@
                     Text="{Binding bot_token}"/>
             </Grid>
             <Grid
-                ColumnDefinitions="100, 150">
+                ColumnDefinitions="100, 220">
                 <TextBlock
                     Grid.Column="0"
                     Grid.Row="0">
@@ -53,7 +53,7 @@
                     Text="{Binding phone_number}"/>
             </Grid>
             <Grid
-                ColumnDefinitions="100, 80">
+                ColumnDefinitions="100, 220">
                 <TextBlock
                     Grid.Column="0"
                     Grid.Row="0">
@@ -62,8 +62,8 @@
                 <ComboBox
                     Grid.Row="0"
                     Grid.Column="1"
-                    Margin="2"
-                    Width="150"
+                    HorizontalAlignment="Stretch"
+                    Margin="2"                    
                     Items="{Binding posting_types}"
                     SelectedItem="{Binding posting_type}">
                 </ComboBox>
@@ -74,20 +74,20 @@
             RowDefinitions="Auto, Auto"
             Grid.Row="1">
             <Button
-                IsEnabled="{Binding !IsActive, Mode=TwoWay}"
+                IsEnabled="{Binding !is_active, Mode=TwoWay}"
                 Command="{Binding startCmd}"
                 Grid.Column="0">
                 Запустить
             </Button>
             <Button
-                IsEnabled="{Binding IsActive, Mode=TwoWay}"
+                IsEnabled="{Binding is_active, Mode=TwoWay}"
                 Command="{Binding stopCmd}"
                 Grid.Column="1">
                 Остановить
             </Button>
             <Button
-                IsEnabled="{Binding !IsActive, Mode=TwoWay}"
-                IsVisible="{Binding !IsActive}"
+                IsEnabled="{Binding !is_active, Mode=TwoWay}"
+                IsVisible="{Binding !is_active}"
                 Command="{Binding editCmd}"
                 Grid.Column="2">
                 Редактировать
@@ -96,7 +96,7 @@
             <StackPanel
               Grid.Row="1"
               Grid.Column="2"
-              IsVisible="{Binding IsEditable}">
+              IsVisible="{Binding is_editable}">
                 <Button
                     Command="{Binding saveCmd}"
                     HorizontalAlignment="Stretch"
@@ -115,7 +115,7 @@
         <Grid
             Grid.Row="2"
             RowDefinitions="Auto, *"
-            IsVisible="{Binding IsActive}">
+            IsVisible="{Binding is_active}">
             <TextBlock
                 Grid.Row="0"
                 VerticalAlignment="Center"

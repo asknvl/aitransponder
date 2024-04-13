@@ -6,25 +6,22 @@
         
         xmlns:pmvs="using:botplatform.Views.pmprocessor"
         xmlns:pmvm="using:botplatform.ViewModels.pmrocessor"
+        xmlns:pm="using:botplatform.Models.pmprocessor"
         
         xmlns:cust="using:botplatform.Views.custom"
-        xmlns:op="using:botplatform.ViewModels"        
+        xmlns:op="using:botplatform.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="botplatform.Views.mainWnd"
         Icon="/Assets/avalonia-logo.ico"
         Title="botplatform 1.0">
+    
+    <Window.Styles>
+        <StyleInclude Source="/Views/Styles/WindowStyle.axaml" />
+    </Window.Styles>
 
-	<Design.DataContext>
-		<vm:MainWindowViewModel/>
-	</Design.DataContext>
-
-	<Window.Styles>
-		<StyleInclude Source="/Views/Styles/WindowStyle.axaml" />
-	</Window.Styles>
-
-	<TabControl>
+    <TabControl>
         <TabItem
             Header="PM">
             <Grid
@@ -36,7 +33,7 @@
                         Grid.Row="0"
                         MinWidth="330"
                         Items="{Binding PMs}"
-                        SelectedItems="{Binding SelectedPm}">
+                        SelectedItem="{Binding SelectedPm}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding geotag}"/>
@@ -67,8 +64,8 @@
                     <ContentControl
                         Content="{Binding SubContent}">
                         <ContentControl.DataTemplates>
-                            <DataTemplate DataType="bot:BotBase">
-                                <vs:botplatformView/>
+                            <DataTemplate DataType="pm:PMBase">
+                                <pmvs:PmView/>
                             </DataTemplate>
                             <DataTemplate DataType="pmvm:addPmVM">
                                 <pmvs:addPmView/>
@@ -76,327 +73,79 @@
                         </ContentControl.DataTemplates>
                     </ContentControl>
                 </Grid>
-                
+
+                <vs:loggerView
+                   Grid.Column="2"
+                   DataContext="{Binding Logger}"/>
+
             </Grid>
         </TabItem>
-        
-		<TabItem Header="Боты">
-			<Grid
+
+        <TabItem Header="Боты">
+            <Grid
                  ColumnDefinitions="Auto, Auto, *">
-				<Grid
+                <Grid
                     Grid.Column="0"
                     RowDefinitions="*, Auto">
-					<ListBox
+                    <ListBox
                         Grid.Row="0"
                         MinWidth="330"
                         Items="{Binding Bots}"
                         SelectedItems="{Binding SelectedBots}"
                         SelectedItem="{Binding SelectedBot}">
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<TextBlock Text="{Binding Geotag}"/>
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
-					<Grid
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Geotag}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Grid
                         Grid.Row="1"
                         ColumnDefinitions="*, *">
-						<Button
-                            Command="{Binding addCmd}"                            
+                        <Button
+                            Command="{Binding addCmd}"
                             Grid.Column="0"
                             HorizontalAlignment="Stretch">
-							Добавить
-						</Button>						
-						<Button
-                            Command="{Binding removeCmd}"                            
+                            Добавить
+                        </Button>
+                        <Button
+                            Command="{Binding removeCmd}"
                             HorizontalAlignment="Stretch"
                             Grid.Column="1">
-							Удалить
-						</Button>
-					</Grid>
-				</Grid>
+                            Удалить
+                        </Button>
+                    </Grid>
+                </Grid>
 
-				<Grid
+                <!--<Grid
                     Grid.Column="1"
                     MinWidth="400">
 					<ContentControl
                         Content="{Binding SubContent}">
 						<ContentControl.DataTemplates>
 							<DataTemplate DataType="bot:BotBase">
-								<vs:botplatformView/>
+								<vs:AviatorView/>
 							</DataTemplate>
 							<DataTemplate DataType="vm:addBotVM">
 								<vs:addBotView/>
 							</DataTemplate>
 						</ContentControl.DataTemplates>
 					</ContentControl>
-				</Grid>
+				</Grid>-->
 
-                <vs:loggerView                    
+                <vs:loggerView
                     Grid.Column="2"
                     DataContext="{Binding Logger}"/>
-                
-				<!--<Grid
-                    Grid.Column="2">
-					<cust:AutoScrollListBox
-                        DataContext="{Binding Logger}"
-                        Items="{Binding Messages}">
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<Grid
-                                    ColumnDefinitions="80, 150, *">
-									<TextBlock
-                                        Grid.Column="0"
-                                        Text="{Binding TAG}"/>
-									<TextBlock
-                                        Grid.Column="1"
-                                        Text="{Binding Date}"/>
-									<TextBlock
-                                        Grid.Column="2"
-                                        Text="{Binding Text}"/>
-									<Grid.Styles>
-										<Style Selector="TextBlock">
-											<Setter Property="FontFamily" Value="Consolas"/>
-										</Style>
-									</Grid.Styles>
-								</Grid>
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-						<ListBox.Styles>
-							<Style Selector="ListBoxItem">
-								<Setter Property="Margin" Value="0"/>
-								<Setter Property="Padding" Value="0"/>
-							</Style>
-							<Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
-								<Setter Property="BorderBrush" Value="Transparent"/>
-							</Style>
-						</ListBox.Styles>
-					</cust:AutoScrollListBox>
-				</Grid>-->
-			</Grid>
-		</TabItem>
 
-		<TabItem Header="Операторы">
-			<Grid
-                DataContext="{Binding OperatorsVM}"
-                ColumnDefinitions="Auto, Auto"
-                RowDefinitions="*, Auto">
-				<Border
-                    Margin="2"
-                    BorderBrush="LightGray"
-                    BorderThickness="1"
-                    CornerRadius="3"
-                    Padding="0">
+            </Grid>
+        </TabItem>
 
-					<ScrollViewer>
+        <TabItem
+            Header="Настройки">
+            <vs:settingsView
+                DataContext="{Binding AppSettings}"/>
+        </TabItem>
 
-
-
-						<ItemsControl
-							MinWidth="330"
-							Items="{Binding BotOperators}">
-
-							<ItemsControl.ItemTemplate>
-								<DataTemplate>
-									<Grid
-										RowDefinitions="Auto, *">
-										<Grid
-											ColumnDefinitions="*, 20, 20"
-											Grid.Row="0">
-											<TextBlock
-												Grid.Column="0"
-												Text="{Binding geotag}"/>
-
-											<Button
-												Grid.Column="1"
-												Classes="Button Hyper"
-												Margin="0"
-												MinHeight="0"
-												MinWidth="0"
-												Command="{Binding addOperatorCmd}">
-												+
-											</Button>
-
-											<Button
-												Grid.Column="2"
-												Classes="Button Hyper"
-												Margin="0"
-												MinHeight="0"
-												MinWidth="0"
-												Command="{Binding deleteOperatorCmd}">
-												-
-											</Button>
-										</Grid>
-
-										<ListBox
-											BorderThickness="0"
-											Grid.Row="1"
-											Items="{Binding Operators}"
-											SelectedItem="{Binding SelectedOperator}">
-											<ListBox.ItemTemplate>
-												<DataTemplate>
-													<Grid
-														ColumnDefinitions="30, Auto">
-														<TextBlock
-															Grid.Column="0"
-															Text="{Binding letters}"
-															FontWeight="DemiBold"/>
-														<TextBlock
-															Grid.Column="1">
-															<TextBlock.Text>
-																<MultiBinding StringFormat="{}{0} {1}">
-																	<Binding Path="last_name"/>
-																	<Binding Path="first_name"/>
-																</MultiBinding>
-															</TextBlock.Text>
-														</TextBlock>
-
-													</Grid>
-												</DataTemplate>
-											</ListBox.ItemTemplate>
-										</ListBox>
-									</Grid>
-								</DataTemplate>
-							</ItemsControl.ItemTemplate>
-						</ItemsControl>
-					</ScrollViewer>
-				</Border>
-				<!--<Grid
-                    Grid.Row="1"
-                    ColumnDefinitions="Auto, Auto, Auto">
-                    <Button
-                        Command="{Binding addCmd}"
-                        Width="110"
-                        Grid.Column="0">
-                        Добавить
-                    </Button>
-                    <Button
-                        Command="{Binding editCmd}"
-                        Width="110"
-                        Grid.Column="1">
-                        Редактировать
-                    </Button>
-                    <Button
-                        Command="{Binding removeCmd}"
-                        Width="110"
-                        Grid.Column="2">
-                        Удалить
-                    </Button>
-                </Grid>-->
-				<Grid
-                    Grid.Column="1"
-                    MinWidth="400"
-                    ColumnDefinitions="Auto, Auto">
-					<ContentControl
-                        Content="{Binding SubContent}">
-						<ContentControl.DataTemplates>
-							<DataTemplate DataType="op:operatorVM">
-								<Grid
-                                    ColumnDefinitions="Auto, Auto">
-									<StackPanel
-                                        Grid.Column="0">
-
-										<Grid
-                                            ColumnDefinitions="100, 100">
-											<TextBlock
-                                                Grid.Column="0"
-                                                Grid.Row="0">
-												Литеры:
-											</TextBlock>
-											<TextBox
-                                                Grid.Row="0"
-                                                Grid.Column="1"
-                                                Text="{Binding OP.letters}"/>
-										</Grid>
-
-										<Grid
-                                            ColumnDefinitions="100, 100">
-											<TextBlock
-                                                Grid.Column="0"
-                                                Grid.Row="0">
-												TG ID:
-											</TextBlock>
-											<TextBox
-                                                Grid.Row="0"
-                                                Grid.Column="1"
-                                                Text="{Binding OP.tg_id}"/>
-										</Grid>
-
-										<Grid
-                                            ColumnDefinitions="100, 100">
-											<TextBlock
-                                                Grid.Column="0"
-                                                Grid.Row="0">
-												Имя:
-											</TextBlock>
-											<TextBox
-                                                Grid.Row="0"
-                                                Grid.Column="1"
-                                                Text="{Binding OP.first_name}"/>
-										</Grid>
-
-										<Grid
-                                            ColumnDefinitions="100, 100">
-											<TextBlock
-                                                Grid.Column="0"
-                                                Grid.Row="0">
-												Фамилия:
-											</TextBlock>
-											<TextBox
-                                                Grid.Row="0"
-                                                Grid.Column="1"
-                                                Text="{Binding OP.last_name}"/>
-										</Grid>
-
-										<Grid
-                                            ColumnDefinitions="100, 100">
-											<TextBlock
-                                                Grid.Column="0"
-                                                Grid.Row="0">
-												Код:
-											</TextBlock>
-											<TextBox
-                                                Grid.Row="0"
-                                                Grid.Column="1"
-                                                Text="{Binding OP.uniqcode}"/>
-										</Grid>
-
-										<Button
-                                            Command="{Binding okCmd}">
-											OK
-										</Button>
-									</StackPanel>
-									<Grid
-                                        Margin="4"
-                                        RowDefinitions="Auto, Auto"
-                                        Grid.Column="1">
-										<TextBlock
-                                            Grid.Row="0">
-											Права доступа:
-										</TextBlock>
-										<ListBox
-                                            Grid.Row="1"
-                                            MaxHeight="200"
-                                            VerticalAlignment="Top"
-                                            Items="{Binding Permissions}"
-                                            SelectionMode="Multiple, Toggle"
-                                            SelectedItems="{Binding SelectedPermissions, Mode=TwoWay}">
-											<ListBox.ItemTemplate>
-												<DataTemplate>
-													<TextBlock
-														Text="{Binding name}"/>
-												</DataTemplate>
-											</ListBox.ItemTemplate>
-										</ListBox>
-									</Grid>
-								</Grid>
-							</DataTemplate>
-						</ContentControl.DataTemplates>
-					</ContentControl>
-				</Grid>
-
-			</Grid>
-		</TabItem>
-	</TabControl>
+    </TabControl>
 
 </Window>
