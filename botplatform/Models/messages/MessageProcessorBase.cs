@@ -42,7 +42,7 @@ namespace botplatform.Models.messages
         #endregion
 
         #region public        
-        public async void Add(string code, Message message, string pm)
+        public async void Add(string code, Message message, string? pm = null)
         {
             if (MessageTypes == null)
                 return;
@@ -52,13 +52,19 @@ namespace botplatform.Models.messages
                 return;
 
             var pattern = await StateMessage.Create(bot, message, geotag, token);
-            AutoChange pm_autochange = new AutoChange()
+
+            //автозамены
+            if (pm != null)
             {
-                OldText = "@booowos",
-                NewText = pm
-            };
-            var autochanges = new List<AutoChange>() { pm_autochange };
-            pattern.MakeAutochange(autochanges);
+                AutoChange pm_autochange = new AutoChange()
+                {
+                    OldText = "@booowos",
+                    NewText = pm
+                };
+                var autochanges = new List<AutoChange>() { pm_autochange };
+                pattern.MakeAutochange(autochanges);
+            }
+
             pattern.Id = messages.Count();
 
             if (messages.ContainsKey(code))

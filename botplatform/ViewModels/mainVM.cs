@@ -114,15 +114,17 @@ namespace botplatform.ViewModels
             AppSettings = new settingsVM();
 
             Logger = new loggerVM();
-            pmStorage = new LocalPmStorage();            
-            operatorStorage = new LocalOperatorStorage();
+            pmStorage = new LocalPmStorage();                        
 
-            pmFactory = new PmFactory(operatorStorage, pmStorage, Logger);
+            pmFactory = new PmFactory(pmStorage, Logger);
 
             var settings = Settings.getInstance();            
             
 
-            //RestService restService = new RestService(Logger);
+            RestService restService = new RestService(Logger);
+            MessageRequestProcessor messageRequestProcessor = new MessageRequestProcessor();    
+            restService.RequestProcessors.Add(messageRequestProcessor); 
+
 
             //PushRequestProcessor pushRequestProcessor = new PushRequestProcessor();
             //StatusUpdateRequestProcessor statusUpdateRequestProcessor = new StatusUpdateRequestProcessor();
@@ -133,7 +135,7 @@ namespace botplatform.ViewModels
             //restService.RequestProcessors.Add(notifyRequestProcessor);
 
 
-            //restService.Listen();
+            restService.Listen();
 
             //botStorage = new LocalBotStorage();
             //operatorStorage = new LocalOperatorStorage();
@@ -156,8 +158,8 @@ namespace botplatform.ViewModels
             foreach (var model in models)
             {
                 var pm = pmFactory.Get(model);
-                PMs.Add(pm);
-                operatorStorage.Add(model.geotag);
+                PMs.Add(pm);        
+                messageRequestProcessor.Add(pm);
             }
 
 
@@ -203,8 +205,7 @@ namespace botplatform.ViewModels
 
                     var pm = pmFactory.Get(model);
                     PMs.Add(pm);
-
-                    operatorStorage.Add(model.geotag);
+                    messageRequestProcessor.Add(pm);
                 };
 
                 SubContent = addvm;
@@ -252,7 +253,6 @@ namespace botplatform.ViewModels
 
             });            
             #endregion
-        }
-
+        }        
     }
 }

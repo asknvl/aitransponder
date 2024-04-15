@@ -1,5 +1,7 @@
 ﻿using asknvl.logger;
 using botplatform.Model.bot;
+using botplatform.Models.messages.pmprocessor.india_hack;
+using botplatform.Models.pmprocessor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,17 @@ namespace botplatform.Models.messages
         {
             switch (type)
             {
+                default:
+                    return null;
+            }
+        }
+
+        public MessageProcessorBase Get(PostingType type, string geotag, string token, ITelegramBotClient bot)
+        {
+            switch (type)
+            {
+                case PostingType.india_hack:
+                    return new MP_hack_ind_eng_v0(geotag, token, bot);                      
                 default:
                     return null;
             }

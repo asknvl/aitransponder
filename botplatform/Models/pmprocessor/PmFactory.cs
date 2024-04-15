@@ -12,15 +12,13 @@ namespace botplatform.Models.pmprocessor
     public class PmFactory : IPmFactory
     {
 
-        #region vars
-        IOperatorStorage operatorStorage;
+        #region vars        
         IPMStorage pmStorage;
         ILogger logger;
         #endregion
 
-        public PmFactory(IOperatorStorage operatorStorage, IPMStorage pmStorage, ILogger logger)
-        {
-            this.operatorStorage = operatorStorage;
+        public PmFactory(IPMStorage pmStorage, ILogger logger)
+        {            
             this.pmStorage = pmStorage;
             this.logger = logger;
         }
@@ -28,7 +26,7 @@ namespace botplatform.Models.pmprocessor
         #region public
         public PMBase Get(PmModel model)
         {
-            return new pm_processor_v0(model, operatorStorage, pmStorage, logger);
+            return new pm_processor_v0(model, pmStorage, logger);
         }
         #endregion
     }

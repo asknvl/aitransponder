@@ -421,7 +421,11 @@ namespace botplatform.Model.bot
 
             var receiverOptions = new ReceiverOptions
             {
-                AllowedUpdates = new UpdateType[] { UpdateType.Message, UpdateType.BusinessConnection, UpdateType.BusinessMessage }
+                AllowedUpdates = new UpdateType[] { 
+                    UpdateType.Message,
+                    UpdateType.BusinessConnection,
+                    UpdateType.BusinessMessage
+                }
             };
 
             //MessageProcessor = new MessageProcessor_v0(geotag, bot);

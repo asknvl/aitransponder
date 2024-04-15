@@ -3,56 +3,112 @@
   "WorkspaceRootPath": "C:\\WORK\\RaceUP\\sources\\aitransponder\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\viewmodels\\mainvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\viewmodels\\mainvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\views\\addbotview.axaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\views\\addbotview.axaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\views\\mainwnd.axaml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\views\\mainwnd.axaml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\views\\mainwnd.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\views\\mainwnd.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\common.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\common.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\viewmodels\\settingsvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\viewmodels\\settingsvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\views\\settingsview.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\views\\settingsview.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\views\\pmprocessor\\pmview.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\views\\pmprocessor\\pmview.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\settings\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\settings\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\viewmodels\\operatorvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\viewmodels\\operatorvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\views\\pmprocessor\\addpmview.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\views\\pmprocessor\\addpmview.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\pmbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\pmbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\bot\\botbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\bot\\botbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\rest\\messagerequestprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\rest\\messagerequestprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\viewmodels\\mainvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\viewmodels\\mainvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\rest\\pushrequestprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\rest\\pushrequestprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\bot\\ipushobserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\bot\\ipushobserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\rest\\imessageobservable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\rest\\imessageobservable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\messages\\messageprocessorbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\messages\\messageprocessorbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\rest\\restservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\rest\\restservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\imessageobserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\imessageobserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\rest\\ipushobservable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\rest\\ipushobservable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\rest\\notifyrequestprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\rest\\notifyrequestprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\server\\iaiserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\server\\iaiserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\settings\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\settings\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\server\\aiserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\server\\aiserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\message_queue\\messagequeue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\message_queue\\messagequeue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\messages\\imessageprocessorfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\messages\\imessageprocessorfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\messages\\messageprocessorfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\messages\\messageprocessorfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\viewmodels\\settingsvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\viewmodels\\settingsvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\views\\mainwnd.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\views\\mainwnd.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\pmfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\pmfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\messages\\pmprocessor\\india_hack\\mp_hack_ind_eng_v0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\messages\\pmprocessor\\india_hack\\mp_hack_ind_eng_v0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\pm_processor_v0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\pm_processor_v0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\views\\addbotview.axaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\views\\addbotview.axaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\views\\settingsview.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\views\\settingsview.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\viewmodels\\operatorvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\viewmodels\\operatorvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\storage\\local\\localpmstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -75,16 +131,8 @@
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\storage\\ioperatorstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\pm_processor_v0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\pm_processor_v0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\bot\\botfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\bot\\botfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\bot\\botbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\bot\\botbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\views\\aviatorbotview.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}",
@@ -139,10 +187,6 @@
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\viewmodels\\editbotvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\rest\\pushrequestprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\rest\\pushrequestprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\viewmodels\\loggervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\viewmodels\\loggervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -165,8 +209,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 194,
-          "SelectedChildIndex": 6,
+          "DockedWidth": 620,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -178,65 +222,93 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "settingsVM.cs",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\settingsVM.cs",
-              "RelativeDocumentMoniker": "botplatform\\ViewModels\\settingsVM.cs",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\settingsVM.cs",
-              "RelativeToolTip": "botplatform\\ViewModels\\settingsVM.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABoAAAAbAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-13T18:45:21.988Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "mainWnd.axaml",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\mainWnd.axaml",
-              "RelativeDocumentMoniker": "botplatform\\Views\\mainWnd.axaml",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\mainWnd.axaml",
-              "RelativeToolTip": "botplatform\\Views\\mainWnd.axaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T12:54:23.822Z",
+              "Title": "MessageRequestProcessor.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\rest\\MessageRequestProcessor.cs",
+              "RelativeDocumentMoniker": "botplatform\\rest\\MessageRequestProcessor.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\rest\\MessageRequestProcessor.cs",
+              "RelativeToolTip": "botplatform\\rest\\MessageRequestProcessor.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAowC8AAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T21:40:51.488Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "settingsView.axaml",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\settingsView.axaml",
-              "RelativeDocumentMoniker": "botplatform\\Views\\settingsView.axaml",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\settingsView.axaml",
-              "RelativeToolTip": "botplatform\\Views\\settingsView.axaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-13T18:42:46.037Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Settings.cs",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\settings\\Settings.cs",
-              "RelativeDocumentMoniker": "botplatform\\Models\\settings\\Settings.cs",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\settings\\Settings.cs",
-              "RelativeToolTip": "botplatform\\Models\\settings\\Settings.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAcwCwAAAAaAAAA",
+              "Title": "IPushObserver.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\bot\\IPushObserver.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\bot\\IPushObserver.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\bot\\IPushObserver.cs",
+              "RelativeToolTip": "botplatform\\Models\\bot\\IPushObserver.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAoAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-13T18:05:42.63Z",
+              "WhenOpened": "2024-04-15T21:46:41.902Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "mainWnd.axaml",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\mainWnd.axaml",
-              "RelativeDocumentMoniker": "botplatform\\Views\\mainWnd.axaml",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\mainWnd.axaml",
-              "RelativeToolTip": "botplatform\\Views\\mainWnd.axaml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T13:49:18.773Z",
+              "Title": "BotBase.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\bot\\BotBase.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\bot\\BotBase.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\bot\\BotBase.cs",
+              "RelativeToolTip": "botplatform\\Models\\bot\\BotBase.cs",
+              "ViewState": "AQIAAE8BAAAAAAAAAAAAwFoBAABUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-11T15:53:48.552Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IMessageObserver.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\IMessageObserver.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\IMessageObserver.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\IMessageObserver.cs",
+              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\IMessageObserver.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T21:47:26.633Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IMessageObservable.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\rest\\IMessageObservable.cs",
+              "RelativeDocumentMoniker": "botplatform\\rest\\IMessageObservable.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\rest\\IMessageObservable.cs",
+              "RelativeToolTip": "botplatform\\rest\\IMessageObservable.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwA4AAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T21:46:01.068Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PushRequestProcessor.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\rest\\PushRequestProcessor.cs",
+              "RelativeDocumentMoniker": "botplatform\\rest\\PushRequestProcessor.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\rest\\PushRequestProcessor.cs",
+              "RelativeToolTip": "botplatform\\rest\\PushRequestProcessor.cs",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAgwFsAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-11T20:53:18.333Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IPushObservable.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\rest\\IPushObservable.cs",
+              "RelativeDocumentMoniker": "botplatform\\rest\\IPushObservable.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\rest\\IPushObservable.cs",
+              "RelativeToolTip": "botplatform\\rest\\IPushObservable.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T21:45:58.981Z",
               "EditorCaption": ""
             },
             {
@@ -245,20 +317,69 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "operatorVM.cs",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\operatorVM.cs",
-              "RelativeDocumentMoniker": "botplatform\\ViewModels\\operatorVM.cs",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\operatorVM.cs",
-              "RelativeToolTip": "botplatform\\ViewModels\\operatorVM.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 12,
+              "Title": "NotifyRequestProcessor.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\rest\\NotifyRequestProcessor.cs",
+              "RelativeDocumentMoniker": "botplatform\\rest\\NotifyRequestProcessor.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\rest\\NotifyRequestProcessor.cs",
+              "RelativeToolTip": "botplatform\\rest\\NotifyRequestProcessor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-13T17:56:03.088Z",
+              "WhenOpened": "2024-04-15T21:42:56.916Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AIServer.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\server\\AIServer.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\server\\AIServer.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\server\\AIServer.cs",
+              "RelativeToolTip": "botplatform\\Models\\server\\AIServer.cs",
+              "ViewState": "AQIAADEAAAAAAAAAAAAkwEcAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T09:21:26.291Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "settingsVM.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\settingsVM.cs",
+              "RelativeDocumentMoniker": "botplatform\\ViewModels\\settingsVM.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\settingsVM.cs",
+              "RelativeToolTip": "botplatform\\ViewModels\\settingsVM.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABoAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-13T18:45:21.988Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 17,
+              "Title": "IMessageProcessorFactory.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\messages\\IMessageProcessorFactory.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\messages\\IMessageProcessorFactory.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\messages\\IMessageProcessorFactory.cs",
+              "RelativeToolTip": "botplatform\\Models\\messages\\IMessageProcessorFactory.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAABoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T13:55:22.154Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "MessageProcessorFactory.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\messages\\MessageProcessorFactory.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\messages\\MessageProcessorFactory.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\messages\\MessageProcessorFactory.cs",
+              "RelativeToolTip": "botplatform\\Models\\messages\\MessageProcessorFactory.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAhwA0AAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T07:16:17.931Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
               "Title": "IOperatorStorage.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\storage\\IOperatorStorage.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\storage\\IOperatorStorage.cs",
@@ -266,38 +387,107 @@
               "RelativeToolTip": "botplatform\\Models\\storage\\IOperatorStorage.cs",
               "ViewState": "AQIAAAEAAAAAAAAAAAAlwBIAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-13T09:01:08.662Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-13T09:01:08.662Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "pm_processor_v0.cs",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
-              "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
-              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBAAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T13:46:41.577Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 21,
               "Title": "PmFactory.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\PmFactory.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\PmFactory.cs",
               "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\PmFactory.cs",
               "RelativeToolTip": "botplatform\\Models\\pmprocessor\\PmFactory.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAqwB4AAAAJAAAA",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAUwBwAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T16:37:08.713Z",
+              "WhenOpened": "2024-04-12T16:37:08.713Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Settings.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\settings\\Settings.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\settings\\Settings.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\settings\\Settings.cs",
+              "RelativeToolTip": "botplatform\\Models\\settings\\Settings.cs",
+              "ViewState": "AQIAACUAAAAAAAAAAAAgwD0AAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-13T18:05:42.63Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
+              "Title": "mainWnd.axaml",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\mainWnd.axaml",
+              "RelativeDocumentMoniker": "botplatform\\Views\\mainWnd.axaml",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\mainWnd.axaml",
+              "RelativeToolTip": "botplatform\\Views\\mainWnd.axaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-15T09:16:21.697Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "MessageQueue.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\message_queue\\MessageQueue.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\message_queue\\MessageQueue.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\message_queue\\MessageQueue.cs",
+              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\message_queue\\MessageQueue.cs",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAwwBQAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T17:45:15.343Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "MP_hack_ind_eng_v0.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\messages\\pmprocessor\\india_hack\\MP_hack_ind_eng_v0.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\messages\\pmprocessor\\india_hack\\MP_hack_ind_eng_v0.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\messages\\pmprocessor\\india_hack\\MP_hack_ind_eng_v0.cs",
+              "RelativeToolTip": "botplatform\\Models\\messages\\pmprocessor\\india_hack\\MP_hack_ind_eng_v0.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T07:20:12.78Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "pm_processor_v0.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
+              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAABiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-12T13:46:41.577Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "operatorVM.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\operatorVM.cs",
+              "RelativeDocumentMoniker": "botplatform\\ViewModels\\operatorVM.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\operatorVM.cs",
+              "RelativeToolTip": "botplatform\\ViewModels\\operatorVM.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-13T17:56:03.088Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "settingsView.axaml",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\settingsView.axaml",
+              "RelativeDocumentMoniker": "botplatform\\Views\\settingsView.axaml",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\settingsView.axaml",
+              "RelativeToolTip": "botplatform\\Views\\settingsView.axaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-13T18:42:46.037Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
               "Title": "BotFactory.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\bot\\BotFactory.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\bot\\BotFactory.cs",
@@ -305,25 +495,11 @@
               "RelativeToolTip": "botplatform\\Models\\bot\\BotFactory.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-11T15:57:15.493Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-11T15:57:15.493Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "BotBase.cs",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\bot\\BotBase.cs",
-              "RelativeDocumentMoniker": "botplatform\\Models\\bot\\BotBase.cs",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\bot\\BotBase.cs",
-              "RelativeToolTip": "botplatform\\Models\\bot\\BotBase.cs",
-              "ViewState": "AQIAALgBAAAAAAAAAAAjwMcBAACRAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-11T15:53:48.552Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 30,
               "Title": "LocalOperatorStorage.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\storage\\local\\LocalOperatorStorage.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\storage\\local\\LocalOperatorStorage.cs",
@@ -331,12 +507,11 @@
               "RelativeToolTip": "botplatform\\Models\\storage\\local\\LocalOperatorStorage.cs",
               "ViewState": "AQIAABAAAAAAAAAAAIA2wBoAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-13T08:59:49.938Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-13T08:59:49.938Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 35,
               "Title": "PmModel.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\PmModel.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\PmModel.cs",
@@ -344,12 +519,11 @@
               "RelativeToolTip": "botplatform\\Models\\pmprocessor\\PmModel.cs",
               "ViewState": "AQIAAAQAAAAAAAAAAAApwA8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T13:00:28.12Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T13:00:28.12Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 34,
               "Title": "addPmVM.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\pmrocessor\\addPmVM.cs",
               "RelativeDocumentMoniker": "botplatform\\ViewModels\\pmrocessor\\addPmVM.cs",
@@ -357,24 +531,22 @@
               "RelativeToolTip": "botplatform\\ViewModels\\pmrocessor\\addPmVM.cs",
               "ViewState": "AQIAABoAAAAAAAAAAAAIwCAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T15:12:24.411Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T15:12:24.411Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 33,
               "Title": "AviatorBotView.axaml",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\AviatorBotView.axaml",
               "RelativeDocumentMoniker": "botplatform\\Views\\AviatorBotView.axaml",
               "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\AviatorBotView.axaml",
               "RelativeToolTip": "botplatform\\Views\\AviatorBotView.axaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T10:54:33.216Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T10:54:33.216Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 40,
               "Title": "App.axaml.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\App.axaml.cs",
               "RelativeDocumentMoniker": "botplatform\\App.axaml.cs",
@@ -382,24 +554,22 @@
               "RelativeToolTip": "botplatform\\App.axaml.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAQwBUAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-11T17:06:30.591Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-11T17:06:30.591Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 36,
               "Title": "addBotView.axaml",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\addBotView.axaml",
               "RelativeDocumentMoniker": "botplatform\\Views\\addBotView.axaml",
               "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\addBotView.axaml",
               "RelativeToolTip": "botplatform\\Views\\addBotView.axaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T10:53:58.611Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T10:53:58.611Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 49,
               "Title": "transponder_bot.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\bot\\transponder_bot.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\bot\\transponder_bot.cs",
@@ -411,7 +581,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 43,
               "Title": "BotModel.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\bot\\BotModel.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\bot\\BotModel.cs",
@@ -419,12 +589,11 @@
               "RelativeToolTip": "botplatform\\Models\\bot\\BotModel.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAIA2wA0AAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-11T15:56:19.014Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-11T15:56:19.014Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 42,
               "Title": "IPM.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\IPM.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\IPM.cs",
@@ -432,12 +601,11 @@
               "RelativeToolTip": "botplatform\\Models\\pmprocessor\\IPM.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T11:15:50.351Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T11:15:50.351Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 46,
               "Title": "loggerVM.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\loggerVM.cs",
               "RelativeDocumentMoniker": "botplatform\\ViewModels\\loggerVM.cs",
@@ -445,12 +613,11 @@
               "RelativeToolTip": "botplatform\\ViewModels\\loggerVM.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-11T16:04:56.795Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-11T16:04:56.795Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 45,
               "Title": "editBotVM.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\editBotVM.cs",
               "RelativeDocumentMoniker": "botplatform\\ViewModels\\editBotVM.cs",
@@ -458,37 +625,22 @@
               "RelativeToolTip": "botplatform\\ViewModels\\editBotVM.cs",
               "ViewState": "AQIAAH0AAAAAAAAAAAAUwIMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T10:53:16.112Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T10:53:16.112Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 44,
               "Title": "editBotView.axaml",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\editBotView.axaml",
               "RelativeDocumentMoniker": "botplatform\\Views\\editBotView.axaml",
               "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\editBotView.axaml",
               "RelativeToolTip": "botplatform\\Views\\editBotView.axaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T10:54:52.314Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T10:54:52.314Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "PushRequestProcessor.cs",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\rest\\PushRequestProcessor.cs",
-              "RelativeDocumentMoniker": "botplatform\\rest\\PushRequestProcessor.cs",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\rest\\PushRequestProcessor.cs",
-              "RelativeToolTip": "botplatform\\rest\\PushRequestProcessor.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-11T20:53:18.333Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 47,
               "Title": "botplatform.csproj",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\botplatform.csproj",
               "RelativeDocumentMoniker": "botplatform\\botplatform.csproj",
@@ -496,12 +648,11 @@
               "RelativeToolTip": "botplatform\\botplatform.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAABlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-04-11T17:06:33.314Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-11T17:06:33.314Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 48,
               "Title": "loggerView.axaml",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\loggerView.axaml",
               "RelativeDocumentMoniker": "botplatform\\Views\\loggerView.axaml",
@@ -513,8 +664,8 @@
           ]
         },
         {
-          "DockedWidth": 197,
-          "SelectedChildIndex": 6,
+          "DockedWidth": 55,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -538,7 +689,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 13,
+              "Title": "IAIserver.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\server\\IAIserver.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\server\\IAIserver.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\server\\IAIserver.cs",
+              "RelativeToolTip": "botplatform\\Models\\server\\IAIserver.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAIBZwAoAAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T09:21:10.374Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 107,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "common.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\common.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\common.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\common.cs",
+              "RelativeToolTip": "botplatform\\Models\\common.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABMAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-13T09:16:52.155Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
               "Title": "addBotView.axaml.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\addBotView.axaml.cs",
               "RelativeDocumentMoniker": "botplatform\\Views\\addBotView.axaml.cs",
@@ -546,25 +729,11 @@
               "RelativeToolTip": "botplatform\\Views\\addBotView.axaml.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-13T20:44:12.739Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-13T20:44:12.739Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "common.cs",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\common.cs",
-              "RelativeDocumentMoniker": "botplatform\\Models\\common.cs",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\common.cs",
-              "RelativeToolTip": "botplatform\\Models\\common.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-13T09:16:52.155Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 28,
               "Title": "IPMStorage.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\storage\\IPMStorage.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\storage\\IPMStorage.cs",
@@ -572,12 +741,11 @@
               "RelativeToolTip": "botplatform\\Models\\storage\\IPMStorage.cs",
               "ViewState": "AQIAAAQAAAAAAAAAAAApwBAAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T13:06:47.758Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T13:06:47.758Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 38,
               "Title": "LocalBotStorage.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\storage\\local\\LocalBotStorage.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\storage\\local\\LocalBotStorage.cs",
@@ -585,12 +753,11 @@
               "RelativeToolTip": "botplatform\\Models\\storage\\local\\LocalBotStorage.cs",
               "ViewState": "AQIAADgAAAAAAAAAAAAnwEoAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T13:09:05.429Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T13:09:05.429Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 37,
               "Title": "IBotFactory.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\bot\\IBotFactory.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\bot\\IBotFactory.cs",
@@ -598,12 +765,11 @@
               "RelativeToolTip": "botplatform\\Models\\bot\\IBotFactory.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T13:02:10.649Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T13:02:10.649Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 29,
               "Title": "IPmFactory.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\IPmFactory.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\IPmFactory.cs",
@@ -611,8 +777,7 @@
               "RelativeToolTip": "botplatform\\Models\\pmprocessor\\IPmFactory.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAqwAwAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T15:23:57.288Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T15:23:57.288Z"
             }
           ]
         }
@@ -632,12 +797,38 @@
       },
       "DocumentGroups": [
         {
-          "DockedWidth": 232,
+          "DockedWidth": 180,
           "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 9,
+              "Title": "RestService.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\rest\\RestService.cs",
+              "RelativeDocumentMoniker": "botplatform\\rest\\RestService.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\rest\\RestService.cs",
+              "RelativeToolTip": "botplatform\\rest\\RestService.cs",
+              "ViewState": "AQIAACIAAAAAAAAAAAAgwEgAAABRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T21:52:36.02Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "mainVM.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\mainVM.cs",
+              "RelativeDocumentMoniker": "botplatform\\ViewModels\\mainVM.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\mainVM.cs",
+              "RelativeToolTip": "botplatform\\ViewModels\\mainVM.cs",
+              "ViewState": "AQIAAHYAAAAAAAAAAAAgwM8AAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-11T15:54:44.081Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
               "Title": "addBotVM.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\addBotVM.cs",
               "RelativeDocumentMoniker": "botplatform\\ViewModels\\addBotVM.cs",
@@ -645,25 +836,11 @@
               "RelativeToolTip": "botplatform\\ViewModels\\addBotVM.cs",
               "ViewState": "AQIAAJQAAAAAAAAAAAA9wLsAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-11T15:56:47.469Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-11T15:56:47.469Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "mainVM.cs",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\mainVM.cs",
-              "RelativeDocumentMoniker": "botplatform\\ViewModels\\mainVM.cs",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\ViewModels\\mainVM.cs",
-              "RelativeToolTip": "botplatform\\ViewModels\\mainVM.cs",
-              "ViewState": "AQIAAHAAAAAAAAAAAAAcwHwAAABAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-11T15:54:44.081Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 41,
               "Title": "IBotStorage.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\storage\\IBotStorage.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\storage\\IBotStorage.cs",
@@ -671,31 +848,43 @@
               "RelativeToolTip": "botplatform\\Models\\storage\\IBotStorage.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAABAAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T13:06:11.486Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T13:06:11.486Z"
             }
           ]
         },
         {
-          "DockedWidth": 168,
-          "SelectedChildIndex": 0,
+          "DockedWidth": 220,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 8,
+              "Title": "MessageProcessorBase.cs",
+              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\messages\\MessageProcessorBase.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\messages\\MessageProcessorBase.cs",
+              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\messages\\MessageProcessorBase.cs",
+              "RelativeToolTip": "botplatform\\Models\\messages\\MessageProcessorBase.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACsAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T16:48:31.755Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "PMBase.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\PMBase.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\PMBase.cs",
               "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\PMBase.cs",
               "RelativeToolTip": "botplatform\\Models\\pmprocessor\\PMBase.cs",
-              "ViewState": "AQIAAFQAAAAAAAAAAAAjwBwAAAAJAAAA",
+              "ViewState": "AQIAAHsBAAAAAAAAAAAuwJcBAABkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-12T11:13:54.159Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 27,
               "Title": "LocalPmStorage.cs",
               "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\storage\\local\\LocalPmStorage.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\storage\\local\\LocalPmStorage.cs",
@@ -703,74 +892,7 @@
               "RelativeToolTip": "botplatform\\Models\\storage\\local\\LocalPmStorage.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAqwA4AAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T13:08:48.707Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "64553296-bd9a-47ef-93b3-ae94447623af",
-        "Display": 1,
-        "X": 292,
-        "Y": 71,
-        "Width": 973,
-        "Height": 854,
-        "WindowState": 2
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "addPmView.axaml",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\pmprocessor\\addPmView.axaml",
-              "RelativeDocumentMoniker": "botplatform\\Views\\pmprocessor\\addPmView.axaml",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\pmprocessor\\addPmView.axaml",
-              "RelativeToolTip": "botplatform\\Views\\pmprocessor\\addPmView.axaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T15:57:28.501Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "93f9f70c-9a3b-41c9-bce1-19cfdbf5fe51",
-        "Display": 1,
-        "X": 162,
-        "Y": 160,
-        "Width": 1696,
-        "Height": 696,
-        "WindowState": 0
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "PmView.axaml",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\pmprocessor\\PmView.axaml",
-              "RelativeDocumentMoniker": "botplatform\\Views\\pmprocessor\\PmView.axaml",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Views\\pmprocessor\\PmView.axaml",
-              "RelativeToolTip": "botplatform\\Views\\pmprocessor\\PmView.axaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-12T16:57:08.158Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-12T13:08:48.707Z"
             }
           ]
         }

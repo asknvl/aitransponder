@@ -63,39 +63,17 @@ namespace botplatform.rest
                 {
                     switch (splt[1])
                     {
-                        case "pushes":
+                        case "user":
 
                             switch (splt[2])
                             {
-                                case "send":
-                                    var p = RequestProcessors.FirstOrDefault(p => p is PushRequestProcessor);
+                                case "messages":
+                                    var p = RequestProcessors.FirstOrDefault(p => p is MessageRequestProcessor);
                                     if (p != null)
                                         (code, text) = await p.ProcessRequestData(requestBody);
                                     break;                                
                             }                            
-                            break;
-
-                        case "statuses":
-                            switch (splt[2])
-                            {
-                                case "update":
-                                    var p = RequestProcessors.FirstOrDefault(p => p is StatusUpdateRequestProcessor);
-                                    if (p != null)
-                                        (code, text) = await p.ProcessRequestData(requestBody);
-                                    break;
-                            }
-                            break;
-
-                        case "notifies":
-                            switch (splt[2])
-                            {
-                                case "send":
-                                    var p = RequestProcessors.FirstOrDefault(p => p is NotifyRequestProcessor);
-                                    if (p != null)
-                                        (code, text) = await p.ProcessRequestData(requestBody);
-                                    break;
-                            }
-                            break;
+                            break;                       
 
                         default:
                             break;
@@ -150,17 +128,11 @@ namespace botplatform.rest
         {
             var listener = new HttpListener();
 #if DEBUG
-            listener.Prefixes.Add($"http://*:5050/pushes/");
-            listener.Prefixes.Add($"http://*:5050/statuses/");
-            listener.Prefixes.Add($"http://*:5050/notifies/");
+            listener.Prefixes.Add($"http://*:6000/user/messages");            
 #elif DEBUG_TG_SERV
-            listener.Prefixes.Add($"http://localhost:5050/pushes/");
-            listener.Prefixes.Add($"http://localhost:5050/statuses/");
-            listener.Prefixes.Add($"http://localhost:5050/notifies/");
+            listener.Prefixes.Add($"http://localhost:6000/user/messages");
 #else
-            listener.Prefixes.Add($"http://*:5000/pushes/");
-            listener.Prefixes.Add($"http://*:5000/statuses/");
-            listener.Prefixes.Add($"http://*:5000/notifies/");
+            listener.Prefixes.Add($"http://*:6000/user/messages");            
 #endif
             try
             {

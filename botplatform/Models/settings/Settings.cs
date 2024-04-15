@@ -33,12 +33,14 @@ namespace botplatform.Models.settings
             var prmtrs = storage.load();
 
             operator_tg = prmtrs.operator_id;
+            ai_server = prmtrs.ai_server;
         }
         #endregion
 
         #region properties
         [JsonProperty]
         public long operator_tg { get; set; } = 0;
+        public string ai_server { get; set; } = "";
         #endregion
 
         #region public
@@ -47,6 +49,7 @@ namespace botplatform.Models.settings
             AppParameters p = new AppParameters();
 
             p.operator_id = operator_tg;
+            p.ai_server = ai_server;    
 
             storage.save(p);
         }
@@ -56,6 +59,7 @@ namespace botplatform.Models.settings
     public class AppParameters
     {
         public long operator_id { get; set; }
+        public string ai_server { get; set; } = "";
     }
 
 }
