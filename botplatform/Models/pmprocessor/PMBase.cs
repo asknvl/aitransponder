@@ -24,6 +24,7 @@ using Telegram.Bot.Requests;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace botplatform.Models.pmprocessor
 {
@@ -36,9 +37,18 @@ namespace botplatform.Models.pmprocessor
         protected ITelegramBotClient bot;
         protected CancellationTokenSource cts;
         protected State state = State.free;
+
         List<int> ignoredMesageIds = new();
+
+        object lockObj = new object();
+        List<userInfo> activeUsers = new();
+
         System.Timers.Timer aggregateMessageTimer;
+
         MessageQueue pmMessages;
+
+        MessageHistory history;
+
         PmModel tmpPmModel;     
         Dictionary<long, string> bcIds = new Dictionary<long, string>();
         IAIserver ai;
@@ -134,7 +144,9 @@ namespace botplatform.Models.pmprocessor
             posting_type = model.posting_type;
 
             messageProcessorFactory = new MessageProcessorFactory(logger);
+
             pmMessages = new MessageQueue();
+            history = new MessageHistory();
 
             ai = new AIServer("https://gpt.raceup.io");
 
@@ -254,6 +266,26 @@ namespace botplatform.Models.pmprocessor
                 var ln = update.BusinessMessage.From.LastName;
                 var un = update.BusinessMessage.From.Username;
 
+                if (!activeUsers.Any(u => u.tg_user_id == chat))
+                {
+
+                    if (activeUsers.Count == 1024)
+                    {
+                        activeUsers.RemoveAt(0);
+                    }
+
+                    activeUsers.Add(new userInfo()
+                    {
+                        tg_user_id = chat,
+                        fn = fn,
+                        ln = ln,
+                        un = un
+                    });
+                }
+
+
+                logger.inf(geotag, $"{fn} {ln} {un} {chat}>{update.BusinessMessage.Text}");
+
                 var bc = await bot.GetBusinessConnectionAsync(new GetBusinessConnectionRequest(update.BusinessMessage.BusinessConnectionId));
 
                 
@@ -263,9 +295,13 @@ namespace botplatform.Models.pmprocessor
                         bcIds.Add(chat, update.BusinessMessage.BusinessConnectionId);
 
                     var text = update.BusinessMessage.Text;
+
                     pmMessages.Add(chat, text);
 
-                    logger.inf(geotag, $"{fn} {ln} {un} {chat}>{text}");
+                    history.Add(MessageFrom.Lead, chat, text);
+
+
+                    //logger.inf(geotag, $"{fn} {ln} {un} {chat}>{text}");
                 }
 
             } catch (Exception ex)
@@ -280,20 +316,58 @@ namespace botplatform.Models.pmprocessor
         {
             try
             {
-                var toSent = pmMessages.GetMessages();
+                //var toSent = pmMessages.GetMessages();
 
-                foreach (var message in toSent)
+                //foreach (var message in toSent)
+                //{
+                //    try
+                //    {
+                //        await ai.SendMessageToAI(geotag, message.Key, message.Value);                       
+
+                //        logger.dbg(geotag, $"aggregate: {message.Key} {message.Value}");
+
+                //    } catch (Exception ex)
+                //    {
+                //        logger.err(geotag, $"Aggregate: {message.Key} {message.Value}");
+                //    }
+                //}
+
+                var toSent = history.Get();
+                logger.dbg(geotag, $"toSent: count={toSent.Count}");
+                foreach ( var item in toSent )
                 {
                     try
                     {
-                        await ai.SendToAI(geotag, message.Key, message.Value);
-                        logger.dbg(geotag, $"aggregate: {message.Key} {message.Value}");
 
+                        string? fn = null;
+                        string? ln = null;
+                        string? un = null;
+
+                        var user = activeUsers.FirstOrDefault(u => u.tg_user_id == item.Key);
+                        if (user != null)
+                        {
+                            fn = user.un;
+                            ln = user.ln;
+                            un = user.un;
+                        }
+
+                        logger.dbg(geotag, $"{item.Key} {fn} {ln} {un}");
+
+                        string s = "";
+                        var histItems = item.Value.Get();
+
+                        foreach (var h in histItems)  {
+                            s += $"{h.role} > {h.content}\n";
+                        }
+                        logger.dbg(geotag, $"{s}");
+
+                        await ai.SendHistoryToAI(geotag, item.Key, fn, ln, un, histItems);
                     } catch (Exception ex)
                     {
-                        logger.err(geotag, $"Aggregate: {message.Key} {message.Value}");
+
                     }
                 }
+
 
             } catch (Exception ex)
             {
@@ -313,12 +387,11 @@ namespace botplatform.Models.pmprocessor
 
             try
             {
-            
                 switch (update.Type)
                 {
                     case UpdateType.BusinessMessage:
                         if (update.BusinessMessage != null)
-                        {                            
+                        {
                             await processBusiness(update);  
                         }
                         break;
@@ -418,6 +491,12 @@ namespace botplatform.Models.pmprocessor
                 {
                     var bcid = bcIds[tg_user_id];
                     await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
+
+
+                    var msg_to_ai = $"Response Code: [{response_code}] Response:{message}";
+                    history.Add(MessageFrom.PM, tg_user_id, msg_to_ai);
+
+
                     logger.inf_urgent(geotag, $"{tg_user_id}>{message}");
                 }
 
@@ -427,5 +506,12 @@ namespace botplatform.Models.pmprocessor
             }
         }
         #endregion
+    }
+    public class userInfo
+    {
+        public long tg_user_id { get; set; }
+        public string? fn { get; set;}
+        public string? ln { get; set; }
+        public string? un { get; set; }
     }
 }

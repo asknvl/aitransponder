@@ -9,6 +9,9 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using static asknvl.server.TGBotFollowersStatApi;
+using botplatform.Models.pmprocessor.message_queue;
+using System.Xml.Xsl;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace botplatform.Models.server
 {
@@ -51,10 +54,9 @@ namespace botplatform.Models.server
         }
 
 
-        public async Task SendToAI(string geotag, long tg_user_id, string text)
+        public async Task SendMessageToAI(string geotag, long tg_user_id, string text)
         {
             var addr = $"{url}/api/message";
-
 
             messageDto msg = new messageDto()
             {
@@ -76,6 +78,45 @@ namespace botplatform.Models.server
             {
                 throw new Exception($"SendToAI {ex.Message}");
             }
+        }
+
+        public async Task SendHistoryToAI(string geotag, long tg_user_id, string? fn, string? ln, string? un, List<HistoryItem> messages)
+        {
+            var addr = $"{url}/api/message";
+
+            historyDto hst = new historyDto()
+            {
+               messages = messages,
+               tg_user_id = tg_user_id,
+               source = geotag,
+               firstname = fn,
+               lastname = ln,
+               username = un
+            };
+
+            var json = JsonConvert.SerializeObject(hst, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                var response = await httpClient.PostAsync(addr, data);
+                //var result = await response.Content.ReadAsStringAsync();
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"SendToAI {ex.Message}");
+            }
+        }
+
+        public class historyDto
+        {
+            public List<HistoryItem> messages { get; set; } = new();
+            public long tg_user_id { get; set; }           
+            public string source { get; set; }
+            public string? firstname { get; set; }
+            public string? lastname { get; set; }    
+            public string? username { get; set; }
         }
         #endregion
     }
