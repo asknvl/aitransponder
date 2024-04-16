@@ -128,11 +128,11 @@ namespace botplatform.rest
         {
             var listener = new HttpListener();
 #if DEBUG
-            listener.Prefixes.Add($"http://*:6000/user/messages");            
+            listener.Prefixes.Add($"http://*:6000/user/messages/");            
 #elif DEBUG_TG_SERV
-            listener.Prefixes.Add($"http://localhost:6000/user/messages");
+            listener.Prefixes.Add($"http://localhost:6000/user/messages/");
 #else
-            listener.Prefixes.Add($"http://*:6000/user/messages");            
+            listener.Prefixes.Add($"http://*:6000/user/messages/");            
 #endif
             try
             {

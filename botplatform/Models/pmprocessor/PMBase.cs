@@ -265,7 +265,7 @@ namespace botplatform.Models.pmprocessor
                     var text = update.BusinessMessage.Text;
                     pmMessages.Add(chat, text);
 
-                    logger.inf(geotag, $"{fn} {ln} {un}>{text}");
+                    logger.inf(geotag, $"{fn} {ln} {un} {chat}>{text}");
                 }
 
             } catch (Exception ex)
@@ -276,7 +276,7 @@ namespace botplatform.Models.pmprocessor
         #endregion
 
         #region handlers
-        private void AggregateMessageTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+        private async void AggregateMessageTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             try
             {
@@ -284,7 +284,15 @@ namespace botplatform.Models.pmprocessor
 
                 foreach (var message in toSent)
                 {
+                    try
+                    {
+                        await ai.SendToAI(geotag, message.Key, message.Value);
+                        logger.dbg(geotag, $"aggregate: {message.Key} {message.Value}");
 
+                    } catch (Exception ex)
+                    {
+                        logger.err(geotag, $"Aggregate: {message.Key} {message.Value}");
+                    }
                 }
 
             } catch (Exception ex)
@@ -358,7 +366,8 @@ namespace botplatform.Models.pmprocessor
 #elif DEBUG_TG_SERV
             bot = new TelegramBotClient(bot_token);
 #else
-            bot = new TelegramBotClient(new TelegramBotClientOptions(bot_token, "http://localhost:8081/bot/"));  
+            //bot = new TelegramBotClient(new TelegramBotClientOptions(bot_token, "http://localhost:8081/bot/"));
+            bot = new TelegramBotClient(bot_token);
 #endif
 
             var u = await bot.GetMeAsync();
@@ -377,6 +386,8 @@ namespace botplatform.Models.pmprocessor
 
             initMessageProcessor();
 
+            aggregateMessageTimer.Start();
+
             bot.StartReceiving(HandleUpdateAsync, HandleErrorAsync, receiverOptions, cts.Token);
 
             is_active = true;
@@ -388,6 +399,7 @@ namespace botplatform.Models.pmprocessor
         public void Stop()
         {
             cts?.Cancel();
+            aggregateMessageTimer.Stop();
             is_active = false;
             logger.inf(geotag, "PM stopped");
         }
@@ -406,6 +418,7 @@ namespace botplatform.Models.pmprocessor
                 {
                     var bcid = bcIds[tg_user_id];
                     await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
+                    logger.inf_urgent(geotag, $"{tg_user_id}>{message}");
                 }
 
             } catch (Exception ex)

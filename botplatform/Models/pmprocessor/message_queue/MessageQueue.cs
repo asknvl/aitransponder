@@ -48,7 +48,10 @@ namespace botplatform.Models.pmprocessor.message_queue
             {
                 if (messages.ContainsKey(id))
                 {
-                    messages[id] += $"|{message}";
+                    if (messages[id] == "")
+                        messages[id] += $"{message}";
+                    else
+                        messages[id] += $"|{message}";
                 }
                 else
                 {
@@ -78,6 +81,11 @@ namespace botplatform.Models.pmprocessor.message_queue
             lock (lockObj)
             {
                 res = messages.Where(m => !string.IsNullOrEmpty(m.Value)).ToDictionary(p => p.Key, p => p.Value);
+                foreach (var item in res)
+                {
+                    messages[item.Key] = "";
+                }
+
             }
             return res;
         }
