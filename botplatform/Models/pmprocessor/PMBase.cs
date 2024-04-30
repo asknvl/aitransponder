@@ -346,7 +346,7 @@ namespace botplatform.Models.pmprocessor
                         var user = activeUsers.FirstOrDefault(u => u.tg_user_id == item.Key);
                         if (user != null)
                         {
-                            fn = user.un;
+                            fn = user.fn;
                             ln = user.ln;
                             un = user.un;
                         }
@@ -493,7 +493,8 @@ namespace botplatform.Models.pmprocessor
                     await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
 
 
-                    var msg_to_ai = $"Response Code: [{response_code}] Response:{message}";
+                    //var msg_to_ai = $"Response Code: [{response_code}] Response:{message}";
+                    var msg_to_ai = $"{message}";
                     history.Add(MessageFrom.PM, tg_user_id, msg_to_ai);
 
 

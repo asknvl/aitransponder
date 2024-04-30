@@ -52,7 +52,7 @@ namespace botplatform.Models.pmprocessor.message_queue
     public class UserHistory
     {
         #region const
-        int capacity = 10;
+        int capacity = 30;
         #endregion
 
         #region vars
