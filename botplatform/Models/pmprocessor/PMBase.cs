@@ -1,4 +1,5 @@
 ﻿using asknvl.logger;
+using asknvl.server;
 using Avalonia.Controls;
 using botplatform.Model.bot;
 using botplatform.Models.messages;
@@ -52,6 +53,7 @@ namespace botplatform.Models.pmprocessor
         PmModel tmpPmModel;     
         Dictionary<long, string> bcIds = new Dictionary<long, string>();
         IAIserver ai;
+        ITGBotFollowersStatApi server;
         #endregion
 
         #region properties
@@ -149,6 +151,7 @@ namespace botplatform.Models.pmprocessor
             history = new MessageHistory();
 
             ai = new AIServer("https://gpt.raceup.io");
+            server = new TGBotFollowersStatApi("https://ru.flopasda.site");
 
             aggregateMessageTimer = new System.Timers.Timer();
             aggregateMessageTimer.Interval = 20 * 1000;
@@ -265,6 +268,8 @@ namespace botplatform.Models.pmprocessor
                 var fn = update.BusinessMessage.From.FirstName;
                 var ln = update.BusinessMessage.From.LastName;
                 var un = update.BusinessMessage.From.Username;
+
+                var userData = server.GetFollowerSubscriprion(geotag, chat);
 
                 if (!activeUsers.Any(u => u.tg_user_id == chat))
                 {
