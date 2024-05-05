@@ -397,8 +397,10 @@ namespace botplatform.Model.bot
 
 
 #if DEBUG
-            server = new TGBotFollowersStatApi("http://185.46.9.229:4000");
-            bot = new TelegramBotClient(new TelegramBotClientOptions(Token, "http://localhost:8081/bot/"));            
+            //server = new TGBotFollowersStatApi("http://185.46.9.229:4000");
+            //bot = new TelegramBotClient(new TelegramBotClientOptions(Token, "http://localhost:8081/bot/"));
+            server = new TGBotFollowersStatApi("http://136.243.74.153:4000");
+            bot = new TelegramBotClient(new TelegramBotClientOptions(Token, "http://localhost:8081/bot/"));
 #elif DEBUG_TG_SERV
 
             //server = new TGBotFollowersStatApi("http://185.46.9.229:4000");            

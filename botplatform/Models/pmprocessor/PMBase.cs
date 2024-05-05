@@ -52,6 +52,10 @@ namespace botplatform.Models.pmprocessor
 
         PmModel tmpPmModel;     
         Dictionary<long, string> bcIds = new Dictionary<long, string>();
+
+        Dictionary<long, bool> usersStatuses = new Dictionary<long, bool>();
+
+
         IAIserver ai;
         ITGBotFollowersStatApi server;
         #endregion
@@ -269,7 +273,30 @@ namespace botplatform.Models.pmprocessor
                 var ln = update.BusinessMessage.From.LastName;
                 var un = update.BusinessMessage.From.Username;
 
-                var userData = server.GetFollowerSubscriprion(geotag, chat);
+                if (!usersStatuses.ContainsKey(chat))
+                {
+
+                    bool needProcess = true;
+                    var userData = await server.GetFollowerSubscriprion(geotag, chat);
+
+                    if (userData.Count != 0)
+                    {
+                        var sdate = userData[0].subscribe_date;
+                        var date = DateTime.Parse(sdate);
+                        var startDate = new DateTime(2024, 05, 1, 9, 42, 0);
+
+                        needProcess = date > startDate;
+
+                        logger.inf(geotag, $"{chat} {fn} {ln} {un} {sdate} | {date} {needProcess}");
+                    }
+
+                    usersStatuses.Add(chat, needProcess);
+                }
+
+
+                if (!usersStatuses[chat])
+                    return;                
+                
 
                 if (!activeUsers.Any(u => u.tg_user_id == chat))
                 {
@@ -440,7 +467,8 @@ namespace botplatform.Models.pmprocessor
             }
 
 #if DEBUG
-            bot = new TelegramBotClient(new TelegramBotClientOptions(bot_token, "http://localhost:8081/bot/"));  
+            //bot = new TelegramBotClient(new TelegramBotClientOptions(bot_token, "http://localhost:8081/bot/"));  
+            bot = new TelegramBotClient(bot_token);
 #elif DEBUG_TG_SERV
             bot = new TelegramBotClient(bot_token);
 #else

@@ -377,6 +377,7 @@ namespace asknvl.server
         {
             public string geolocation { get; set; }
             public bool is_subscribed { get; set; }
+            public string? subscribe_date { get; set; }
         }
         public async Task<List<subscriptionDto>> GetFollowerSubscriprion(string geotag, long tg_id)
         {
