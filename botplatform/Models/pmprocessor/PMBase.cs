@@ -287,6 +287,10 @@ namespace botplatform.Models.pmprocessor
 
                         needProcess = date > startDate;
 
+#if DEBUG_TG_SERV
+                        needProcess = true;
+#endif
+
                         logger.inf(geotag, $"{chat} {fn} {ln} {un} {sdate} | {date} {needProcess}");
                     }
 
@@ -325,12 +329,14 @@ namespace botplatform.Models.pmprocessor
                 {
                     if (!bcIds.ContainsKey(chat))
                         bcIds.Add(chat, update.BusinessMessage.BusinessConnectionId);
-
+                                        
                     var text = update.BusinessMessage.Text;
 
-                    pmMessages.Add(chat, text);
-
-                    history.Add(MessageFrom.Lead, chat, text);
+                    if (text != null)
+                    {
+                        pmMessages.Add(chat, text);
+                        history.Add(MessageFrom.Lead, chat, text);
+                    }
 
 
                     //logger.inf(geotag, $"{fn} {ln} {un} {chat}>{text}");
@@ -524,7 +530,6 @@ namespace botplatform.Models.pmprocessor
                 {
                     var bcid = bcIds[tg_user_id];
                     await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
-
 
                     //var msg_to_ai = $"Response Code: [{response_code}] Response:{message}";
                     var msg_to_ai = $"{message}";
