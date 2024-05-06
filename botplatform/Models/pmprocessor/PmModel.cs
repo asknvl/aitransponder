@@ -11,6 +11,8 @@ namespace botplatform.Models.pmprocessor
         public string geotag { get; set; }
         public string phone_number { get; set; }
         public string bot_token { get; set; }
+        public string api_id { get; set; }
+        public string api_hash { get; set; }
         public PostingType posting_type { get; set; }
     }
 

@@ -1,9 +1,11 @@
-﻿using asknvl.logger;
+﻿using asknvl;
+using asknvl.logger;
 using asknvl.server;
 using Avalonia.Controls;
 using botplatform.Model.bot;
 using botplatform.Models.messages;
 using botplatform.Models.pmprocessor.message_queue;
+using botplatform.Models.pmprocessor.userapi;
 using botplatform.Models.server;
 using botplatform.Models.settings;
 using botplatform.Models.storage;
@@ -25,6 +27,7 @@ using Telegram.Bot.Requests;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
+using TL;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace botplatform.Models.pmprocessor
@@ -35,7 +38,11 @@ namespace botplatform.Models.pmprocessor
         protected ILogger logger;        
         protected IPMStorage pmStorage;
         protected IMessageProcessorFactory messageProcessorFactory;
+
         protected ITelegramBotClient bot;
+        protected ITGUser user;
+        protected IMarkRead marker;
+
         protected CancellationTokenSource cts;
         protected State state = State.free;
 
@@ -79,7 +86,19 @@ namespace botplatform.Models.pmprocessor
             set => this.RaiseAndSetIfChanged(ref _bot_token, value);    
         }
 
+        bool _need_verification;
+        public bool need_verification
+        {
+            get => _need_verification;
+            set => this.RaiseAndSetIfChanged(ref _need_verification, value);    
+        }
 
+        string _verify_code;
+        public string verify_code
+        {
+            get => _verify_code;
+            set => this.RaiseAndSetIfChanged(ref _verify_code, value);
+        }
 
         public List<PostingType> posting_types { get; } = common.common_Available_Posting_Types;
 
@@ -136,6 +155,7 @@ namespace botplatform.Models.pmprocessor
         public ReactiveCommand<Unit, Unit> editCmd { get; }
         public ReactiveCommand<Unit, Unit> cancelCmd { get; }
         public ReactiveCommand<Unit, Unit> saveCmd { get; }
+        public ReactiveCommand<Unit, Unit> verifyCmd { get; }
         #endregion
 
         public PMBase(PmModel model, IPMStorage pmStorage, ILogger logger)
@@ -162,6 +182,11 @@ namespace botplatform.Models.pmprocessor
             aggregateMessageTimer.AutoReset = true;
             aggregateMessageTimer.Elapsed += AggregateMessageTimer_Elapsed;
 
+            user = new user_v0(model.api_id, model.api_hash, phone_number, "5555", logger);
+            user.VerificationCodeRequestEvent += User_VerificationCodeRequestEvent;
+            user.StatusChangedEvent += User_StatusChangedEvent;
+
+            marker = (IMarkRead)user;
 
             #region commands
             startCmd = ReactiveCommand.CreateFromTask(async () => {
@@ -200,6 +225,9 @@ namespace botplatform.Models.pmprocessor
                 };
                 pmStorage.Update(tmpPmModel.geotag, model);
                 is_editable = false;
+            });
+            verifyCmd = ReactiveCommand.Create(() => {
+                user?.SetVerifyCode(verify_code);
             });
             #endregion
 
@@ -248,7 +276,7 @@ namespace botplatform.Models.pmprocessor
             }
         }
 
-        async Task processOperator(Message message)
+        async Task processOperator(Telegram.Bot.Types.Message message)
         {
             try 
             { 
@@ -264,7 +292,7 @@ namespace botplatform.Models.pmprocessor
             }
         }
 
-        async Task processBusiness(Update update)
+        async Task processBusiness(Telegram.Bot.Types.Update update)
         {
             try
             {
@@ -323,7 +351,7 @@ namespace botplatform.Models.pmprocessor
                 logger.inf(geotag, $"{fn} {ln} {un} {chat}>{update.BusinessMessage.Text}");
 
                 var bc = await bot.GetBusinessConnectionAsync(new GetBusinessConnectionRequest(update.BusinessMessage.BusinessConnectionId));
-
+                
                 
                 if (chat != bc.User.Id)
                 {
@@ -350,6 +378,19 @@ namespace botplatform.Models.pmprocessor
         #endregion
 
         #region handlers
+        private void User_VerificationCodeRequestEvent(ITGUser usr)
+        {
+            need_verification = true;
+        }
+
+        private void User_StatusChangedEvent(ITGUser usr, DropStatus status)
+        {
+            if (status == DropStatus.active)
+            {
+                need_verification = false;
+            }
+        }
+
         private async void AggregateMessageTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             try
@@ -399,7 +440,16 @@ namespace botplatform.Models.pmprocessor
                         }
                         logger.dbg(geotag, $"{s}");
 
-                        await ai.SendHistoryToAI(geotag, item.Key, fn, ln, un, histItems);
+
+                        try
+                        {
+                            await ai.SendHistoryToAI(geotag, item.Key, fn, ln, un, histItems);
+                        } catch (Exception ex)
+                        {
+                            logger.err(geotag, $"AggregateMessageTimer: {ex.Message}");
+                        }
+
+                        await marker.MarkAsRead(item.Key);
                     } catch (Exception ex)
                     {
 
@@ -413,7 +463,7 @@ namespace botplatform.Models.pmprocessor
             }
         }
 
-        async Task HandleUpdateAsync(ITelegramBotClient bot, Update update, CancellationToken cancellationToken)
+        async Task HandleUpdateAsync(ITelegramBotClient bot, Telegram.Bot.Types.Update update, CancellationToken cancellationToken)
         {
             if (update == null)
                 return;
@@ -501,6 +551,8 @@ namespace botplatform.Models.pmprocessor
             aggregateMessageTimer.Start();
 
             bot.StartReceiving(HandleUpdateAsync, HandleErrorAsync, receiverOptions, cts.Token);
+
+            await user.Start();
 
             is_active = true;
 

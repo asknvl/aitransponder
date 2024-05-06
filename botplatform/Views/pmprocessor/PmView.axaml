@@ -41,16 +41,31 @@
                     Text="{Binding bot_token}"/>
             </Grid>
             <Grid
-                ColumnDefinitions="100, 220">
+                ColumnDefinitions="100, 220, 80, 50">
                 <TextBlock
-                    Grid.Column="0"
-                    Grid.Row="0">
+                    Grid.Column="0">
                     Номер:
                 </TextBlock>
                 <TextBox
                     Grid.Row="0"
                     Grid.Column="1"
                     Text="{Binding phone_number}"/>
+                <TextBox                                        
+                    Grid.Column="2"
+                    IsVisible="{Binding need_verification}"
+                    Text="{Binding verify_code}">                    
+                </TextBox>
+                <Button
+                    MinHeight="0"
+                    MinWidth="50"
+                    Height="21"                    
+                    Grid.Column="3"
+                    TextBlock.FontSize="8"
+                    Margin="0, 0, 0, 0"
+                    IsVisible="{Binding need_verification}"
+                    Command="{Binding verifyCmd}">
+                    ОК
+                </Button>
             </Grid>
             <Grid
                 ColumnDefinitions="100, 220">
