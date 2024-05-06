@@ -1,5 +1,6 @@
 ﻿using asknvl;
 using asknvl.logger;
+using botplatform.Model.bot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,18 +19,22 @@ namespace botplatform.Models.pmprocessor.userapi
         
         public async Task MarkAsRead(long id)
         {
-            try
+            if (status == DropStatus.active)
             {
-                TL.User foundUser = null;
-                var found = users.TryGetValue(id, out foundUser);
-                var peer = new InputPeerUser(foundUser.ID, foundUser.access_hash);
-                //var histoty = await user.Messages_GetHistory(peer);
-                await user.ReadHistory(peer);
-                logger.err(phone_number, $"MarkeAsRead {id} OK");
+                try
+                {
+                    TL.User foundUser = null;
+                    var found = users.TryGetValue(id, out foundUser);
+                    var peer = new InputPeerUser(foundUser.ID, foundUser.access_hash);
+                    //var histoty = await user.Messages_GetHistory(peer);
+                    await user.ReadHistory(peer);
+                    logger.err(phone_number, $"MarkeAsRead {id} OK");
 
-            } catch (Exception ex)
-            {
-                logger.err(phone_number, $"MarkAsRead {id}: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    logger.err(phone_number, $"MarkAsRead {id}: {ex.Message}");
+                }
             }
         }
 

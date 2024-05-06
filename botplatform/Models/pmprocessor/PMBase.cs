@@ -393,6 +393,10 @@ namespace botplatform.Models.pmprocessor
 
         private async void AggregateMessageTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
+
+            if (!is_active)
+                return;
+
             try
             {
                 //var toSent = pmMessages.GetMessages();
@@ -449,7 +453,7 @@ namespace botplatform.Models.pmprocessor
                             logger.err(geotag, $"AggregateMessageTimer: {ex.Message}");
                         }
 
-                        await marker.MarkAsRead(item.Key);
+                        await marker?.MarkAsRead(item.Key);
                     } catch (Exception ex)
                     {
 
