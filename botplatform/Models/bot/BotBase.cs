@@ -293,33 +293,7 @@ namespace botplatform.Model.bot
 
         async Task processChatMember(ChatMemberUpdated chatMember, CancellationToken cancellationToken)
         {
-            try
-            {
-                long id = chatMember.From.Id;
-                string fn = chatMember.From.FirstName;
-                string ln = chatMember.From.LastName;
-                string un = chatMember.From.Username;
-
-                switch (chatMember.NewChatMember.Status)
-                {
-                    case ChatMemberStatus.Member:
-                        var message = MessageProcessor.GetChatJoinMessage();
-                        if (message != null)
-                        {
-                            await message.Send(chatMember.From.Id, bot);
-                        }
-                        logger.inf(Geotag, $"VIP JOIN: {id} {fn} {ln} {un}");
-                        break;
-
-                    case ChatMemberStatus.Left:
-                        logger.inf(Geotag, $"VIP LEFT: {id} {fn} {ln} {un}");
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.err(Geotag, $"processChatMember: {ex.Message}");
-            }
+            await Task.CompletedTask;
         }
 
 
@@ -360,14 +334,10 @@ namespace botplatform.Model.bot
 
                     default:
                         break;
-
-
-
                 }
 
             } catch (Exception ex)
             {
-
             } 
         }
 
@@ -473,12 +443,8 @@ namespace botplatform.Model.bot
                         }
                     }
                 };
-
                 MessageProcessor.Init();
             }
-
-
-            
 
             bot.StartReceiving(HandleUpdateAsync, HandleErrorAsync, receiverOptions, cts.Token);
 

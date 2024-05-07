@@ -22,7 +22,7 @@ namespace botplatform.Models.messages
 
         }
 
-        public static async Task<StateMessage> Create(ITelegramBotClient bot, Message pattern, string geotag, string token)
+        public static async Task<StateMessage> Create(ITelegramBotClient bot, Telegram.Bot.Types.Message pattern, string geotag, string token)
         {
             StateMessage res = new StateMessage();
             res.Message = pattern;

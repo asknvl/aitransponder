@@ -194,10 +194,11 @@ namespace aksnvl.messaging
             }
         }
 
-        async Task<int> sendTextMessage(long id, ITelegramBotClient bot, IReplyMarkup? markup = null)
+        async Task<int> sendTextMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null)
         {
             var m = await bot.SendTextMessageAsync(
                     chatId: id,
+                    businessConnectionId: bcid,
                     text: Message.Text,
                     entities: Message.Entities,                    
                     replyMarkup: (markup == null) ? Message.ReplyMarkup : markup,
@@ -205,13 +206,14 @@ namespace aksnvl.messaging
             return m.MessageId;
         }
 
-        async Task<int> sendPhotoMessage(long id, ITelegramBotClient bot, IReplyMarkup? markup = null)
+        async Task<int> sendPhotoMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null)
         {
             int messageId;
             var file = await bot.GetFileAsync(Message.Photo.Last().FileId);
             fileId = file.FileId;
 
             var sent = await bot.SendPhotoAsync(id,
+                   businessConnectionId: bcid,
                    photo: InputFile.FromFileId(fileId),
                    caption: Message.Caption,
                    replyMarkup: Message.ReplyMarkup,
@@ -221,17 +223,15 @@ namespace aksnvl.messaging
             return messageId;
         }
 
-        async Task<int> sendVideoMessage(long id, ITelegramBotClient bot, IReplyMarkup? markup = null, string? thumb_path = null)
+        async Task<int> sendVideoMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null, string? thumb_path = null)
         {
             int messageId;
             var file = await bot.GetFileAsync(Message.Video.FileId);
             fileId = file.FileId;
 
             var sent = await bot.SendVideoAsync(id,
-                   video: InputFile.FromFileId(fileId),
-                   //width: Message.Video.Width,
-                   //height: Message.Video.Height,
-
+                   businessConnectionId: bcid,
+                   video: InputFile.FromFileId(fileId),                   
                    duration: Message.Video.Duration,
                    caption: Message.Caption,
                    supportsStreaming: true,
@@ -242,25 +242,27 @@ namespace aksnvl.messaging
             return messageId;
         }
 
-        async Task<int> sendVideoNoteMessage(long id, ITelegramBotClient bot, IReplyMarkup? markup = null)
+        async Task<int> sendVideoNoteMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null)
         {
             int messageId;
             var file = await bot.GetFileAsync(Message.VideoNote.FileId);
             fileId = file.FileId;
 
             var sent = await bot.SendVideoNoteAsync(id,
+                businessConnectionId: bcid,
                 videoNote: InputFile.FromFileId(fileId));
             messageId = sent.MessageId;
             return messageId;
         }
 
-        async Task<int> sendDocumentMessage(long id, ITelegramBotClient bot, IReplyMarkup? markup = null)
+        async Task<int> sendDocumentMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null)
         {
             int messageId;
             var file = await bot.GetFileAsync(Message.Document.FileId);
             fileId = file.FileId;
 
             var sent = await bot.SendDocumentAsync(id,
+                businessConnectionId: bcid,
                 document: InputFile.FromFileId(fileId),
                 caption: Message.Caption,
                 replyMarkup: Message.ReplyMarkup,
@@ -270,29 +272,29 @@ namespace aksnvl.messaging
             return messageId;
         }
 
-        async Task<int> send(long id, ITelegramBotClient bot, IReplyMarkup? markup = null, string? thumb_path = null)
+        async Task<int> send(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null, string? thumb_path = null)
         {
             int messageId;
             switch (Message.Type)
             {
                 case MessageType.Text:
-                    messageId =  await sendTextMessage(id, bot, markup);
+                    messageId =  await sendTextMessage(id, bcid, bot, markup);
                     break;
 
                 case MessageType.Photo:
-                    messageId = await sendPhotoMessage(id, bot, markup);
+                    messageId = await sendPhotoMessage(id, bcid, bot, markup);
                     break;
                                     
                 case MessageType.Video:               
-                    messageId = await sendVideoMessage(id, bot, markup, thumb_path);                    
+                    messageId = await sendVideoMessage(id, bcid, bot, markup, thumb_path);                    
                     break;
 
                 case MessageType.VideoNote:
-                    messageId = await sendVideoNoteMessage(id, bot, markup);
+                    messageId = await sendVideoNoteMessage(id, bcid, bot, markup);
                     break;
 
                 case MessageType.Document:
-                    messageId = await sendDocumentMessage(id, bot, markup);
+                    messageId = await sendDocumentMessage(id, bcid, bot, markup);
                     break;
 
                 default:
@@ -325,7 +327,7 @@ namespace aksnvl.messaging
             }
         }
 
-        public virtual async Task<int> Send(long id, ITelegramBotClient bot, IReplyMarkup markup = null, string? thumb_path = null)
+        public virtual async Task<int> Send(long id, ITelegramBotClient bot, IReplyMarkup markup = null, string? thumb_path = null, string? bcid = null)
         {
             int messageId = 0;
 
@@ -336,7 +338,7 @@ namespace aksnvl.messaging
 
                     try
                     {
-                        messageId = await send(id, bot, markup, thumb_path);
+                        messageId = await send(id, bcid, bot, markup, thumb_path);
 
                     }
                     catch (Exception ex)
@@ -345,7 +347,7 @@ namespace aksnvl.messaging
                         {
                             Console.WriteLine("Resending with fileId = null");
                             fileId = null;
-                            messageId = await send(id, bot, markup);
+                            messageId = await send(id, bcid, bot, markup);
                         }
                         else
                             throw;
@@ -361,9 +363,7 @@ namespace aksnvl.messaging
             if (System.IO.File.Exists(FilePath))
             {
                 System.IO.File.Delete(FilePath);
-            }
-
-            
+            }            
         }
 
     }

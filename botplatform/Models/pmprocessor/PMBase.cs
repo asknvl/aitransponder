@@ -518,6 +518,45 @@ namespace botplatform.Models.pmprocessor
         }
         #endregion
 
+        #region helpers
+        async Task sendTextMessage(long tg_user_id, string message)
+        {
+            int delay = (int)(message.Length * 0.1 * 1000);
+            int typings = delay / 5000;
+
+            if (typings == 0)
+                typings = 1;
+
+            var bcid = bcIds[tg_user_id];
+            for (int i = 0; i < typings; i++)
+            {
+                await bot.SendChatActionAsync(tg_user_id, ChatAction.Typing, businessConnectionId: bcid);
+                await Task.Delay(5000);
+            }
+            await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
+
+            var msg_to_ai = $"{message}";
+            history.Add(MessageFrom.PM, tg_user_id, msg_to_ai);
+            logger.inf_urgent(geotag, $"{tg_user_id}>{message}");
+        }
+
+        async Task sendStatusMessage(long tg_user_id, string response_code, string message)
+        {
+            try
+            {
+                var m = MessageProcessor.GetMessage(response_code);
+                if (m != null)
+                {
+                    var bcid = bcIds[tg_user_id];
+                    await m.Send(tg_user_id, bot, bcid: bcid);
+                } 
+            } catch (Exception ex)
+            {
+                logger.err(geotag, $"sendStatusMessage: {ex.Message}");
+            }
+        }
+        #endregion
+
         #region public
         public virtual async Task Start()
         {
@@ -588,29 +627,28 @@ namespace botplatform.Models.pmprocessor
 
                     var _ = Task.Run(async () => {
 
-                        int delay = (int)(message.Length * 0.1 * 1000);
-                        int typings = delay / 5000;
 
-                        if (typings == 0)
-                            typings = 1;
-
-                        var bcid = bcIds[tg_user_id];
-                        for (int i = 0; i < typings; i++)
+                        if (!response_code.Equals("UNKNOWN"))
                         {
-                            await bot.SendChatActionAsync(tg_user_id, ChatAction.Typing, businessConnectionId: bcid);
-                            await Task.Delay(5000);
-                        }
+                            var m = MessageProcessor.GetMessage(response_code);
+                            if (m != null)
+                            {
+                                await sendStatusMessage(tg_user_id, response_code, message);
+                            } else
+                            {
+                                await sendTextMessage(tg_user_id, message);
+                            }
 
-                        
-                        await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
+                        } else
+                        {
+                            await sendTextMessage(tg_user_id, message);
+                        }
                     });
 
                     
 
                     //var msg_to_ai = $"Response Code: [{response_code}] Response:{message}";
-                    var msg_to_ai = $"{message}";
-                    history.Add(MessageFrom.PM, tg_user_id, msg_to_ai);
-                    logger.inf_urgent(geotag, $"{tg_user_id}>{message}");
+                  
                 }
 
             } catch (Exception ex)

@@ -35,7 +35,7 @@ namespace botplatform.Models.messages
             switch (type)
             {
                 case PostingType.india_hack:
-                    return new MP_hack_ind_eng_v0(geotag, token, bot);                      
+                    return new MP_india_strategy(geotag, token, bot);                      
                 default:
                     return null;
             }

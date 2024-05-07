@@ -42,7 +42,7 @@ namespace botplatform.Models.messages
         #endregion
 
         #region public        
-        public async void Add(string code, Message message, string? pm = null)
+        public async void Add(string code, Telegram.Bot.Types.Message message, string? pm = null)
         {
             if (MessageTypes == null)
                 return;
