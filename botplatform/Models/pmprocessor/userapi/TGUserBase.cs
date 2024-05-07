@@ -125,8 +125,9 @@ namespace asknvl
                     tg_id = usr.ID;
 
                     //chats = await user.Messages_GetAllChats();
-                    dialogs = await user.Messages_GetAllDialogs();
-                    dialogs.CollectUsersChats(users, chats);
+
+                    //dialogs = await user.Messages_GetAllDialogs();
+                    //dialogs.CollectUsersChats(users, chats);
 
                     //using (var db = new DataBaseContext())
                     //{
