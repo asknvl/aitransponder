@@ -38,7 +38,10 @@ namespace asknvl.storage
 
              string rd = File.ReadAllText(path);
 
-             var p = JsonConvert.DeserializeObject<T>(rd);
+             var p = JsonConvert.DeserializeObject<T>(rd, new JsonSerializerSettings
+             {
+                 TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto
+             });
 
              return p;
             
@@ -47,7 +50,10 @@ namespace asknvl.storage
 
         public void save(T p) {
 
-            var json = JsonConvert.SerializeObject(p, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(p, Formatting.Indented, new JsonSerializerSettings { 
+            
+                TypeNameHandling = TypeNameHandling.Auto
+            });
             try {
 
                 if (File.Exists(path))

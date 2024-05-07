@@ -36,6 +36,21 @@ namespace botplatform.Models.messages.pmprocessor.india_hack
                     Code = "AM_I_A_BOT",
                     Description = "Я бот?"
                 },
+                new messageControlVM(this)
+                {
+                    Code = "ACCUSED_OF_FRAUD",
+                    Description = "Ты мошенник"
+                },
+                new messageControlVM(this)
+                {
+                    Code = "CONCERN_ABOUT_COST",
+                    Description = "1000 рупий-дорого"
+                },
+                new messageControlVM(this)
+                {
+                    Code = "CANNOT_FIND_MONEY",
+                    Description = "Негде найти деньги"
+                },
             };
         }
 
