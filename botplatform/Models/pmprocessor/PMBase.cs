@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using botplatform.Model.bot;
 using botplatform.Models.messages;
 using botplatform.Models.pmprocessor.message_queue;
+using botplatform.Models.pmprocessor.quote_rocessor;
 using botplatform.Models.pmprocessor.userapi;
 using botplatform.Models.server;
 using botplatform.Models.settings;
@@ -60,8 +61,9 @@ namespace botplatform.Models.pmprocessor
 
         PmModel tmpPmModel;     
         Dictionary<long, string> bcIds = new Dictionary<long, string>();
-
         Dictionary<long, bool> usersStatuses = new Dictionary<long, bool>();
+
+        QuoteProcessor quoteProcessor = new QuoteProcessor();
 
 
         IAIserver ai;
@@ -548,7 +550,16 @@ namespace botplatform.Models.pmprocessor
                 if (m != null)
                 {
                     var bcid = bcIds[tg_user_id];
-                    await m.Send(tg_user_id, bot, bcid: bcid);
+
+                    var exists_id = quoteProcessor.Get(tg_user_id, response_code);
+                    if (exists_id != -1)
+                    {
+
+                    } else
+                    {
+                        int id = await m.Send(tg_user_id, bot, bcid: bcid);
+                        quoteProcessor.Add(tg_user_id, response_code, id);
+                    }                    
                 } 
             } catch (Exception ex)
             {
@@ -622,13 +633,13 @@ namespace botplatform.Models.pmprocessor
             try
             {
 
-                if (!string.IsNullOrEmpty(message))
+                if (!string.IsNullOrEmpty(message) || !string.IsNullOrEmpty(response_code))
                 {
 
                     var _ = Task.Run(async () => {
 
 
-                        if (!response_code.Equals("UNKNOWN"))
+                        if (!response_code.Equals("UNKNOWN") && geotag.Equals("INDAH17"))
                         {
                             var m = MessageProcessor.GetMessage(response_code);
                             if (m != null)
