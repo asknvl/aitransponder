@@ -51,6 +51,11 @@ namespace botplatform.Models.messages.pmprocessor.india_hack
                     Code = "CANNOT_FIND_MONEY",
                     Description = "Негде найти деньги"
                 },
+                new messageControlVM(this)
+                {
+                    Code = "ALREADY_SENT",
+                    Description = "Reply-подпись"
+                }
             };
         }
 
