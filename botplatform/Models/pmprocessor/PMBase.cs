@@ -554,6 +554,7 @@ namespace botplatform.Models.pmprocessor
                     var exists_id = quoteProcessor.Get(tg_user_id, response_code);
                     if (exists_id != -1)
                     {
+                        await m.Send(tg_user_id, bot, bcid: bcid, reply_message_id: exists_id);
 
                     } else
                     {

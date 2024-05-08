@@ -16,7 +16,7 @@ namespace aksnvl.messaging
 {
     public class PushMessageBase
     {
-        
+
         #region properties
         [JsonProperty]
         public int Id { get; set; }
@@ -194,107 +194,179 @@ namespace aksnvl.messaging
             }
         }
 
-        async Task<int> sendTextMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null)
+        async Task<int> sendTextMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null, int? reply_message_id = null)
         {
-            var m = await bot.SendTextMessageAsync(
-                    chatId: id,
-                    businessConnectionId: bcid,
-                    text: Message.Text,
-                    entities: Message.Entities,                    
-                    replyMarkup: (markup == null) ? Message.ReplyMarkup : markup,
-                    cancellationToken: new CancellationToken());
-            return m.MessageId;
+            Message sent = null;
+
+            if (reply_message_id == null)
+            {
+                sent = await bot.SendTextMessageAsync(
+                        chatId: id,
+                        businessConnectionId: bcid,
+                        text: Message.Text,
+                        entities: Message.Entities,
+                        replyMarkup: (markup == null) ? Message.ReplyMarkup : markup,
+                        cancellationToken: new CancellationToken());
+            }
+            else
+            {
+                sent = await bot.SendTextMessageAsync(
+                        chatId: id,
+                        businessConnectionId: bcid,
+                        text: Message.Text,
+                        entities: Message.Entities,
+                        replyMarkup: (markup == null) ? Message.ReplyMarkup : markup,
+                        replyParameters: new ReplyParameters() { MessageId = (int)reply_message_id },
+                        cancellationToken: new CancellationToken());
+            }
+
+            return sent.MessageId;
         }
 
-        async Task<int> sendPhotoMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null)
+        async Task<int> sendPhotoMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null, int? reply_message_id = null)
         {
-            int messageId;
             var file = await bot.GetFileAsync(Message.Photo.Last().FileId);
             fileId = file.FileId;
 
-            var sent = await bot.SendPhotoAsync(id,
-                   businessConnectionId: bcid,
-                   photo: InputFile.FromFileId(fileId),
-                   caption: Message.Caption,
-                   replyMarkup: Message.ReplyMarkup,
-                   captionEntities: Message.CaptionEntities);
-            messageId = sent.MessageId;
+            Message sent = null;
+            if (reply_message_id == null)
+            {
+                sent = await bot.SendPhotoAsync(id,
+                       businessConnectionId: bcid,
+                       photo: InputFile.FromFileId(fileId),
+                       caption: Message.Caption,
+                       replyMarkup: Message.ReplyMarkup,
+                       captionEntities: Message.CaptionEntities);
+            }
+            else
+            {
+                sent = await bot.SendPhotoAsync(id,
+                       businessConnectionId: bcid,
+                       photo: InputFile.FromFileId(fileId),
+                       caption: Message.Caption,
+                       replyMarkup: Message.ReplyMarkup,
+                       replyParameters: new ReplyParameters() { MessageId = (int)reply_message_id },
+                       captionEntities: Message.CaptionEntities);
+            }
 
-            return messageId;
+            return sent.MessageId;
         }
 
-        async Task<int> sendVideoMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null, string? thumb_path = null)
+        async Task<int> sendVideoMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null, int? reply_message_id = null)
         {
             int messageId;
             var file = await bot.GetFileAsync(Message.Video.FileId);
             fileId = file.FileId;
 
-            var sent = await bot.SendVideoAsync(id,
-                   businessConnectionId: bcid,
-                   video: InputFile.FromFileId(fileId),                   
-                   duration: Message.Video.Duration,
-                   caption: Message.Caption,
-                   supportsStreaming: true,
-                   replyMarkup: Message.ReplyMarkup,
-                   captionEntities: Message.CaptionEntities);
+            Message sent = null;
 
-            messageId = sent.MessageId;
-            return messageId;
+            if (reply_message_id == null)
+            {
+
+                sent = await bot.SendVideoAsync(id,
+                       businessConnectionId: bcid,
+                       video: InputFile.FromFileId(fileId),
+                       duration: Message.Video.Duration,
+                       caption: Message.Caption,
+                       supportsStreaming: true,
+                       replyMarkup: Message.ReplyMarkup,
+                       captionEntities: Message.CaptionEntities);
+            }
+            else
+            {
+                sent = await bot.SendVideoAsync(id,
+                       businessConnectionId: bcid,
+                       video: InputFile.FromFileId(fileId),
+                       duration: Message.Video.Duration,
+                       caption: Message.Caption,
+                       supportsStreaming: true,
+                       replyMarkup: Message.ReplyMarkup,
+                       replyParameters: new ReplyParameters() { MessageId = (int)reply_message_id },
+                       captionEntities: Message.CaptionEntities);
+            }
+
+            return sent.MessageId;
         }
 
-        async Task<int> sendVideoNoteMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null)
+        async Task<int> sendVideoNoteMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null, int? reply_message_id = null)
         {
             int messageId;
             var file = await bot.GetFileAsync(Message.VideoNote.FileId);
             fileId = file.FileId;
 
-            var sent = await bot.SendVideoNoteAsync(id,
-                businessConnectionId: bcid,
-                videoNote: InputFile.FromFileId(fileId));
-            messageId = sent.MessageId;
-            return messageId;
+            Message sent = null;
+
+            if (reply_message_id == null)
+            {
+
+                sent = await bot.SendVideoNoteAsync(id,
+                    businessConnectionId: bcid,
+                    videoNote: InputFile.FromFileId(fileId));
+                
+            } else
+            {
+                sent = await bot.SendVideoNoteAsync(id,
+                    businessConnectionId: bcid,
+                    videoNote: InputFile.FromFileId(fileId),
+                    replyParameters: new ReplyParameters() { MessageId = (int)reply_message_id });
+            }
+
+            return sent.MessageId;
         }
 
-        async Task<int> sendDocumentMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null)
-        {
-            int messageId;
+        async Task<int> sendDocumentMessage(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null, int? reply_message_id = null)
+        {            
             var file = await bot.GetFileAsync(Message.Document.FileId);
             fileId = file.FileId;
 
-            var sent = await bot.SendDocumentAsync(id,
-                businessConnectionId: bcid,
-                document: InputFile.FromFileId(fileId),
-                caption: Message.Caption,
-                replyMarkup: Message.ReplyMarkup,
-                captionEntities: Message.CaptionEntities);
-            messageId = sent.MessageId;
+            Message sent = null;
 
-            return messageId;
+            if (reply_message_id == null)
+            {
+
+                sent = await bot.SendDocumentAsync(id,
+                    businessConnectionId: bcid,
+                    document: InputFile.FromFileId(fileId),
+                    caption: Message.Caption,
+                    replyMarkup: Message.ReplyMarkup,
+                    captionEntities: Message.CaptionEntities);
+            } else
+            {
+                sent = await bot.SendDocumentAsync(id,
+                   businessConnectionId: bcid,
+                   document: InputFile.FromFileId(fileId),
+                   caption: Message.Caption,
+                   replyMarkup: Message.ReplyMarkup,
+                   replyParameters: new ReplyParameters() { MessageId = (int)reply_message_id },
+                   captionEntities: Message.CaptionEntities);
+            }
+
+            return sent.MessageId;
         }
 
-        async Task<int> send(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null, string? thumb_path = null)
+        async Task<int> send(long id, string bcid, ITelegramBotClient bot, IReplyMarkup? markup = null, int? reply_message_id = null)
         {
             int messageId;
             switch (Message.Type)
             {
                 case MessageType.Text:
-                    messageId =  await sendTextMessage(id, bcid, bot, markup);
+                    messageId = await sendTextMessage(id, bcid, bot, markup, reply_message_id);
                     break;
 
                 case MessageType.Photo:
-                    messageId = await sendPhotoMessage(id, bcid, bot, markup);
+                    messageId = await sendPhotoMessage(id, bcid, bot, markup, reply_message_id);
                     break;
-                                    
-                case MessageType.Video:               
-                    messageId = await sendVideoMessage(id, bcid, bot, markup, thumb_path);                    
+
+                case MessageType.Video:
+                    messageId = await sendVideoMessage(id, bcid, bot, markup, reply_message_id);
                     break;
 
                 case MessageType.VideoNote:
-                    messageId = await sendVideoNoteMessage(id, bcid, bot, markup);
+                    messageId = await sendVideoNoteMessage(id, bcid, bot, markup, reply_message_id);
                     break;
 
                 case MessageType.Document:
-                    messageId = await sendDocumentMessage(id, bcid, bot, markup);
+                    messageId = await sendDocumentMessage(id, bcid, bot, markup, reply_message_id);
                     break;
 
                 default:
@@ -327,7 +399,7 @@ namespace aksnvl.messaging
             }
         }
 
-        public virtual async Task<int> Send(long id, ITelegramBotClient bot, IReplyMarkup markup = null, string? thumb_path = null, string? bcid = null)
+        public virtual async Task<int> Send(long id, ITelegramBotClient bot, IReplyMarkup markup = null, string? thumb_path = null, string? bcid = null, int? reply_message_id = null)
         {
             int messageId = 0;
 
@@ -338,7 +410,7 @@ namespace aksnvl.messaging
 
                     try
                     {
-                        messageId = await send(id, bcid, bot, markup, thumb_path);
+                        messageId = await send(id, bcid, bot, markup, reply_message_id);
 
                     }
                     catch (Exception ex)
@@ -354,7 +426,7 @@ namespace aksnvl.messaging
                     }
                 });
             }
-           
+
             return messageId;
         }
 
@@ -363,7 +435,7 @@ namespace aksnvl.messaging
             if (System.IO.File.Exists(FilePath))
             {
                 System.IO.File.Delete(FilePath);
-            }            
+            }
         }
 
     }
