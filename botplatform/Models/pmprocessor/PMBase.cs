@@ -644,7 +644,7 @@ namespace botplatform.Models.pmprocessor
                     var _ = Task.Run(async () => {
 
 
-                        if (!response_code.Equals("UNKNOWN") && geotag.Equals("INDAH17"))
+                        if (!response_code.Equals("UNKNOWN"))
                         {
                             var m = MessageProcessor.GetMessage(response_code);
                             if (m != null)
