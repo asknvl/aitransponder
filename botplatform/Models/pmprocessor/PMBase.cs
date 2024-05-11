@@ -181,7 +181,7 @@ namespace botplatform.Models.pmprocessor
             server = new TGBotFollowersStatApi("https://ru.flopasda.site");
 
             aggregateMessageTimer = new System.Timers.Timer();
-            aggregateMessageTimer.Interval = 20 * 1000;
+            aggregateMessageTimer.Interval = 40 * 1000;
             aggregateMessageTimer.AutoReset = true;
             aggregateMessageTimer.Elapsed += AggregateMessageTimer_Elapsed;
 
