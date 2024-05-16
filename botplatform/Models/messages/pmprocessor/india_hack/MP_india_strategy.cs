@@ -33,6 +33,11 @@ namespace botplatform.Models.messages.pmprocessor.india_hack
                 },
                 new messageControlVM(this)
                 {
+                    Code = "WHO_AM_I",
+                    Description = "Кто я?"
+                },
+                new messageControlVM(this)
+                {
                     Code = "AM_I_A_BOT",
                     Description = "Я бот?"
                 },

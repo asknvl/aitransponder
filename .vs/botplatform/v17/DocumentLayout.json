@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\sources\\aitransponder\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\messages\\pmprocessor\\india_hack\\mp_india_strategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\messages\\pmprocessor\\india_hack\\mp_india_strategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\pmbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\pmbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\message_queue\\messagehistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\message_queue\\messagehistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\messages\\pmprocessor\\india_hack\\mp_india_strategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\messages\\pmprocessor\\india_hack\\mp_india_strategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\storage\\local\\storage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -139,10 +139,6 @@
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\pmfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\pm_processor_v0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\pm_processor_v0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\views\\settingsview.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}",
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\views\\settingsview.axaml||{52A100FB-4151-3710-80C3-8B555898AD56}"
     },
@@ -225,8 +221,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 438,
-          "SelectedChildIndex": 5,
+          "DockedWidth": 420,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -242,52 +238,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IAIserver.cs",
-              "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\server\\IAIserver.cs",
-              "RelativeDocumentMoniker": "botplatform\\Models\\server\\IAIserver.cs",
-              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\server\\IAIserver.cs",
-              "RelativeToolTip": "botplatform\\Models\\server\\IAIserver.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAwAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-15T20:07:37.091Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MessageHistory.cs",
-              "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\message_queue\\MessageHistory.cs",
-              "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\message_queue\\MessageHistory.cs",
-              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\message_queue\\MessageHistory.cs",
-              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\message_queue\\MessageHistory.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAAewGIAAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-11T15:17:31.929Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "PMBase.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\PMBase.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\PMBase.cs",
-              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\PMBase.cs",
-              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\PMBase.cs",
-              "ViewState": "AQIAAHEBAAAAmpmZmRkswIsBAAAdAAAA",
+              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\PMBase.cs*",
+              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\PMBase.cs*",
+              "ViewState": "AQIAAGsCAAAAAAAAAAAAAIACAABgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-11T12:10:50.422Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "MP_india_strategy.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\messages\\pmprocessor\\india_hack\\MP_india_strategy.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\messages\\pmprocessor\\india_hack\\MP_india_strategy.cs",
-              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\messages\\pmprocessor\\india_hack\\MP_india_strategy.cs",
-              "RelativeToolTip": "botplatform\\Models\\messages\\pmprocessor\\india_hack\\MP_india_strategy.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAADwvzgAAAAwAAAA",
+              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\messages\\pmprocessor\\india_hack\\MP_india_strategy.cs*",
+              "RelativeToolTip": "botplatform\\Models\\messages\\pmprocessor\\india_hack\\MP_india_strategy.cs*",
+              "ViewState": "AQIAABEAAAAwzczMzIwmwBMAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-15T07:20:12.78Z"
+              "WhenOpened": "2024-04-15T07:20:12.78Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -300,6 +273,30 @@
               "ViewState": "AQIAACMAAAAAAAAAAAAwwDYAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-07T21:25:28.701Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MessageHistory.cs",
+              "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\message_queue\\MessageHistory.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\message_queue\\MessageHistory.cs",
+              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\message_queue\\MessageHistory.cs",
+              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\message_queue\\MessageHistory.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAAewGIAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-11T15:17:31.929Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IAIserver.cs",
+              "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\server\\IAIserver.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\server\\IAIserver.cs",
+              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\server\\IAIserver.cs",
+              "RelativeToolTip": "botplatform\\Models\\server\\IAIserver.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAwAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-15T20:07:37.091Z"
             },
             {
               "$type": "Document",
@@ -350,7 +347,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AIServer.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\server\\AIServer.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\server\\AIServer.cs",
@@ -601,7 +598,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 38,
               "Title": "IOperatorStorage.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\storage\\IOperatorStorage.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\storage\\IOperatorStorage.cs",
@@ -648,19 +645,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "pm_processor_v0.cs",
-              "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
-              "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
-              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
-              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAABiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T13:46:41.577Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 35,
               "Title": "operatorVM.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\ViewModels\\operatorVM.cs",
               "RelativeDocumentMoniker": "botplatform\\ViewModels\\operatorVM.cs",
@@ -672,7 +657,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 34,
               "Title": "settingsView.axaml",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Views\\settingsView.axaml",
               "RelativeDocumentMoniker": "botplatform\\Views\\settingsView.axaml",
@@ -683,7 +668,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 39,
               "Title": "BotFactory.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\bot\\BotFactory.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\bot\\BotFactory.cs",
@@ -695,7 +680,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 37,
               "Title": "LocalOperatorStorage.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\storage\\local\\LocalOperatorStorage.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\storage\\local\\LocalOperatorStorage.cs",
@@ -707,7 +692,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 41,
               "Title": "addPmVM.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\ViewModels\\pmrocessor\\addPmVM.cs",
               "RelativeDocumentMoniker": "botplatform\\ViewModels\\pmrocessor\\addPmVM.cs",
@@ -719,7 +704,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 40,
               "Title": "AviatorBotView.axaml",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Views\\AviatorBotView.axaml",
               "RelativeDocumentMoniker": "botplatform\\Views\\AviatorBotView.axaml",
@@ -730,7 +715,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 45,
               "Title": "App.axaml.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\App.axaml.cs",
               "RelativeDocumentMoniker": "botplatform\\App.axaml.cs",
@@ -742,7 +727,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 42,
               "Title": "addBotView.axaml",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Views\\addBotView.axaml",
               "RelativeDocumentMoniker": "botplatform\\Views\\addBotView.axaml",
@@ -753,7 +738,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 52,
               "Title": "transponder_bot.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\bot\\transponder_bot.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\bot\\transponder_bot.cs",
@@ -765,7 +750,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 47,
               "Title": "BotModel.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\bot\\BotModel.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\bot\\BotModel.cs",
@@ -777,7 +762,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 46,
               "Title": "IPM.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\IPM.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\IPM.cs",
@@ -789,7 +774,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 49,
               "Title": "editBotVM.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\ViewModels\\editBotVM.cs",
               "RelativeDocumentMoniker": "botplatform\\ViewModels\\editBotVM.cs",
@@ -801,7 +786,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 48,
               "Title": "editBotView.axaml",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Views\\editBotView.axaml",
               "RelativeDocumentMoniker": "botplatform\\Views\\editBotView.axaml",
@@ -812,7 +797,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 50,
               "Title": "botplatform.csproj",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\botplatform.csproj",
               "RelativeDocumentMoniker": "botplatform\\botplatform.csproj",
@@ -824,7 +809,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 51,
               "Title": "loggerView.axaml",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Views\\loggerView.axaml",
               "RelativeDocumentMoniker": "botplatform\\Views\\loggerView.axaml",
@@ -832,10 +817,6 @@
               "RelativeToolTip": "botplatform\\Views\\loggerView.axaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2024-04-11T16:04:13.738Z"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         },
@@ -866,7 +847,7 @@
           ]
         },
         {
-          "DockedWidth": 139,
+          "DockedWidth": 157,
           "SelectedChildIndex": 0,
           "Children": [
             {
@@ -884,7 +865,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 44,
               "Title": "LocalBotStorage.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\storage\\local\\LocalBotStorage.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\storage\\local\\LocalBotStorage.cs",
@@ -896,7 +877,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 43,
               "Title": "IBotFactory.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\bot\\IBotFactory.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\bot\\IBotFactory.cs",
@@ -908,7 +889,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 36,
               "Title": "IPmFactory.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\IPmFactory.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\IPmFactory.cs",
