@@ -68,6 +68,8 @@ namespace botplatform.Models.pmprocessor
 
         IAIserver ai;
         ITGBotFollowersStatApi server;
+
+        Random random = new Random();
         #endregion
 
         #region properties
@@ -350,9 +352,6 @@ namespace botplatform.Models.pmprocessor
                     });
                 }
 
-
-                logger.inf(geotag, $"{fn} {ln} {un} {chat}>{update.BusinessMessage.Text}");
-
                 var bc = await bot.GetBusinessConnectionAsync(new GetBusinessConnectionRequest(update.BusinessMessage.BusinessConnectionId));
                 
                 
@@ -363,14 +362,43 @@ namespace botplatform.Models.pmprocessor
                                         
                     var text = update.BusinessMessage.Text;
 
-                    if (text != null)
-                    {
-                        pmMessages.Add(chat, text);
-                        history.Add(MessageFrom.Lead, chat, text);
+                    //if (text != null)
+                    //{
+                    //    pmMessages.Add(chat, text);
+                    //    history.Add(MessageFrom.Lead, chat, text);
+                    //}
+                    if (text != null) { 
+
+                        var _ = Task.Run(async () => { 
+
+                            
+
+                            var hitem = new List<HistoryItem>()
+                            {
+                                new HistoryItem(MessageFrom.Lead, text)
+                            };
+
+                            try
+                            {
+                                await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
+                                logger.inf(geotag, $"{fn} {ln} {un} {chat}>{text}");
+                            }
+                            catch (Exception ex)
+                            {
+                                logger.err(geotag, $"processBusiness: {ex.Message}");
+                            }
+
+                            await Task.Delay(random.Next(5, 21) * 1000);
+                            try
+                            {
+                                await marker?.MarkAsRead(chat);
+                            } catch (Exception ex)
+                            {
+                            }
+                        });
+
                     }
 
-
-                    //logger.inf(geotag, $"{fn} {ln} {un} {chat}>{text}");
                 }
 
             } catch (Exception ex)
@@ -608,7 +636,7 @@ namespace botplatform.Models.pmprocessor
 
             initMessageProcessor();
 
-            aggregateMessageTimer.Start();
+            //aggregateMessageTimer.Start();
 
             bot.StartReceiving(HandleUpdateAsync, HandleErrorAsync, receiverOptions, cts.Token);
 
@@ -623,7 +651,7 @@ namespace botplatform.Models.pmprocessor
         public void Stop()
         {
             cts?.Cancel();
-            aggregateMessageTimer.Stop();
+            //aggregateMessageTimer.Stop();
             is_active = false;
             logger.inf(geotag, "PM stopped");
         }
