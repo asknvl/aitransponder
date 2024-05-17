@@ -18,10 +18,10 @@ namespace asknvl.server
         Task<List<getIdUserInfoDto>> GetUserInfoByTGid(long tg_id);
         Task<List<getIdUserInfoDto>> GetUserInfoByPlayerId(string player_id);
         Task<List<subscriptionDto>> GetFollowerSubscriprion(string geotag, long tg_id);
-        Task LeadDistributeRequest(long tg_id, string geotag, AssigmentTypes type);
+        Task LeadDistributeRequest(long tg_id, string geotag, AssignmentTypes type);
     }
 
-    public enum AssigmentTypes
+    public enum AssignmentTypes
     {
         RD
     }

@@ -412,10 +412,10 @@ namespace asknvl.server
         {
             public long tg_user_id { get; set; }
             public string source { get; set; }
-            public string assigment_type { get; set; }
+            public string assignment_type { get; set; }
         }
 
-        public async Task LeadDistributeRequest(long tg_id, string geotag, AssigmentTypes atype)
+        public async Task LeadDistributeRequest(long tg_id, string geotag, AssignmentTypes atype)
         {
             var addr = $"https://app.flopasda.site/v1/telegram/userMessages/distribute";
 
@@ -423,7 +423,7 @@ namespace asknvl.server
             {
                 tg_user_id = tg_id,
                 source = geotag,
-                assigment_type = atype.ToString()
+                assignment_type = atype.ToString()
             };
 
             var json = JsonConvert.SerializeObject(lead, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });

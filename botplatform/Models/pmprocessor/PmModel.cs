@@ -5,7 +5,7 @@ namespace botplatform.Models.pmprocessor
     public class PmModel
     {
         public PMType posting_type { get; set; }
-        public DateTime start_date { get; set; } = new DateTime(2024, 05, 1, 9, 42, 0);
+        public DateTime start_date { get; set; } 
         public string geotag { get; set; }
         public string phone_number { get; set; }
         public string bot_token { get; set; }

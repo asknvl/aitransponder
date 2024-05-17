@@ -710,13 +710,13 @@ namespace botplatform.Models.pmprocessor
                     case "DIALOG_END":                        
                         userStorage.updateUser(tg_user_id, is_active: false);
                         userStorage.save();
-                        await server.LeadDistributeRequest(tg_user_id, geotag, AssigmentTypes.RD);
+                        await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
                         break;
 
                     case "DIALOG_ERROR":
                         userStorage.updateUser(tg_user_id, is_active: false);
                         userStorage.save();
-                        await server.LeadDistributeRequest(tg_user_id, geotag, AssigmentTypes.RD);
+                        await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
                         return;
 
                     default:
