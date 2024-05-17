@@ -9,13 +9,10 @@ namespace botplatform.Models
 {
     public static class common
     {
-        public static List<PostingType> common_Available_Posting_Types { get; } = new List<PostingType>() { 
+        public static List<PMType> common_Available_Posting_Types { get; } = new List<PMType>() { 
         
-            PostingType.india_hack,
-            PostingType.india_strategy,
-            PostingType.latam_x,
-            PostingType.latam_t
-        
+            PMType.qualification_pm,
+            PMType.support_pm
         };
     }
 }

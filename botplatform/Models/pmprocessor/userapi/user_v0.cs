@@ -1,6 +1,5 @@
 ﻿using asknvl;
 using asknvl.logger;
-using botplatform.Model.bot;
 using System;
 using System.Collections.Generic;
 using System.Linq;

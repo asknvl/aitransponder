@@ -1,16 +1,14 @@
 ﻿using asknvl;
 using asknvl.logger;
 using asknvl.server;
-using Avalonia.Controls;
-using botplatform.Model.bot;
 using botplatform.Models.messages;
 using botplatform.Models.pmprocessor.message_queue;
 using botplatform.Models.pmprocessor.quote_rocessor;
+using botplatform.Models.pmprocessor.user_storage;
 using botplatform.Models.pmprocessor.userapi;
 using botplatform.Models.server;
 using botplatform.Models.settings;
 using botplatform.Models.storage;
-using botplatform.Operators;
 using botplatform.ViewModels;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
@@ -45,8 +43,9 @@ namespace botplatform.Models.pmprocessor
         protected ITGUser user;
         protected IMarkRead marker;
 
-        protected CancellationTokenSource cts;
-        protected State state = State.free;
+        State state;
+
+        protected CancellationTokenSource cts;        
 
         List<int> ignoredMesageIds = new();
 
@@ -63,6 +62,7 @@ namespace botplatform.Models.pmprocessor
         Dictionary<long, string> bcIds = new Dictionary<long, string>();
         Dictionary<long, bool> usersStatuses = new Dictionary<long, bool>();
 
+        IUserStorage userStorage;
         QuoteProcessor quoteProcessor = new QuoteProcessor();
 
         IAIserver ai;
@@ -106,10 +106,10 @@ namespace botplatform.Models.pmprocessor
             set => this.RaiseAndSetIfChanged(ref _verify_code, value);
         }
 
-        public List<PostingType> posting_types { get; } = common.common_Available_Posting_Types;
+        public List<PMType> posting_types { get; } = common.common_Available_Posting_Types;
 
-        PostingType _posting_type;
-        public PostingType posting_type
+        PMType _posting_type;
+        public PMType posting_type
         {
             get => _posting_type;
             set => this.RaiseAndSetIfChanged(ref _posting_type, value);
@@ -164,7 +164,7 @@ namespace botplatform.Models.pmprocessor
         public ReactiveCommand<Unit, Unit> verifyCmd { get; }
         #endregion
 
-        public PMBase(PmModel model, DateTime startDate, IPMStorage pmStorage, ILogger logger)
+        public PMBase(PmModel model, IPMStorage pmStorage, ILogger logger)
         {
 
             this.logger = logger;            
@@ -175,7 +175,9 @@ namespace botplatform.Models.pmprocessor
             bot_token = model.bot_token;
             posting_type = model.posting_type;
 
-            this.startDate = startDate;
+            startDate = model.start_date;
+
+            userStorage = new JsonUserStorage(geotag);
 
             messageProcessorFactory = new MessageProcessorFactory(logger);
 
@@ -300,6 +302,28 @@ namespace botplatform.Models.pmprocessor
             }
         }
 
+        async Task<bool> checkNeedProcess(long chat, string fn, string ln, string un)
+        {
+            bool needProcess = true;
+            var userData = await server.GetFollowerSubscriprion(geotag, chat);
+
+            if (userData.Count != 0)
+            {
+                var sdate = userData[0].subscribe_date;
+                var date = DateTime.Parse(sdate);
+
+                needProcess = date > startDate;
+
+#if DEBUG_TG_SERV
+                needProcess = true;
+#endif
+
+                
+            }
+
+            return needProcess;
+        }
+
         async Task processBusiness(Telegram.Bot.Types.Update update)
         {
             try
@@ -309,33 +333,40 @@ namespace botplatform.Models.pmprocessor
                 var ln = update.BusinessMessage.From.LastName;
                 var un = update.BusinessMessage.From.Username;
 
-                if (!usersStatuses.ContainsKey(chat))
-                {
+//                if (!usersStatuses.ContainsKey(chat))
+//                {
 
-                    bool needProcess = true;
-                    var userData = await server.GetFollowerSubscriprion(geotag, chat);
+//                    bool needProcess = true;
+//                    var userData = await server.GetFollowerSubscriprion(geotag, chat);
 
-                    if (userData.Count != 0)
-                    {
-                        var sdate = userData[0].subscribe_date;
-                        var date = DateTime.Parse(sdate);                        
+//                    if (userData.Count != 0)
+//                    {
+//                        var sdate = userData[0].subscribe_date;
+//                        var date = DateTime.Parse(sdate);                        
 
-                        needProcess = date > startDate;
+//                        needProcess = date > startDate;
 
-#if DEBUG_TG_SERV
-                        needProcess = true;
-#endif
+//#if DEBUG_TG_SERV
+//                        needProcess = true;
+//#endif
 
-                        logger.inf(geotag, $"{chat} {fn} {ln} {un} {sdate} | {date} {needProcess}");
-                    }
+//                        logger.inf(geotag, $"{chat} {fn} {ln} {un} {sdate} | {date} {needProcess}");
+//                    }
 
-                    usersStatuses.Add(chat, needProcess);
-                }
+//                    usersStatuses.Add(chat, needProcess);
+//                }
+
+                bool is_active = await checkNeedProcess(chat, fn, ln, un);
+                var user = userStorage.createUserIfNeeded(chat, is_active);
+
+                //if (!usersStatuses[chat])
+                //    return;                
 
 
-                if (!usersStatuses[chat])
-                    return;                
-                
+                logger.inf(geotag, $"{chat} {fn} {ln} {un} active={user.is_active}");
+
+                if (!user.is_active)
+                    return;
 
                 if (!activeUsers.Any(u => u.tg_user_id == chat))
                 {
@@ -640,6 +671,8 @@ namespace botplatform.Models.pmprocessor
 
             //aggregateMessageTimer.Start();
 
+            userStorage?.load();
+
             bot.StartReceiving(HandleUpdateAsync, HandleErrorAsync, receiverOptions, cts.Token);
 
             await user.Start();
@@ -652,6 +685,7 @@ namespace botplatform.Models.pmprocessor
 
         public void Stop()
         {
+            userStorage.save();
             cts?.Cancel();
             //aggregateMessageTimer.Stop();
             is_active = false;
@@ -659,18 +693,30 @@ namespace botplatform.Models.pmprocessor
         }
 
         public string GetGeotag()
-        {
+        {            
             return geotag;
         }
 
         public async Task Update(string source, long tg_user_id, string response_code, string message)
         {
+
+            logger.dbg(geotag, $"Update: {source} {tg_user_id} {response_code} ismessage={!string.IsNullOrEmpty(message)}");
+
             try
             {
                 //system codes
                 switch (response_code)
                 {
-                    case "DIALOG_END":
+                    case "DIALOG_END":                        
+                        userStorage.updateUser(tg_user_id, is_active: false);
+                        userStorage.save();
+                        await server.LeadDistributeRequest(tg_user_id, geotag, AssigmentTypes.RD);
+                        break;
+
+                    case "DIALOG_ERROR":
+                        userStorage.updateUser(tg_user_id, is_active: false);
+                        userStorage.save();
+                        await server.LeadDistributeRequest(tg_user_id, geotag, AssigmentTypes.RD);
                         return;
 
                     default:
@@ -720,5 +766,11 @@ namespace botplatform.Models.pmprocessor
         public string? fn { get; set;}
         public string? ln { get; set; }
         public string? un { get; set; }
+    }
+
+    public enum State
+    {
+        free,
+        waiting_new_message
     }
 }

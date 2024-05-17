@@ -1,12 +1,9 @@
-﻿using botplatform.Model.bot;
+﻿using botplatform.Models;
 using botplatform.Models.pmprocessor;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace botplatform.ViewModels.pmrocessor
 {
@@ -38,20 +35,16 @@ namespace botplatform.ViewModels.pmrocessor
             set => this.RaiseAndSetIfChanged(ref _bot_token, value);
         }
 
-        List<PostingType> _posting_types = new() { 
-            PostingType.india_hack,
-            PostingType.india_strategy,
-            PostingType.latam_t,
-            PostingType.latam_x
-        };
-        public List<PostingType> posting_types
+        List<PMType> _posting_types = common.common_Available_Posting_Types;
+           
+        public List<PMType> posting_types
         {
             get => _posting_types;
             set => this.RaiseAndSetIfChanged(ref _posting_types, value);
         }
 
-        PostingType _posting_type;
-        public PostingType posting_type
+        PMType _posting_type;
+        public PMType posting_type
         {
             get => _posting_type;
             set => this.RaiseAndSetIfChanged(ref _posting_type, value);

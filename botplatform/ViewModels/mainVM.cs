@@ -1,26 +1,13 @@
-﻿using aksnvl.storage;
-using botplatform.Model.bot;
-using botplatform.Models.bot;
-using botplatform.Models.pmprocessor;
+﻿using botplatform.Models.pmprocessor;
 using botplatform.Models.settings;
 using botplatform.Models.storage;
 using botplatform.Models.storage.local;
-using botplatform.Operators;
 using botplatform.rest;
 using botplatform.ViewModels.pmrocessor;
-using botplatform.WS;
-using motivebot.Model.storage;
-using motivebot.Model.storage.local;
 using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Net.Http.Headers;
 using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace botplatform.ViewModels
 {
@@ -28,30 +15,11 @@ namespace botplatform.ViewModels
     {
 
         #region vars
-        IBotStorage botStorage;        
-        IBotFactory botFactory;
-
         IPMStorage pmStorage;
-        IPmFactory pmFactory;
-
-        IOperatorStorage operatorStorage;
+        IPmFactory pmFactory;        
         #endregion
 
-        #region properties
-        public ObservableCollection<BotBase> Bots { get; set; } = new();
-        public ObservableCollection<BotBase> SelectedBots { get; set; } = new(); 
-        
-        BotBase selectedBot;
-        public BotBase SelectedBot
-        {
-            get => selectedBot;
-            set
-            {
-                SubContent = value;
-                this.RaiseAndSetIfChanged(ref selectedBot, value);                
-            }
-        }
-
+        #region properties                
         object subContent;
         public object SubContent
         {
@@ -93,13 +61,6 @@ namespace botplatform.ViewModels
         {
             get => appSettings;
             set => this.RaiseAndSetIfChanged(ref appSettings, value);  
-        }
-
-        operatorsVM operators;
-        public operatorsVM OperatorsVM
-        {
-            get => operators;
-            set => this.RaiseAndSetIfChanged(ref operators, value);
         }
         #endregion
 

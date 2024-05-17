@@ -407,6 +407,42 @@ namespace asknvl.server
             return res;
         }
 
+
+        class leadDistributeDto
+        {
+            public long tg_user_id { get; set; }
+            public string source { get; set; }
+            public string assigment_type { get; set; }
+        }
+
+        public async Task LeadDistributeRequest(long tg_id, string geotag, AssigmentTypes atype)
+        {
+            var addr = $"https://app.flopasda.site/v1/telegram/userMessages/distribute";
+
+            leadDistributeDto lead = new()
+            {
+                tg_user_id = tg_id,
+                source = geotag,
+                assigment_type = atype.ToString()
+            };
+
+            var json = JsonConvert.SerializeObject(lead, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                var response = await httpClient.PutAsync(addr, data);
+                var result = await response.Content.ReadAsStringAsync();
+                var jres = JObject.Parse(result);
+                bool res = jres["success"].ToObject<bool>();
+                if (!res)
+                    throw new Exception($"success=false");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"LeadDistributeRequest {geotag} {tg_id} {atype} {ex.Message}");
+            }
+        }
     }
 
 

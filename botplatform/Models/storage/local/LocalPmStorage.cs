@@ -1,8 +1,6 @@
 ﻿using aksnvl.storage;
 using asknvl.storage;
-using botplatform.Model.bot;
 using botplatform.Models.pmprocessor;
-using motivebot.Model.storage;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,7 +30,7 @@ namespace botplatform.Models.storage.local
             if (!found)
                 PmModels.Add(pm);
             else
-                throw new BotStorageException($"Личка с геотегом {pm.geotag} уже существует");
+                throw new Exception($"Личка с геотегом {pm.geotag} уже существует");
 
             storage.save(PmModels);
         }
@@ -61,7 +59,7 @@ namespace botplatform.Models.storage.local
             }
             catch (Exception ex)
             {
-                throw new BotStorageException("Не удалось загрузить данные");
+                throw new Exception("Не удалось загрузить данные");
             }
         }
 
@@ -82,7 +80,7 @@ namespace botplatform.Models.storage.local
             }
             catch (Exception ex)
             {
-                throw new BotStorageException("Не удалось обновить данные");
+                throw new Exception("Не удалось обновить данные");
             }
         }
 
@@ -95,7 +93,7 @@ namespace botplatform.Models.storage.local
             }
             catch (Exception ex)
             {
-                throw new BotStorageException("Не удалось сохранить данные");
+                throw new Exception("Не удалось сохранить данные");
             }
         }
         #endregion

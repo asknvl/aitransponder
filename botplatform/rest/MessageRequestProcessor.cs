@@ -1,5 +1,4 @@
-﻿using botplatform.Models.bot;
-using botplatform.Models.pmprocessor;
+﻿using botplatform.Models.pmprocessor;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
