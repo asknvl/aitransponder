@@ -24,10 +24,25 @@ namespace botplatform.Models.pmprocessor
         }
 
         #region public
-        public PMBase Get(PmModel model)
+        public PMBase Get(PmModel model, PMType type)
         {
-            return new pm_processor_v0(model, pmStorage, logger);
+            switch (type)
+            {
+                case PMType.strategy_ind_pm:
+                    return new pm_processor_v0(model, pmStorage, logger);
+
+                default:
+                    throw new NotImplementedException();
+            }
+            
         }
         #endregion
+    }
+
+    public enum PMType
+    {
+        strategy_ind_pm,
+        hack_ind_supp,
+        hack_ind_pm        
     }
 }

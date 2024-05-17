@@ -9,6 +9,6 @@ namespace botplatform.Models.pmprocessor
     public interface IMessageObserver
     {
         string GetGeotag();
-        Task SendMessage(string source, long tg_user_id, string response_code, string message);
+        Task Update(string source, long tg_user_id, string response_code, string message);
     }
 }

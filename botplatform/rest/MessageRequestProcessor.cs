@@ -41,7 +41,7 @@ namespace botplatform.rest
                     {
                         var _ = Task.Run(async () => {
 
-                            await messageObserver.SendMessage(
+                            await messageObserver.Update(
                                                             messageData.source,
                                                             messageData.tg_user_id,
                                                             messageData.response_code,

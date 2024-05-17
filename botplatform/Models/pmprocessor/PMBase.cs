@@ -65,9 +65,10 @@ namespace botplatform.Models.pmprocessor
 
         QuoteProcessor quoteProcessor = new QuoteProcessor();
 
-
         IAIserver ai;
         ITGBotFollowersStatApi server;
+
+        DateTime startDate;
 
         Random random = new Random();
         #endregion
@@ -163,7 +164,7 @@ namespace botplatform.Models.pmprocessor
         public ReactiveCommand<Unit, Unit> verifyCmd { get; }
         #endregion
 
-        public PMBase(PmModel model, IPMStorage pmStorage, ILogger logger)
+        public PMBase(PmModel model, DateTime startDate, IPMStorage pmStorage, ILogger logger)
         {
 
             this.logger = logger;            
@@ -173,6 +174,8 @@ namespace botplatform.Models.pmprocessor
             phone_number = model.phone_number;
             bot_token = model.bot_token;
             posting_type = model.posting_type;
+
+            this.startDate = startDate;
 
             messageProcessorFactory = new MessageProcessorFactory(logger);
 
@@ -315,8 +318,7 @@ namespace botplatform.Models.pmprocessor
                     if (userData.Count != 0)
                     {
                         var sdate = userData[0].subscribe_date;
-                        var date = DateTime.Parse(sdate);
-                        var startDate = new DateTime(2024, 05, 1, 9, 42, 0);
+                        var date = DateTime.Parse(sdate);                        
 
                         needProcess = date > startDate;
 
@@ -661,10 +663,20 @@ namespace botplatform.Models.pmprocessor
             return geotag;
         }
 
-        public async Task SendMessage(string source, long tg_user_id, string response_code, string message)
+        public async Task Update(string source, long tg_user_id, string response_code, string message)
         {
             try
             {
+                //system codes
+                switch (response_code)
+                {
+                    case "DIALOG_END":
+                        return;
+
+                    default:
+                        break;
+                }
+
 
                 if (!string.IsNullOrEmpty(message) || !string.IsNullOrEmpty(response_code))
                 {
