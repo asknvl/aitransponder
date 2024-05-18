@@ -8,7 +8,7 @@ namespace botplatform.Models.pmprocessor.user_storage
 {
     public interface IUserStorage
     {
-        User createUserIfNeeded(long tg_id, bool is_active);
+        User createUserIfNeeded(long tg_id);
         void updateUser(long tg_id, bool? is_active = null);
         void save();
         void load();
