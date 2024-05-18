@@ -27,10 +27,10 @@ namespace botplatform.Models.pmprocessor.user_storage
         #endregion
 
         #region public
-        public User createUserIfNeeded(long tg_id, bool is_active)
+        public User createUserIfNeeded(long tg_id)
         {
             User user = new User();
-            user.is_active = is_active;
+            user.is_active = true;
 
             if (!users.ContainsKey(tg_id))
             {

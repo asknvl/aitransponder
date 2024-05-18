@@ -309,17 +309,27 @@ namespace botplatform.Models.pmprocessor
 
             if (userData.Count != 0)
             {
-                var sdate = userData[0].subscribe_date;
-                var date = DateTime.Parse(sdate);
+                var datedSubscribes = userData.Where(s => !string.IsNullOrEmpty(s.subscribe_date));
+                var maxDateSub = datedSubscribes.Max(s => DateTime.Parse(s.subscribe_date));
+                //var sdate = userData[0].subscribe_date;                
+                try
+                {
+                    //var date = DateTime.Parse(sdate);
+                    //needProcess = date > startDate;
+                    needProcess = maxDateSub > startDate;
 
-                needProcess = date > startDate;
+                    logger.inf(geotag, $"{chat} {fn} {ln} {un} needProcess={needProcess} {maxDateSub} | {startDate}");
+
+                } catch (Exception ex)
+                {
+                    throw ex;
+                }
 
 #if DEBUG_TG_SERV
                 needProcess = true;
-#endif
-
-                
+#endif                
             }
+                       
 
             return needProcess;
         }
@@ -333,37 +343,42 @@ namespace botplatform.Models.pmprocessor
                 var ln = update.BusinessMessage.From.LastName;
                 var un = update.BusinessMessage.From.Username;
 
-//                if (!usersStatuses.ContainsKey(chat))
-//                {
+                //                if (!usersStatuses.ContainsKey(chat))
+                //                {
 
-//                    bool needProcess = true;
-//                    var userData = await server.GetFollowerSubscriprion(geotag, chat);
+                //                    bool needProcess = true;
+                //                    var userData = await server.GetFollowerSubscriprion(geotag, chat);
 
-//                    if (userData.Count != 0)
-//                    {
-//                        var sdate = userData[0].subscribe_date;
-//                        var date = DateTime.Parse(sdate);                        
+                //                    if (userData.Count != 0)
+                //                    {
+                //                        var sdate = userData[0].subscribe_date;
+                //                        var date = DateTime.Parse(sdate);                        
 
-//                        needProcess = date > startDate;
+                //                        needProcess = date > startDate;
 
-//#if DEBUG_TG_SERV
-//                        needProcess = true;
-//#endif
+                //#if DEBUG_TG_SERV
+                //                        needProcess = true;
+                //#endif
 
-//                        logger.inf(geotag, $"{chat} {fn} {ln} {un} {sdate} | {date} {needProcess}");
-//                    }
+                //                        logger.inf(geotag, $"{chat} {fn} {ln} {un} {sdate} | {date} {needProcess}");
+                //                    }
 
-//                    usersStatuses.Add(chat, needProcess);
-//                }
+                //                    usersStatuses.Add(chat, needProcess);
+                //                }
 
-                bool is_active = await checkNeedProcess(chat, fn, ln, un);
-                var user = userStorage.createUserIfNeeded(chat, is_active);
+                var user = userStorage.createUserIfNeeded(chat);
+                if (user.is_active)
+                {
+                    user.is_active = await checkNeedProcess(chat, fn, ln, un);
+                }
+
+                logger.inf(geotag, $"{chat} {fn} {ln} {un} active={user.is_active}");
 
                 //if (!usersStatuses[chat])
                 //    return;                
 
 
-                logger.inf(geotag, $"{chat} {fn} {ln} {un} active={user.is_active}");
+
 
                 if (!user.is_active)
                     return;
