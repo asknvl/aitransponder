@@ -19,7 +19,7 @@ namespace botplatform.Models.pmprocessor.db_storage
             this.context = context; 
         }
 
-        public User createUserIfNeeded(string geotag,
+        public (User, bool) createUserIfNeeded(string geotag,
                                        long tg_id,
                                        string bcId,
                                        string? fn,
@@ -35,13 +35,13 @@ namespace botplatform.Models.pmprocessor.db_storage
                         found.bcId = bcId;
                         context.SaveChanges();
                     }
-                    return found;
+                    return (found, false);
                 } else
                 {
                     User user = new User(geotag, tg_id, bcId, fn: fn, ln: ln, un: un);
                     context.Users.Add(user);
                     context.SaveChanges();
-                    return user;
+                    return (user, true);
                 }
             }
         }
