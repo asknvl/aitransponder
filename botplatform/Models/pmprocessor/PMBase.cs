@@ -356,17 +356,20 @@ namespace botplatform.Models.pmprocessor
                 if (chat == bc.User.Id)
                     return;
 
-                var user = dbStorage.createUserIfNeeded(geotag, chat, bcId, fn, ln, un);
-                if (user.ai_on)
+                db_storage.User user = null;
+                bool isNew;
+
+                (user, isNew) = dbStorage.createUserIfNeeded(geotag, chat, bcId, fn, ln, un);
+
+                if (isNew)
                 {
                     user.ai_on = await checkNeedProcess(chat, fn, ln, un);
+                    if (!user.ai_on)
+                        dbStorage.updateUser(geotag, chat, ai_on: false, ai_off_code: "DATE");
                 }
 
                 if (!user.ai_on)
-                {
-                    dbStorage.updateUser(geotag, chat, ai_on: false, ai_off_code: "DATE");
-                    return;
-                }
+                    return;                
 
                 string? text = null;
 
@@ -410,13 +413,15 @@ namespace botplatform.Models.pmprocessor
                 }
                 else
                 {
-                    var hitem = new List<HistoryItem>()
-                            {
-                                new HistoryItem(MessageFrom.Lead, "screenshot")
-                            };
+                    var _ = Task.Run(async () => { 
+                        var hitem = new List<HistoryItem>()
+                                {
+                                    new HistoryItem(MessageFrom.Lead, "screenshot")
+                                };
 
-                    await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
-                    logger.inf(geotag, $"{fn} {ln} {un} {chat}>screenshot");
+                        await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
+                        logger.inf(geotag, $"{fn} {ln} {un} {chat}>screenshot");
+                    });
                 }
             }
             catch (Exception ex)
