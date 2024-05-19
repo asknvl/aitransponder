@@ -368,7 +368,14 @@ namespace botplatform.Models.pmprocessor
                     return;
                 }
 
-                var text = update.BusinessMessage.Text;
+                string? text = null;
+
+                if (update.BusinessMessage.Text != null)
+                    text = update.BusinessMessage.Text;
+                else
+                if (update.BusinessMessage.Sticker != null)
+                    text = update.BusinessMessage.Sticker.Emoji;
+                
               
                 if (text != null)
                 {
