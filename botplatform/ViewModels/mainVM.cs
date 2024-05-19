@@ -1,4 +1,5 @@
 ﻿using botplatform.Models.pmprocessor;
+using botplatform.Models.pmprocessor.db_storage;
 using botplatform.Models.settings;
 using botplatform.Models.storage;
 using botplatform.Models.storage.local;
@@ -77,7 +78,11 @@ namespace botplatform.ViewModels
             Logger = new loggerVM();
             pmStorage = new LocalPmStorage();                        
 
-            pmFactory = new PmFactory(pmStorage, Logger);
+            ApplicationContext context = new ApplicationContext();
+            context.Database.EnsureCreated();
+            IDBStorage dbStorage = new DBStorage(context);
+
+            pmFactory = new PmFactory(pmStorage, dbStorage, Logger);
 
             var settings = Settings.getInstance();            
             
@@ -86,34 +91,7 @@ namespace botplatform.ViewModels
             MessageRequestProcessor messageRequestProcessor = new MessageRequestProcessor();    
             restService.RequestProcessors.Add(messageRequestProcessor); 
 
-
-            //PushRequestProcessor pushRequestProcessor = new PushRequestProcessor();
-            //StatusUpdateRequestProcessor statusUpdateRequestProcessor = new StatusUpdateRequestProcessor();
-            //NotifyRequestProcessor notifyRequestProcessor = new NotifyRequestProcessor();
-
-            //restService.RequestProcessors.Add(pushRequestProcessor);
-            //restService.RequestProcessors.Add(statusUpdateRequestProcessor);
-            //restService.RequestProcessors.Add(notifyRequestProcessor);
-
-
             restService.Listen();
-
-            //botStorage = new LocalBotStorage();
-            //operatorStorage = new LocalOperatorStorage();
-
-            //botFactory = new BotFactory(operatorStorage, botStorage);
-
-            //var models = botStorage.GetAll();
-
-            //OperatorsVM = new operatorsVM(operatorStorage);            
-
-            //foreach (var model in models)
-            //{                
-            //    var bot = botFactory.Get(model, logger);
-            //    Bots.Add(bot);
-            //    operatorStorage.Add(model.geotag);                
-            //}
-
 
             var models = pmStorage.GetAll();
             foreach (var model in models)
@@ -122,8 +100,6 @@ namespace botplatform.ViewModels
                 PMs.Add(pm);        
                 messageRequestProcessor.Add(pm);
             }
-
-
 
             #region commands
             addCmd = ReactiveCommand.Create(() => {

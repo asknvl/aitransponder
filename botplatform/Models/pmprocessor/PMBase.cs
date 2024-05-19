@@ -4,7 +4,7 @@ using asknvl.server;
 using botplatform.Models.messages;
 using botplatform.Models.pmprocessor.message_queue;
 using botplatform.Models.pmprocessor.quote_rocessor;
-using botplatform.Models.pmprocessor.user_storage;
+using botplatform.Models.pmprocessor.db_storage;
 using botplatform.Models.pmprocessor.userapi;
 using botplatform.Models.server;
 using botplatform.Models.settings;
@@ -29,6 +29,7 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
 using TL;
 using static System.Net.Mime.MediaTypeNames;
+using Avalonia.Media;
 
 namespace botplatform.Models.pmprocessor
 {
@@ -36,7 +37,10 @@ namespace botplatform.Models.pmprocessor
     {
         #region vars
         protected ILogger logger;        
+
         protected IPMStorage pmStorage;
+        IDBStorage dbStorage;
+
         protected IMessageProcessorFactory messageProcessorFactory;
 
         protected ITelegramBotClient bot;
@@ -48,21 +52,10 @@ namespace botplatform.Models.pmprocessor
         protected CancellationTokenSource cts;        
 
         List<int> ignoredMesageIds = new();
-
-        object lockObj = new object();
-        List<userInfo> activeUsers = new();
-
-        System.Timers.Timer aggregateMessageTimer;
-
-        MessageQueue pmMessages;
-
         MessageHistory history;
 
-        PmModel tmpPmModel;     
-        Dictionary<long, string> bcIds = new Dictionary<long, string>();
-        Dictionary<long, bool> usersStatuses = new Dictionary<long, bool>();
+        PmModel tmpPmModel;             
 
-        IUserStorage userStorage;
         QuoteProcessor quoteProcessor = new QuoteProcessor();
 
         IAIserver ai;
@@ -164,11 +157,13 @@ namespace botplatform.Models.pmprocessor
         public ReactiveCommand<Unit, Unit> verifyCmd { get; }
         #endregion
 
-        public PMBase(PmModel model, IPMStorage pmStorage, ILogger logger)
+        public PMBase(PmModel model, IPMStorage pmStorage, IDBStorage dbStorage, ILogger logger)
         {
 
             this.logger = logger;            
             this.pmStorage = pmStorage;
+            this.dbStorage = dbStorage;
+            this.dbStorage = dbStorage;
 
             geotag = model.geotag;
             phone_number = model.phone_number;
@@ -177,20 +172,19 @@ namespace botplatform.Models.pmprocessor
 
             startDate = model.start_date;
 
-            userStorage = new JsonUserStorage(geotag);
+            //dbStorage = new JsondbStorage(geotag);            
 
             messageProcessorFactory = new MessageProcessorFactory(logger);
 
-            pmMessages = new MessageQueue();
             history = new MessageHistory();
 
             ai = new AIServer("https://gpt.raceup.io");
             server = new TGBotFollowersStatApi("https://ru.flopasda.site");
 
-            aggregateMessageTimer = new System.Timers.Timer();
-            aggregateMessageTimer.Interval = 40 * 1000;
-            aggregateMessageTimer.AutoReset = true;
-            aggregateMessageTimer.Elapsed += AggregateMessageTimer_Elapsed;
+            //aggregateMessageTimer = new System.Timers.Timer();
+            //aggregateMessageTimer.Interval = 40 * 1000;
+            //aggregateMessageTimer.AutoReset = true;
+            //aggregateMessageTimer.Elapsed += AggregateMessageTimer_Elapsed;
 
             user = new user_v0(model.api_id, model.api_hash, phone_number, "5555", logger);
             user.VerificationCodeRequestEvent += User_VerificationCodeRequestEvent;
@@ -335,78 +329,32 @@ namespace botplatform.Models.pmprocessor
         }
 
         async Task processBusiness(Telegram.Bot.Types.Update update)
-        {
+        {          
+
             try
             {
                 var chat = update.BusinessMessage.From.Id;
+                var bcId = update.BusinessMessage.BusinessConnectionId;
+
                 var fn = update.BusinessMessage.From.FirstName;
                 var ln = update.BusinessMessage.From.LastName;
                 var un = update.BusinessMessage.From.Username;
 
-                //                if (!usersStatuses.ContainsKey(chat))
-                //                {
-
-                //                    bool needProcess = true;
-                //                    var userData = await server.GetFollowerSubscriprion(geotag, chat);
-
-                //                    if (userData.Count != 0)
-                //                    {
-                //                        var sdate = userData[0].subscribe_date;
-                //                        var date = DateTime.Parse(sdate);                        
-
-                //                        needProcess = date > startDate;
-
-                //#if DEBUG_TG_SERV
-                //                        needProcess = true;
-                //#endif
-
-                //                        logger.inf(geotag, $"{chat} {fn} {ln} {un} {sdate} | {date} {needProcess}");
-                //                    }
-
-                //                    usersStatuses.Add(chat, needProcess);
-                //                }
-
-                var user = userStorage.createUserIfNeeded(chat);
-                if (user.is_active)
+                var user = dbStorage.createUserIfNeeded(geotag, chat, bcId, fn, ln, un);
+                if (user.ai_on)
                 {
-                    user.is_active = await checkNeedProcess(chat, fn, ln, un);
+                    user.ai_on = await checkNeedProcess(chat, fn, ln, un);
                 }
 
-                logger.inf(geotag, $"{chat} {fn} {ln} {un} active={user.is_active}");
+                logger.inf(geotag, $"{chat} {fn} {ln} {un} active={user.ai_on}");                
 
-                //if (!usersStatuses[chat])
-                //    return;                
-
-
-
-
-                if (!user.is_active)
+                if (!user.ai_on)
                     return;
 
-                if (!activeUsers.Any(u => u.tg_user_id == chat))
-                {
+                var bc = await bot.GetBusinessConnectionAsync(new GetBusinessConnectionRequest(user.bcId));                                
 
-                    if (activeUsers.Count == 1024)
-                    {
-                        activeUsers.RemoveAt(0);
-                    }
-
-                    activeUsers.Add(new userInfo()
-                    {
-                        tg_user_id = chat,
-                        fn = fn,
-                        ln = ln,
-                        un = un
-                    });
-                }
-
-                var bc = await bot.GetBusinessConnectionAsync(new GetBusinessConnectionRequest(update.BusinessMessage.BusinessConnectionId));
-                
-                
                 if (chat != bc.User.Id)
                 {
-                    if (!bcIds.ContainsKey(chat))
-                        bcIds.Add(chat, update.BusinessMessage.BusinessConnectionId);
                                         
                     var text = update.BusinessMessage.Text;
 
@@ -415,11 +363,9 @@ namespace botplatform.Models.pmprocessor
                     //    pmMessages.Add(chat, text);
                     //    history.Add(MessageFrom.Lead, chat, text);
                     //}
-                    if (text != null) { 
+                    if (text != null) {
 
-                        var _ = Task.Run(async () => { 
-
-                            
+                        var _ = Task.Run(async () => {
 
                             var hitem = new List<HistoryItem>()
                             {
@@ -440,11 +386,21 @@ namespace botplatform.Models.pmprocessor
                             try
                             {
                                 await marker?.MarkAsRead(chat);
-                            } catch (Exception ex)
+                            }
+                            catch (Exception ex)
                             {
                             }
                         });
+                    }
+                    else
+                    {
+                        var hitem = new List<HistoryItem>()
+                            {
+                                new HistoryItem(MessageFrom.Lead, "screenshot")
+                            };
 
+                        await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
+                        logger.inf(geotag, $"{fn} {ln} {un} {chat}>screenshot");
                     }
 
                 }
@@ -470,81 +426,81 @@ namespace botplatform.Models.pmprocessor
             }
         }
 
-        private async void AggregateMessageTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
-        {
+        //private async void AggregateMessageTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+        //{
 
-            if (!is_active)
-                return;
+        //    if (!is_active)
+        //        return;
 
-            try
-            {
-                //var toSent = pmMessages.GetMessages();
+        //    try
+        //    {
+        //        //var toSent = pmMessages.GetMessages();
 
-                //foreach (var message in toSent)
-                //{
-                //    try
-                //    {
-                //        await ai.SendMessageToAI(geotag, message.Key, message.Value);                       
+        //        //foreach (var message in toSent)
+        //        //{
+        //        //    try
+        //        //    {
+        //        //        await ai.SendMessageToAI(geotag, message.Key, message.Value);                       
 
-                //        logger.dbg(geotag, $"aggregate: {message.Key} {message.Value}");
+        //        //        logger.dbg(geotag, $"aggregate: {message.Key} {message.Value}");
 
-                //    } catch (Exception ex)
-                //    {
-                //        logger.err(geotag, $"Aggregate: {message.Key} {message.Value}");
-                //    }
-                //}
+        //        //    } catch (Exception ex)
+        //        //    {
+        //        //        logger.err(geotag, $"Aggregate: {message.Key} {message.Value}");
+        //        //    }
+        //        //}
 
-                var toSent = history.Get();
-                logger.dbg(geotag, $"toSent: count={toSent.Count}");
-                foreach ( var item in toSent )
-                {
-                    try
-                    {
+        //        var toSent = history.Get();
+        //        logger.dbg(geotag, $"toSent: count={toSent.Count}");
+        //        foreach ( var item in toSent )
+        //        {
+        //            try
+        //            {
 
-                        string? fn = null;
-                        string? ln = null;
-                        string? un = null;
+        //                string? fn = null;
+        //                string? ln = null;
+        //                string? un = null;
 
-                        var user = activeUsers.FirstOrDefault(u => u.tg_user_id == item.Key);
-                        if (user != null)
-                        {
-                            fn = user.fn;
-                            ln = user.ln;
-                            un = user.un;
-                        }
+        //                var user = activeUsers.FirstOrDefault(u => u.tg_user_id == item.Key);
+        //                if (user != null)
+        //                {
+        //                    fn = user.fn;
+        //                    ln = user.ln;
+        //                    un = user.un;
+        //                }
 
-                        logger.dbg(geotag, $"{item.Key} {fn} {ln} {un}");
+        //                logger.dbg(geotag, $"{item.Key} {fn} {ln} {un}");
 
-                        string s = "";
-                        var histItems = item.Value.Get();
+        //                string s = "";
+        //                var histItems = item.Value.Get();
 
-                        foreach (var h in histItems)  {
-                            s += $"{h.role} > {h.content}\n";
-                        }
-                        logger.dbg(geotag, $"{s}");
-
-
-                        try
-                        {
-                            await ai.SendHistoryToAI(geotag, item.Key, fn, ln, un, histItems);
-                        } catch (Exception ex)
-                        {
-                            logger.err(geotag, $"AggregateMessageTimer: {ex.Message}");
-                        }
-
-                        await marker?.MarkAsRead(item.Key);
-                    } catch (Exception ex)
-                    {
-
-                    }
-                }
+        //                foreach (var h in histItems)  {
+        //                    s += $"{h.role} > {h.content}\n";
+        //                }
+        //                logger.dbg(geotag, $"{s}");
 
 
-            } catch (Exception ex)
-            {
+        //                try
+        //                {
+        //                    await ai.SendHistoryToAI(geotag, item.Key, fn, ln, un, histItems);
+        //                } catch (Exception ex)
+        //                {
+        //                    logger.err(geotag, $"AggregateMessageTimer: {ex.Message}");
+        //                }
 
-            }
-        }
+        //                await marker?.MarkAsRead(item.Key);
+        //            } catch (Exception ex)
+        //            {
+
+        //            }
+        //        }
+
+
+        //    } catch (Exception ex)
+        //    {
+
+        //    }
+        //}
 
         async Task HandleUpdateAsync(ITelegramBotClient bot, Telegram.Bot.Types.Update update, CancellationToken cancellationToken)
         {
@@ -597,7 +553,7 @@ namespace botplatform.Models.pmprocessor
         #endregion
 
         #region helpers
-        async Task sendTextMessage(long tg_user_id, string message)
+        async Task sendTextMessage(long tg_user_id, string bcid, string message)
         {
             int delay = (int)(message.Length * 0.1 * 1000);
             int typings = delay / 5000;
@@ -605,7 +561,7 @@ namespace botplatform.Models.pmprocessor
             if (typings == 0)
                 typings = 1;
 
-            var bcid = bcIds[tg_user_id];
+            //var bcid = bcIds[tg_user_id];
             for (int i = 0; i < typings; i++)
             {
                 await bot.SendChatActionAsync(tg_user_id, ChatAction.Typing, businessConnectionId: bcid);
@@ -618,14 +574,14 @@ namespace botplatform.Models.pmprocessor
             logger.inf_urgent(geotag, $"{tg_user_id}>{message}");
         }
 
-        async Task sendStatusMessage(long tg_user_id, string response_code, string message)
+        async Task sendStatusMessage(long tg_user_id, string bcid, string response_code, string message)
         {
             try
             {
                 var m = MessageProcessor.GetMessage(response_code);
                 if (m != null)
                 {
-                    var bcid = bcIds[tg_user_id];
+                    //var bcid = bcIds[tg_user_id];
 
                     var exists_id = quoteProcessor.Get(tg_user_id, response_code);
                     if (exists_id != -1)
@@ -671,7 +627,7 @@ namespace botplatform.Models.pmprocessor
             var u = await bot.GetMeAsync();
             bot_username = u.Username;
 
-            var updates = await bot.GetUpdatesAsync();
+            var updates = await bot.GetUpdatesAsync();            
             ignoredMesageIds = updates.Select(u => u.Id).ToList();
 
 
@@ -686,8 +642,6 @@ namespace botplatform.Models.pmprocessor
 
             //aggregateMessageTimer.Start();
 
-            userStorage?.load();
-
             bot.StartReceiving(HandleUpdateAsync, HandleErrorAsync, receiverOptions, cts.Token);
 
             await user.Start();
@@ -699,8 +653,7 @@ namespace botplatform.Models.pmprocessor
         }
 
         public void Stop()
-        {
-            userStorage.save();
+        {            
             cts?.Cancel();
             //aggregateMessageTimer.Stop();
             is_active = false;
@@ -715,6 +668,25 @@ namespace botplatform.Models.pmprocessor
         public async Task Update(string source, long tg_user_id, string response_code, string message)
         {
 
+            if (!source.Equals(geotag))
+            {
+                logger.err(geotag, $"Update: source {source} not equals {geotag}");
+                return;
+            }
+                
+
+            db_storage.User user = null;
+            try
+            {
+                user = dbStorage.getUser(source, tg_user_id);
+            } catch (Exception ex)
+            {
+                logger.err(geotag, $"Update: {source} {tg_user_id} user not found");
+            }
+
+            if (user == null)
+                return;
+
             logger.dbg(geotag, $"Update: {source} {tg_user_id} {response_code} ismessage={!string.IsNullOrEmpty(message)}");
 
             try
@@ -723,14 +695,12 @@ namespace botplatform.Models.pmprocessor
                 switch (response_code)
                 {
                     case "DIALOG_END":                        
-                        userStorage.updateUser(tg_user_id, is_active: false);
-                        userStorage.save();
+                        dbStorage.updateUser(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);                        
                         await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
                         break;
 
                     case "DIALOG_ERROR":
-                        userStorage.updateUser(tg_user_id, is_active: false);
-                        userStorage.save();
+                        dbStorage.updateUser(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);                        
                         await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
                         return;
 
@@ -741,36 +711,29 @@ namespace botplatform.Models.pmprocessor
 
                 if (!string.IsNullOrEmpty(message) || !string.IsNullOrEmpty(response_code))
                 {
-
                     var _ = Task.Run(async () => {
-
 
                         if (!response_code.Equals("UNKNOWN"))
                         {
                             var m = MessageProcessor.GetMessage(response_code);
                             if (m != null)
                             {
-                                await sendStatusMessage(tg_user_id, response_code, message);
+                                await sendStatusMessage(tg_user_id, user.bcId, response_code, message);
                             } else
                             {
-                                await sendTextMessage(tg_user_id, message);
+                                await sendTextMessage(tg_user_id, user.bcId, message);
                             }
 
                         } else
                         {
-                            await sendTextMessage(tg_user_id, message);
+                            await sendTextMessage(tg_user_id, user.bcId, message);
                         }
                     });
-
-                    
-
-                    //var msg_to_ai = $"Response Code: [{response_code}] Response:{message}";
-                  
                 }
 
             } catch (Exception ex)
             {
-                logger.err(geotag, $"SendMessage: {ex.Message}");
+                logger.err(geotag, $"Update: {ex.Message}");
             }
         }
         #endregion
