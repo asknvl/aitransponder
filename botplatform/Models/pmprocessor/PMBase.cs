@@ -363,7 +363,10 @@ namespace botplatform.Models.pmprocessor
                 }
 
                 if (!user.ai_on)
+                {
+                    dbStorage.updateUser(geotag, chat, ai_on: false, ai_off_code: "DATE");
                     return;
+                }
 
                 var text = update.BusinessMessage.Text;
               
