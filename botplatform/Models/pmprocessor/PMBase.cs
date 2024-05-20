@@ -30,6 +30,7 @@ using Telegram.Bot.Types.InlineQueryResults;
 using TL;
 using static System.Net.Mime.MediaTypeNames;
 using Avalonia.Media;
+using System.IO;
 
 namespace botplatform.Models.pmprocessor
 {
@@ -339,8 +340,59 @@ namespace botplatform.Models.pmprocessor
             return needProcess;
         }
 
+        void handleSticker(long chat, string? fn, string? ln, string? un, Sticker? sticker)
+        {
+            if (sticker != null)
+                handleTextMessage(chat, fn, ln, un, sticker.Emoji);
+        }
+
+        void handleTextMessage(long chat, string? fn, string? ln, string? un, string? text)
+        {
+            if (text != null)
+            {
+                var _ = Task.Run(async () =>
+                {
+
+                    var hitem = new List<HistoryItem>()
+                        {
+                                new HistoryItem(MessageFrom.Lead, text)
+                        };
+
+                    try
+                    {
+                        await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
+                        logger.inf(geotag, $"{fn} {ln} {un} {chat}>{text}");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.err(geotag, $"processBusiness: {ex.Message}");
+                    }
+
+                    await Task.Delay(random.Next(5, 21) * 1000);
+                    try
+                    {
+                        await marker?.MarkAsRead(chat);
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                });
+            }
+        }
+
+        async Task handlePhotoMessage()
+        {
+            await Task.CompletedTask;
+        }
+
+
         async Task processBusiness(Telegram.Bot.Types.Update update)
         {
+
+            string caption = update.BusinessMessage.Caption;
+            string message = update.BusinessMessage.Text;
+
+            logger.inf(geotag, $"caption: {caption}, message: {message}");
 
             try
             {
@@ -371,58 +423,88 @@ namespace botplatform.Models.pmprocessor
                 if (!user.ai_on)
                     return;                
 
-                string? text = null;
 
-                if (update.BusinessMessage.Text != null)
-                    text = update.BusinessMessage.Text;
-                else
-                if (update.BusinessMessage.Sticker != null)
-                    text = update.BusinessMessage.Sticker.Emoji;
+                switch (update.BusinessMessage.Type)
+                {
+                    case Telegram.Bot.Types.Enums.MessageType.Sticker:
+                        handleSticker(chat, fn, ln, un, update.BusinessMessage.Sticker);
+                        break;
+
+                    case Telegram.Bot.Types.Enums.MessageType.Text:
+                        handleTextMessage(chat, fn, ln, un, update.BusinessMessage.Text);
+                        break;
+
+                    case Telegram.Bot.Types.Enums.MessageType.Photo:
+
+                        MemoryStream memoryStream = new MemoryStream();
+
+                        var fileId = update.BusinessMessage.Photo.Last().FileId;
+                        var fileInfo = await bot.GetFileAsync(fileId);
+                        var filePath = fileInfo.FilePath;   
+
+                        await bot.DownloadFileAsync(
+
+                                filePath: filePath,
+                                destination: memoryStream
+                            );
+
+                        break;
+                        
+                }
+
+
+                //string? text = null;
+
+                //if (update.BusinessMessage.Text != null)
+                //    text = update.BusinessMessage.Text;
+                //else
+                //if (update.BusinessMessage.Sticker != null)
+                //    text = update.BusinessMessage.Sticker.Emoji;
                 
               
-                if (text != null)
-                {
+                //if (text != null)
+                //{
 
-                    var _ = Task.Run(async () =>
-                    {
+                //    var _ = Task.Run(async () =>
+                //    {
 
-                        var hitem = new List<HistoryItem>()
-                            {
-                                new HistoryItem(MessageFrom.Lead, text)
-                            };
+                //        var hitem = new List<HistoryItem>()
+                //            {
+                //                new HistoryItem(MessageFrom.Lead, text)
+                //            };
 
-                        try
-                        {
-                            await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
-                            logger.inf(geotag, $"{fn} {ln} {un} {chat}>{text}");
-                        }
-                        catch (Exception ex)
-                        {
-                            logger.err(geotag, $"processBusiness: {ex.Message}");
-                        }
+                //        try
+                //        {
+                //            await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
+                //            logger.inf(geotag, $"{fn} {ln} {un} {chat}>{text}");
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //            logger.err(geotag, $"processBusiness: {ex.Message}");
+                //        }
 
-                        await Task.Delay(random.Next(5, 21) * 1000);
-                        try
-                        {
-                            await marker?.MarkAsRead(chat);
-                        }
-                        catch (Exception ex)
-                        {
-                        }
-                    });
-                }
-                else
-                {
-                    var _ = Task.Run(async () => { 
-                        var hitem = new List<HistoryItem>()
-                                {
-                                    new HistoryItem(MessageFrom.Lead, "screenshot")
-                                };
+                //        await Task.Delay(random.Next(5, 21) * 1000);
+                //        try
+                //        {
+                //            await marker?.MarkAsRead(chat);
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //        }
+                //    });
+                //}
+                //else
+                //{
+                //    var _ = Task.Run(async () => { 
+                //        var hitem = new List<HistoryItem>()
+                //                {
+                //                    new HistoryItem(MessageFrom.Lead, "screenshot")
+                //                };
 
-                        await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
-                        logger.inf(geotag, $"{fn} {ln} {un} {chat}>screenshot");
-                    });
-                }
+                //        await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
+                //        logger.inf(geotag, $"{fn} {ln} {un} {chat}>screenshot");
+                //    });
+                //}
             }
             catch (Exception ex)
             {
@@ -587,7 +669,7 @@ namespace botplatform.Models.pmprocessor
                 await bot.SendChatActionAsync(tg_user_id, ChatAction.Typing, businessConnectionId: bcid);
                 await Task.Delay(5000);
             }
-            await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
+            await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid, parseMode: ParseMode.MarkdownV2);
 
             var msg_to_ai = $"{message}";
             history.Add(MessageFrom.PM, tg_user_id, msg_to_ai);
