@@ -62,13 +62,14 @@ namespace botplatform.ViewModels
         {
             get => appSettings;
             set => this.RaiseAndSetIfChanged(ref appSettings, value);  
-        }
+        }       
         #endregion
 
         #region commands
         public ReactiveCommand<Unit, Unit> addCmd { get; }
         public ReactiveCommand<Unit, Unit> removeCmd { get;  }
-        public ReactiveCommand<Unit, Unit> editCmd { get; }        
+        public ReactiveCommand<Unit, Unit> editCmd { get; }
+        
         #endregion
         public mainVM()
         {

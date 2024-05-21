@@ -360,7 +360,9 @@ namespace botplatform.Models.pmprocessor
 
                     try
                     {
-                        await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
+                        //await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
+                        await ai.SendToAI(geotag, chat, fn, ln, un, message: text);
+
                         logger.inf(geotag, $"{fn} {ln} {un} {chat}>{text}");
                     }
                     catch (Exception ex)
@@ -443,68 +445,17 @@ namespace botplatform.Models.pmprocessor
                         var filePath = fileInfo.FilePath;   
 
                         await bot.DownloadFileAsync(
-
                                 filePath: filePath,
                                 destination: memoryStream
                             );
 
+                        var base64_image = Convert.ToBase64String(memoryStream.ToArray());
+
+                        await ai.SendToAI(geotag, chat, fn, ln, un, message: update.BusinessMessage.Caption, base64_image: base64_image);
+
                         break;
                         
                 }
-
-
-                //string? text = null;
-
-                //if (update.BusinessMessage.Text != null)
-                //    text = update.BusinessMessage.Text;
-                //else
-                //if (update.BusinessMessage.Sticker != null)
-                //    text = update.BusinessMessage.Sticker.Emoji;
-                
-              
-                //if (text != null)
-                //{
-
-                //    var _ = Task.Run(async () =>
-                //    {
-
-                //        var hitem = new List<HistoryItem>()
-                //            {
-                //                new HistoryItem(MessageFrom.Lead, text)
-                //            };
-
-                //        try
-                //        {
-                //            await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
-                //            logger.inf(geotag, $"{fn} {ln} {un} {chat}>{text}");
-                //        }
-                //        catch (Exception ex)
-                //        {
-                //            logger.err(geotag, $"processBusiness: {ex.Message}");
-                //        }
-
-                //        await Task.Delay(random.Next(5, 21) * 1000);
-                //        try
-                //        {
-                //            await marker?.MarkAsRead(chat);
-                //        }
-                //        catch (Exception ex)
-                //        {
-                //        }
-                //    });
-                //}
-                //else
-                //{
-                //    var _ = Task.Run(async () => { 
-                //        var hitem = new List<HistoryItem>()
-                //                {
-                //                    new HistoryItem(MessageFrom.Lead, "screenshot")
-                //                };
-
-                //        await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
-                //        logger.inf(geotag, $"{fn} {ln} {un} {chat}>screenshot");
-                //    });
-                //}
             }
             catch (Exception ex)
             {
@@ -526,82 +477,6 @@ namespace botplatform.Models.pmprocessor
                 need_verification = false;
             }
         }
-
-        //private async void AggregateMessageTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
-        //{
-
-        //    if (!is_active)
-        //        return;
-
-        //    try
-        //    {
-        //        //var toSent = pmMessages.GetMessages();
-
-        //        //foreach (var message in toSent)
-        //        //{
-        //        //    try
-        //        //    {
-        //        //        await ai.SendMessageToAI(geotag, message.Key, message.Value);                       
-
-        //        //        logger.dbg(geotag, $"aggregate: {message.Key} {message.Value}");
-
-        //        //    } catch (Exception ex)
-        //        //    {
-        //        //        logger.err(geotag, $"Aggregate: {message.Key} {message.Value}");
-        //        //    }
-        //        //}
-
-        //        var toSent = history.Get();
-        //        logger.dbg(geotag, $"toSent: count={toSent.Count}");
-        //        foreach ( var item in toSent )
-        //        {
-        //            try
-        //            {
-
-        //                string? fn = null;
-        //                string? ln = null;
-        //                string? un = null;
-
-        //                var user = activeUsers.FirstOrDefault(u => u.tg_user_id == item.Key);
-        //                if (user != null)
-        //                {
-        //                    fn = user.fn;
-        //                    ln = user.ln;
-        //                    un = user.un;
-        //                }
-
-        //                logger.dbg(geotag, $"{item.Key} {fn} {ln} {un}");
-
-        //                string s = "";
-        //                var histItems = item.Value.Get();
-
-        //                foreach (var h in histItems)  {
-        //                    s += $"{h.role} > {h.content}\n";
-        //                }
-        //                logger.dbg(geotag, $"{s}");
-
-
-        //                try
-        //                {
-        //                    await ai.SendHistoryToAI(geotag, item.Key, fn, ln, un, histItems);
-        //                } catch (Exception ex)
-        //                {
-        //                    logger.err(geotag, $"AggregateMessageTimer: {ex.Message}");
-        //                }
-
-        //                await marker?.MarkAsRead(item.Key);
-        //            } catch (Exception ex)
-        //            {
-
-        //            }
-        //        }
-
-
-        //    } catch (Exception ex)
-        //    {
-
-        //    }
-        //}
 
         async Task HandleUpdateAsync(ITelegramBotClient bot, Telegram.Bot.Types.Update update, CancellationToken cancellationToken)
         {

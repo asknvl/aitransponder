@@ -109,6 +109,27 @@ namespace botplatform.Models.server
             }
         }
 
+        public async Task SendToAI(string geotag, long tg_user_id, string? fn, string? ln, string? un, string? message = null, string? base64_image = null)
+        {
+            var addr = $"{url}/api/message";
+
+            universalMessageDto msg = new universalMessageDto(geotag, tg_user_id, fn, ln, un, text: message, base64_image: base64_image);
+
+            var json = JsonConvert.SerializeObject(msg, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                var response = await httpClient.PostAsync(addr, data);
+                //var result = await response.Content.ReadAsStringAsync();
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"SendToAI {ex.Message}");
+            }
+        }
+
         public class historyDto
         {
             public List<HistoryItem> messages { get; set; } = new();
