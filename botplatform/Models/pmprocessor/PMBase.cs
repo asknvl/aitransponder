@@ -10,8 +10,6 @@ using botplatform.Models.server;
 using botplatform.Models.settings;
 using botplatform.Models.storage;
 using botplatform.ViewModels;
-using Microsoft.VisualBasic;
-using Newtonsoft.Json.Linq;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -26,11 +24,8 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Requests;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.InlineQueryResults;
-using TL;
-using static System.Net.Mime.MediaTypeNames;
-using Avalonia.Media;
 using System.IO;
+using SkiaSharp;
 
 namespace botplatform.Models.pmprocessor
 {
@@ -449,9 +444,34 @@ namespace botplatform.Models.pmprocessor
                                 destination: memoryStream
                             );
 
-                        var base64_image = Convert.ToBase64String(memoryStream.ToArray());
+                        string base64_image = null;
+                        MemoryStream compressedStream = new MemoryStream();
+                        memoryStream.Position = 0;
+                        byte[] inputImage = memoryStream.ToArray();
+                        memoryStream.Close();
 
-                        await ai.SendToAI(geotag, chat, fn, ln, un, message: update.BusinessMessage.Caption, base64_image: base64_image);
+                        using (var originalBitmap = SKBitmap.Decode(inputImage))
+                        {
+                            var quality = 20; // Quality set to 50
+                            using (var image = SKImage.FromBitmap(originalBitmap))
+                            using (var data = image.Encode(SKEncodedImageFormat.Jpeg, quality))
+                            {                                
+                                data.SaveTo(compressedStream);                                
+                                base64_image = Convert.ToBase64String(compressedStream.ToArray());                                
+                            }
+
+                        }
+
+                        logger.inf(geotag, $"compressed: {inputImage.Length} to {compressedStream.Length}");
+
+                        //var base64_image = Convert.ToBase64String(memoryStream.ToArray());
+                        if (base64_image != null)
+                        {
+                            await ai.SendToAI(geotag, chat, fn, ln, un, message: update.BusinessMessage.Caption, base64_image: base64_image);
+                        }
+
+                        memoryStream.Dispose();
+                        compressedStream.Dispose();
 
                         break;
                         
