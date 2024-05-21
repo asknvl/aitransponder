@@ -544,7 +544,7 @@ namespace botplatform.Models.pmprocessor
                 await bot.SendChatActionAsync(tg_user_id, ChatAction.Typing, businessConnectionId: bcid);
                 await Task.Delay(5000);
             }
-            await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid, parseMode: ParseMode.MarkdownV2);
+            await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
 
             var msg_to_ai = $"{message}";
             history.Add(MessageFrom.PM, tg_user_id, msg_to_ai);
