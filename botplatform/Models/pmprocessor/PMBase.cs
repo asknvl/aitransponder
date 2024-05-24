@@ -186,6 +186,8 @@ namespace botplatform.Models.pmprocessor
             //aggregateMessageTimer.Elapsed += AggregateMessageTimer_Elapsed;
 
             user = new user_v0(model.api_id, model.api_hash, phone_number, "5555", logger);
+            user.BusinessBotToggleEvent += User_BusinessBotToggleEvent;
+
             user.VerificationCodeRequestEvent += User_VerificationCodeRequestEvent;
             user.StatusChangedEvent += User_StatusChangedEvent;
 
@@ -428,7 +430,28 @@ namespace botplatform.Models.pmprocessor
                         break;
 
                     case Telegram.Bot.Types.Enums.MessageType.Text:
+
+
+                        var _ = Task.Run(async () => {
+
+                            await Task.Delay(40000);
+
+                            int delay = (int)(message.Length * 0.1 * 1000);
+                            int typings = delay / 5000;
+
+                            if (typings == 0)
+                                typings = 1;
+
+                            for (int i = 0; i < typings; i++)
+                            {
+                                await bot.SendChatActionAsync(chat, ChatAction.Typing, businessConnectionId: user.bcId);
+                                await Task.Delay(5000);
+                            }
+
+                        });                        
+
                         handleTextMessage(chat, fn, ln, un, update.BusinessMessage.Text);
+
                         break;
 
                     case Telegram.Bot.Types.Enums.MessageType.Photo:
@@ -547,27 +570,31 @@ namespace botplatform.Models.pmprocessor
             logger.err(geotag, ErrorMessage);
             return Task.CompletedTask;
         }
+
+        private void User_BusinessBotToggleEvent(long tg_user_id, bool state)
+        {
+            logger.inf(geotag, $"BusinessBot: {tg_user_id} {state}");
+        }
         #endregion
 
         #region helpers
         async Task sendTextMessage(long tg_user_id, string bcid, string message)
         {
-            int delay = (int)(message.Length * 0.1 * 1000);
-            int typings = delay / 5000;
+            //int delay = (int)(message.Length * 0.1 * 1000);
+            //int typings = delay / 5000;
 
-            if (typings == 0)
-                typings = 1;
-
-            //var bcid = bcIds[tg_user_id];
-            for (int i = 0; i < typings; i++)
-            {
-                await bot.SendChatActionAsync(tg_user_id, ChatAction.Typing, businessConnectionId: bcid);
-                await Task.Delay(5000);
-            }
+            //if (typings == 0)
+            //    typings = 1;
+            
+            //for (int i = 0; i < typings; i++)
+            //{
+            //    await bot.SendChatActionAsync(tg_user_id, ChatAction.Typing, businessConnectionId: bcid);
+            //    await Task.Delay(5000);
+            //}
             await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
 
-            var msg_to_ai = $"{message}";
-            history.Add(MessageFrom.PM, tg_user_id, msg_to_ai);
+            //var msg_to_ai = $"{message}";
+            //history.Add(MessageFrom.PM, tg_user_id, msg_to_ai);
             logger.inf_urgent(geotag, $"{tg_user_id}>{message}");
         }
 
@@ -642,7 +669,7 @@ namespace botplatform.Models.pmprocessor
             //aggregateMessageTimer.Start();
 
             bot.StartReceiving(HandleUpdateAsync, HandleErrorAsync, receiverOptions, cts.Token);
-
+            
             await user.Start();
 
             is_active = true;

@@ -102,7 +102,7 @@ namespace asknvl
             {
                 await processUpdate(update);
             }
-        }
+        }      
         #endregion
 
         #region public
@@ -357,15 +357,20 @@ namespace asknvl
 
             }
         }
-        #endregion
+
+        protected void onBusinessBotToggle(long tg_user_id, bool state)
+        {
+            BusinessBotToggleEvent?.Invoke(tg_user_id, state);
+        }
+        #endregion    
 
         #region events
         public event Action<ITGUser> VerificationCodeRequestEvent;
         public event Action<string, long, string> ChannelAddedEvent;        
-
         public event Action<long, uint> ChannelMessageViewedEvent;
         public event Action<string> _2FAPasswordChanged;
         public event Action<ITGUser, DropStatus> StatusChangedEvent;
+        public event Action<long, bool> BusinessBotToggleEvent;
         #endregion
     }
 }

@@ -39,6 +39,20 @@ namespace botplatform.Models.pmprocessor.userapi
 
         protected override Task processUpdate(Update update)
         {
+            switch (update)
+            {
+                case UpdatePeerSettings ups:
+                    if (ups.settings.flags.HasFlag(PeerSettings.Flags.business_bot_paused))
+                        onBusinessBotToggle(ups.peer.ID, false);
+                    else
+                        if (ups.settings.flags.HasFlag(PeerSettings.Flags.business_bot_can_reply))
+                        onBusinessBotToggle(ups.peer.ID, true);
+                    break;
+
+                default:
+                    break;
+            }
+
             return Task.CompletedTask;
         }
     }
