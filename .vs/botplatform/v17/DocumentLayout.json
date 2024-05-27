@@ -3,36 +3,24 @@
   "WorkspaceRootPath": "C:\\sources\\aitransponder\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\messages\\pmprocessor\\india_hack\\mp_india_strategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\messages\\pmprocessor\\india_hack\\mp_india_strategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\pm_processor_v0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\pm_processor_v0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\pmbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\pmbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-<<<<<<< HEAD
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\userapi\\user_v0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\userapi\\user_v0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\userapi\\user_v0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\userapi\\itguser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\userapi\\itguser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\userapi\\itguser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\userapi\\tguserbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\userapi\\tguserbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\userapi\\tguserbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\viewmodels\\mainvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-=======
       "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\viewmodels\\mainvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
->>>>>>> 206e994d7ba0652558a02e7b40867f94404859ff
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\viewmodels\\mainvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\ipmfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\ipmfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\storage\\ipmstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -40,18 +28,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\server\\aiserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\server\\aiserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\sources\\aitransponder\\botplatform\\models\\pmprocessor\\ipmfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\pmprocessor\\ipmfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\storage\\ipmstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\storage\\ipmstorage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|c:\\work\\raceup\\sources\\aitransponder\\botplatform\\models\\server\\aiserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F87B94AF-6D2A-4A02-9860-73BB6ED8CB02}|botplatform\\botplatform.csproj|solutionrelative:botplatform\\models\\server\\aiserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -61,24 +37,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-<<<<<<< HEAD
           "DockedWidth": 445,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
-            }
-          ]
-        },
-        {
-=======
->>>>>>> 206e994d7ba0652558a02e7b40867f94404859ff
-          "DockedWidth": 205,
           "SelectedChildIndex": -1,
           "Children": [
             {
@@ -92,16 +51,12 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{90243340-bd7a-11d0-93ef-00a0c90f2734}"
             }
           ]
         },
         {
-          "DockedWidth": 132,
-          "SelectedChildIndex": 5,
+          "DockedWidth": 205,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -121,8 +76,11 @@
             },
             {
               "$type": "Bookmark",
-<<<<<<< HEAD
-              "Name": "ST:0:0:{4a18f9d0-b838-11d0-93eb-00a0c90f2734}"
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{90243340-bd7a-11d0-93ef-00a0c90f2734}"
             }
           ]
         },
@@ -130,144 +88,82 @@
           "DockedWidth": 132,
           "SelectedChildIndex": 1,
           "Children": [
-=======
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ITGUser.cs",
+              "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\userapi\\ITGUser.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\userapi\\ITGUser.cs",
+              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\userapi\\ITGUser.cs",
+              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\userapi\\ITGUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T17:19:08.651Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MP_india_strategy.cs",
-              "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\messages\\pmprocessor\\india_hack\\MP_india_strategy.cs",
-              "RelativeDocumentMoniker": "botplatform\\Models\\messages\\pmprocessor\\india_hack\\MP_india_strategy.cs",
-              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\messages\\pmprocessor\\india_hack\\MP_india_strategy.cs*",
-              "RelativeToolTip": "botplatform\\Models\\messages\\pmprocessor\\india_hack\\MP_india_strategy.cs*",
-              "ViewState": "AQIAACcAAADgzMzMzKwwwD4AAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T12:37:47.58Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "pm_processor_v0.cs",
-              "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
-              "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
-              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
-              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\pm_processor_v0.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T12:37:33.046Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PMBase.cs",
-              "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\PMBase.cs",
-              "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\PMBase.cs",
-              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\PMBase.cs",
-              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\PMBase.cs",
-              "ViewState": "AQIAADcCAABAMzMzM3MhwFUCAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-21T09:39:01.945Z",
-              "EditorCaption": ""
-            },
->>>>>>> 206e994d7ba0652558a02e7b40867f94404859ff
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ITGUser.cs",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\userapi\\ITGUser.cs",
-              "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\userapi\\ITGUser.cs",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\userapi\\ITGUser.cs",
-              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\userapi\\ITGUser.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAgAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T20:37:53.936Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "user_v0.cs",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\userapi\\user_v0.cs",
+              "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\userapi\\user_v0.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\userapi\\user_v0.cs",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\userapi\\user_v0.cs",
+              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\userapi\\user_v0.cs",
               "RelativeToolTip": "botplatform\\Models\\pmprocessor\\userapi\\user_v0.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAxwCgAAAAJAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAACgAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T19:26:24.4Z",
+              "WhenOpened": "2024-05-24T17:19:08.689Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TGUserBase.cs",
+              "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\userapi\\TGUserBase.cs",
+              "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\userapi\\TGUserBase.cs",
+              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\userapi\\TGUserBase.cs",
+              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\userapi\\TGUserBase.cs",
+              "ViewState": "AQIAAFYBAAAAAAAAAAA0wGoBAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T17:19:08.694Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "TGUserBase.cs",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\userapi\\TGUserBase.cs",
-              "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\userapi\\TGUserBase.cs",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\userapi\\TGUserBase.cs",
-              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\userapi\\TGUserBase.cs",
-              "ViewState": "AQIAAFYBAAAAAAAAAAA0wGoBAAA2AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T18:50:33.933Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "mainVM.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\ViewModels\\mainVM.cs",
               "RelativeDocumentMoniker": "botplatform\\ViewModels\\mainVM.cs",
               "ToolTip": "C:\\sources\\aitransponder\\botplatform\\ViewModels\\mainVM.cs",
               "RelativeToolTip": "botplatform\\ViewModels\\mainVM.cs",
-<<<<<<< HEAD
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAEAAAAAQAAAA",
-=======
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAIAAAA",
->>>>>>> 206e994d7ba0652558a02e7b40867f94404859ff
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-20T22:24:01.668Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-24T17:19:08.698Z"
             },
             {
               "$type": "Document",
-<<<<<<< HEAD
-              "DocumentIndex": 7,
-=======
-              "DocumentIndex": 5,
->>>>>>> 206e994d7ba0652558a02e7b40867f94404859ff
+              "DocumentIndex": 6,
               "Title": "AIServer.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\server\\AIServer.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\server\\AIServer.cs",
               "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\server\\AIServer.cs",
               "RelativeToolTip": "botplatform\\Models\\server\\AIServer.cs",
-              "ViewState": "AQIAAGQAAAAAAAAAAAAuwG0AAAAJAAAA",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAxwC4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-20T21:53:24.037Z"
+              "WhenOpened": "2024-05-24T17:19:08.701Z"
             },
             {
               "$type": "Document",
-<<<<<<< HEAD
-              "DocumentIndex": 6,
-=======
-              "DocumentIndex": 4,
->>>>>>> 206e994d7ba0652558a02e7b40867f94404859ff
+              "DocumentIndex": 5,
               "Title": "IPMStorage.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\storage\\IPMStorage.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\storage\\IPMStorage.cs",
               "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\storage\\IPMStorage.cs",
               "RelativeToolTip": "botplatform\\Models\\storage\\IPMStorage.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-12T13:06:47.758Z"
+              "WhenOpened": "2024-05-24T17:19:08.706Z"
             },
             {
               "$type": "Document",
-<<<<<<< HEAD
-              "DocumentIndex": 5,
-=======
-              "DocumentIndex": 6,
->>>>>>> 206e994d7ba0652558a02e7b40867f94404859ff
+              "DocumentIndex": 4,
               "Title": "IPmFactory.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\IPmFactory.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\IPmFactory.cs",
@@ -275,46 +171,7 @@
               "RelativeToolTip": "botplatform\\Models\\pmprocessor\\IPmFactory.cs",
               "ViewState": "AQIAAAcAAAAAAAAAAAAgwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-<<<<<<< HEAD
-              "WhenOpened": "2024-04-12T15:23:57.288Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "52e3d688-9206-495c-b1a7-e1892719e8cb",
-        "Display": 1,
-        "X": 130,
-        "Y": 17,
-        "Width": 1649,
-        "Height": 830,
-        "WindowState": 2
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PMBase.cs",
-              "DocumentMoniker": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\PMBase.cs",
-              "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\PMBase.cs",
-              "ToolTip": "C:\\WORK\\RaceUP\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\PMBase.cs*",
-              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\PMBase.cs*",
-              "ViewState": "AQIAAJ8BAAAAAAAAAAAAALQBAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-21T15:09:50.877Z",
-              "EditorCaption": ""
-=======
-              "WhenOpened": "2024-04-12T15:23:57.288Z"
->>>>>>> 206e994d7ba0652558a02e7b40867f94404859ff
+              "WhenOpened": "2024-05-24T17:19:08.71Z"
             }
           ]
         }

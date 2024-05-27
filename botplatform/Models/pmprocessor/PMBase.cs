@@ -434,7 +434,7 @@ namespace botplatform.Models.pmprocessor
 
                         var _ = Task.Run(async () => {
 
-                            await Task.Delay(40000);
+                            await Task.Delay(20000);
 
                             //int delay = (int)(message.Length * 0.1 * 1000);
                             //int typings = delay / 5000;
