@@ -27,7 +27,10 @@ namespace botplatform.Models.pmprocessor
             switch (model.posting_type)
             {
                 case PMType.qualification_pm:
-                    return new pm_processor_v0(model, pmStorage, dbStorage, logger);
+                    return new pm_processor_qual_v0(model, pmStorage, dbStorage, logger);
+
+                case PMType.support_pm:
+                    return new pm_processor_supp_v0(model, pmStorage, dbStorage, logger);   
 
                 default:
                     throw new NotImplementedException();

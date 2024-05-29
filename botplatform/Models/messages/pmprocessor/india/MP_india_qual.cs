@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace botplatform.Models.messages.pmprocessor.india_hack
+namespace botplatform.Models.messages.pmprocessor.india
 {
-    public class MP_india_strategy : MessageProcessorBase
+    public class MP_india_qual : MessageProcessorBase
     {
         public override ObservableCollection<messageControlVM> MessageTypes { get; }
 
-        public MP_india_strategy(string geotag, string token, ITelegramBotClient bot) : base(geotag, token, bot)
+        public MP_india_qual(string geotag, string token, ITelegramBotClient bot) : base(geotag, token, bot)
         {
             MessageTypes = new ObservableCollection<messageControlVM>()
             {

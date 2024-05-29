@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace botplatform.Models.pmprocessor
 {
-    public class pm_processor_v0 : PMBase
+    public class pm_processor_qual_v0 : PMBase
     {
-        public pm_processor_v0(PmModel model, IPMStorage pmStorage, IDBStorage dbStorage, ILogger logger) : base(model, pmStorage, dbStorage, logger)
+        public pm_processor_qual_v0(PmModel model, IPMStorage pmStorage, IDBStorage dbStorage, ILogger logger) : base(model, pmStorage, dbStorage, logger)
         {
         }
     }

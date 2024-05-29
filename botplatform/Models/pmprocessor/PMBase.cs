@@ -35,7 +35,7 @@ namespace botplatform.Models.pmprocessor
         protected ILogger logger;
 
         protected IPMStorage pmStorage;
-        IDBStorage dbStorage;
+        protected IDBStorage dbStorage;
 
         protected IMessageProcessorFactory messageProcessorFactory;
 
@@ -582,7 +582,7 @@ namespace botplatform.Models.pmprocessor
         #endregion
 
         #region helpers
-        async Task sendTextMessage(long tg_user_id, string bcid, string message)
+        protected async Task sendTextMessage(long tg_user_id, string bcid, string message)
         {
             //int delay = (int)(message.Length * 0.1 * 1000);
             //int typings = delay / 5000;
@@ -602,7 +602,7 @@ namespace botplatform.Models.pmprocessor
             logger.inf_urgent(geotag, $"{tg_user_id}>{message}");
         }
 
-        async Task sendStatusMessage(long tg_user_id, string bcid, string response_code, string message)
+        protected async Task sendStatusMessage(long tg_user_id, string bcid, string response_code, string message)
         {
             try
             {
@@ -695,7 +695,7 @@ namespace botplatform.Models.pmprocessor
             return geotag;
         }
 
-        public async Task Update(string source, long tg_user_id, string response_code, string message)
+        public virtual async Task Update(string source, long tg_user_id, string response_code, string message)
         {
 
             if (!source.Equals(geotag))

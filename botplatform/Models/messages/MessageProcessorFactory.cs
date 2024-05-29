@@ -1,5 +1,5 @@
 ﻿using asknvl.logger;
-using botplatform.Models.messages.pmprocessor.india_hack;
+using botplatform.Models.messages.pmprocessor.india;
 using botplatform.Models.pmprocessor;
 using Telegram.Bot;
 
@@ -20,7 +20,11 @@ namespace botplatform.Models.messages
             switch (type)
             {
                 case PMType.qualification_pm:
-                    return new MP_india_strategy(geotag, token, bot);                      
+                    return new MP_india_qual(geotag, token, bot);
+
+                case PMType.support_pm:
+                    return new MP_india_supp(geotag, token, bot);
+
                 default:
                     return null;
             }
