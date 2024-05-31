@@ -33,6 +33,16 @@ namespace botplatform.Models.messages.pmprocessor.india
                 {
                     Code = "MAHESH_ACCESS",
                     Description = "Доступ в личку"
+                },
+                new messageControlVM(this)
+                {
+                    Code = "DIALOG_END",
+                    Description = "Диалог окончен"
+                },
+                new messageControlVM(this)
+                {
+                    Code = "DIALOG_LIMIT_END",
+                    Description = "Диалог окончен (лимит)"
                 }
             };
         }

@@ -45,6 +45,21 @@ namespace botplatform.Models.pmprocessor
             try
             {
 
+                switch (response_code)
+                {
+                    case "DIALOG_END":
+                        dbStorage.updateUser(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);                        
+                        break;
+
+                    case "DIALOG_LIMIT_END":
+                        dbStorage.updateUser(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
+                        break;
+
+                    default:
+                        break;
+                }
+
+
                 if (!string.IsNullOrEmpty(message) || !string.IsNullOrEmpty(response_code))
                 {
                     var _ = Task.Run(async () =>
