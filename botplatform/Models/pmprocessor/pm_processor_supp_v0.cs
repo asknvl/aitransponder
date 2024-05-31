@@ -55,6 +55,10 @@ namespace botplatform.Models.pmprocessor
                         dbStorage.updateUser(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
                         break;
 
+                    case "DIALOG_ERROR":
+                        dbStorage.updateUser(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);                        
+                        return;
+
                     default:
                         break;
                 }
