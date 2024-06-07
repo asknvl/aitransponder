@@ -55,7 +55,7 @@ namespace botplatform.Models.pmprocessor
         QuoteProcessor quoteProcessor = new QuoteProcessor();
 
         IAIserver ai;
-        ITGBotFollowersStatApi server;
+        protected ITGBotFollowersStatApi server;
 
         DateTime startDate;
 

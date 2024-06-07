@@ -14,6 +14,8 @@ namespace botplatform.Models.pmprocessor
 {
     public class pm_processor_latam_v0 : PMBase, IAutoReplyObserver
     {
+
+
         public pm_processor_latam_v0(PmModel model, IPMStorage pmStorage, IDBStorage dbStorage, ILogger logger) : base(model, pmStorage, dbStorage, logger)
         {
         }
@@ -55,14 +57,14 @@ namespace botplatform.Models.pmprocessor
                         //in
                         logger.dbg(geotag, $"{pmId} < {userId} message");
                         dbStorage.updateUserData(geotag, userId, first_msg_id: messageId);
-                        //await server.MarkFollowerMadeFeedback(ChannelTag, userId, fn, ln, un);
+                        await server.MarkFollowerMadeFeedback(geotag, userId, fn, ln, un);
                     }
                     else
                     {
                         //out
                         logger.dbg(geotag, $"{pmId} > {userId} message");
                         dbStorage.updateUserData(geotag, userId, is_reply: true);
-                        //await server.MarkFollowerWasReplied(ChannelTag, userId);
+                        await server.MarkFollowerWasReplied(geotag, userId);
                     }
                 }
 

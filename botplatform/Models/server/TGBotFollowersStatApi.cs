@@ -443,6 +443,106 @@ namespace asknvl.server
                 throw new Exception($"LeadDistributeRequest {geotag} {tg_id} {atype} {ex.Message}");
             }
         }
+
+        public class tgUserStateDto
+        {
+            [JsonProperty]
+            public long tg_user_id { get; set; }
+            [JsonProperty]
+            public string tg_geolocation { get; set; }
+            [JsonProperty]
+            public bool? is_user_send_msg { get; set; } = null;
+            [JsonProperty]
+            public bool? is_user_msg_processed { get; set; } = null;
+            [JsonProperty]
+            public bool? is_user_get_auto_answer { get; set; } = null;
+            [JsonProperty]
+            public string? username { get; set; } = null;
+            [JsonProperty]
+            public string? firstname { get; set; } = null;
+            [JsonProperty]
+            public string? lastname { get; set; } = null;
+        }
+        public class tgUsersStatesDto
+        {
+            [JsonProperty]
+            public List<tgUserStateDto> users { get; set; } = new();
+        }
+
+        public virtual async Task MarkFollowerMadeFeedback(string geotag, long id, string? fn = null, string? ln = null, string? un = null)
+        {
+
+            tgUsersStatesDto feedback = new();
+            feedback.users.Add(new tgUserStateDto()
+            {
+                tg_user_id = id,
+                tg_geolocation = geotag,
+                is_user_send_msg = true,
+
+                firstname = fn,
+                lastname = ln,
+                username = un,
+            });
+
+            string json = JsonConvert.SerializeObject(feedback, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
+            var addr = $"{url}/v1/telegram/userByGeo";
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                var response = await httpClient.PostAsync(addr, data);
+                var result = await response.Content.ReadAsStringAsync();
+                var jres = JObject.Parse(result);
+                bool res = jres["success"].ToObject<bool>();
+                if (!res)
+                    throw new Exception($"success=false");
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"MarkFollowerMadeFeedback {ex.Message}");
+            }
+
+        }
+
+        public virtual async Task MarkFollowerWasReplied(string geotag, long id)
+        {
+            tgUsersStatesDto reply = new();
+            reply.users.Add(new tgUserStateDto()
+            {
+                tg_user_id = id,
+                tg_geolocation = geotag,
+                is_user_msg_processed = true
+            });
+
+            string json = JsonConvert.SerializeObject(reply, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
+
+            var addr = $"{url}/v1/telegram/userByGeo";
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                var response = await httpClient.PostAsync(addr, data);
+                var result = await response.Content.ReadAsStringAsync();
+                var jres = JObject.Parse(result);
+                bool res = jres["success"].ToObject<bool>();
+                if (!res)
+                    throw new Exception($"success=false");
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"MarkFollowerWasReplied {ex.Message}");
+            }
+        }
     }
 
 
