@@ -48,15 +48,15 @@ namespace botplatform.Models.pmprocessor
                 switch (response_code)
                 {
                     case "DIALOG_END":
-                        dbStorage.updateUser(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);                        
+                        dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);                        
                         break;
 
                     case "DIALOG_LIMIT_END":
-                        dbStorage.updateUser(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
+                        dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
                         break;
 
                     case "DIALOG_ERROR":
-                        dbStorage.updateUser(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);                        
+                        dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);                        
                         return;
 
                     default:

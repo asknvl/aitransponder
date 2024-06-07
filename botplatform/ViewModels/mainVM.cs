@@ -89,8 +89,10 @@ namespace botplatform.ViewModels
             
 
             RestService restService = new RestService(Logger);
-            MessageRequestProcessor messageRequestProcessor = new MessageRequestProcessor();    
-            restService.RequestProcessors.Add(messageRequestProcessor); 
+            MessageRequestProcessor messageRequestProcessor = new MessageRequestProcessor();
+            AutoReplyRequestProcessor autoReplyRequestProcessor = new AutoReplyRequestProcessor();            
+            restService.RequestProcessors.Add(messageRequestProcessor);
+            restService.RequestProcessors.Add(autoReplyRequestProcessor);
 
             restService.Listen();
 
@@ -99,7 +101,9 @@ namespace botplatform.ViewModels
             {
                 var pm = pmFactory.Get(model);
                 PMs.Add(pm);        
+
                 messageRequestProcessor.Add(pm);
+                autoReplyRequestProcessor.Add(pm as IAutoReplyObserver);
             }
 
             #region commands
@@ -143,7 +147,9 @@ namespace botplatform.ViewModels
 
                     var pm = pmFactory.Get(model);
                     PMs.Add(pm);
+
                     messageRequestProcessor.Add(pm);
+                    autoReplyRequestProcessor.Add(pm as IAutoReplyObserver);
                 };
 
                 SubContent = addvm;

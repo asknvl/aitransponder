@@ -12,7 +12,8 @@ namespace botplatform.Models
         public static List<PMType> common_Available_Posting_Types { get; } = new List<PMType>() { 
         
             PMType.qualification_pm,
-            PMType.support_pm
-        };
+            PMType.support_pm,
+            PMType.latam_pm
+       };
     }
 }

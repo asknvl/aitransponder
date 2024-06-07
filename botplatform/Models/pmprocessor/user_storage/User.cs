@@ -20,7 +20,15 @@ namespace botplatform.Models.pmprocessor.db_storage
         public DateTime created_date { get; set; }
         public bool ai_on { get; set; }
         public DateTime ai_off_time { get; set; }
-        public string? ai_off_code { get; set; }        
+        public string? ai_off_code { get; set; }
+        public int? first_msg_id { get; set; }
+        public DateTime first_msg_rcvd_date { get; set; }
+        public bool is_first_msg_rep { get; set; }
+        public DateTime first_msg_rep_date { get; set; }
+        public bool is_chat_deleted { get; set; }
+        public DateTime chat_delete_date { get; set; }
+        public bool was_autoreply { get; set; }
+        public DateTime autoreply_date { get; set; }
         public User(string geotag, long tg_id, string bcId, string? fn = null, string? ln = null, string? un = null)
         {
             this.geotag = geotag;
@@ -33,6 +41,11 @@ namespace botplatform.Models.pmprocessor.db_storage
             created_date = DateTime.UtcNow;
             ai_on = true;
             this.bcId = bcId;
+
+            first_msg_id = null;
+            is_first_msg_rep = false;
+            is_chat_deleted = false;
+            was_autoreply = false;
         }
     }    
 }

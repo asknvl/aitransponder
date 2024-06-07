@@ -73,7 +73,18 @@ namespace botplatform.rest
                                         (code, text) = await p.ProcessRequestData(requestBody);
                                     break;                                
                             }                            
-                            break;                       
+                            break;
+
+                        case "autoreplies":
+                            switch (splt[2])
+                            {
+                                case "send":
+                                    var p = RequestProcessors.FirstOrDefault(p => p is AutoReplyRequestProcessor);
+                                    if (p != null)
+                                        (code, text) = await p.ProcessRequestData(requestBody);
+                                    break;
+                            }
+                            break;
 
                         default:
                             break;
@@ -128,11 +139,14 @@ namespace botplatform.rest
         {
             var listener = new HttpListener();
 #if DEBUG
-            listener.Prefixes.Add($"http://*:6000/user/messages/");            
+            listener.Prefixes.Add($"http://*:6000/user/messages/");        
+            listener.Prefixes.Add($"http://*:6000/autoreplies/");
 #elif DEBUG_TG_SERV
             listener.Prefixes.Add($"http://localhost:6000/user/messages/");
+            listener.Prefixes.Add($"http://localhost:6000/autoreplies/");
 #else
             listener.Prefixes.Add($"http://*:6000/user/messages/");            
+            listener.Prefixes.Add($"http://*:6000/autoreplies/");
 #endif
             try
             {

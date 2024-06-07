@@ -8,8 +8,14 @@ namespace botplatform.Models.pmprocessor.db_storage
 {
     public interface IDBStorage
     {
-        (User, bool) createUserIfNeeded(string geotag, long tg_ids, string? fn, string? ln, string? un, string bcId);
+        (User, bool) createUserIfNeeded(string geotag, long tg_id, string bcId, string? fn, string? ln, string? un, bool? ai_on = false);
         User getUser(string geotag, long tg_id);
-        void updateUser(string geotag, long tg_id, bool? ai_on = null, string? ai_off_code = null);
+        void updateUserData(string geotag, long tg_id,
+                        bool? ai_on = null,
+                        string? ai_off_code = null,
+                        int? first_msg_id = null,
+                        bool? is_reply = null,
+                        bool? chat_deleted = null,
+                        bool? was_autoreply = null);
     }    
 }

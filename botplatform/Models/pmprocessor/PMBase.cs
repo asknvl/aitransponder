@@ -40,7 +40,7 @@ namespace botplatform.Models.pmprocessor
         protected IMessageProcessorFactory messageProcessorFactory;
 
         protected ITelegramBotClient bot;
-        protected ITGUser user;
+        protected ITGUser? user = null;
         protected IMarkRead marker;
 
         State state;
@@ -185,13 +185,16 @@ namespace botplatform.Models.pmprocessor
             //aggregateMessageTimer.AutoReset = true;
             //aggregateMessageTimer.Elapsed += AggregateMessageTimer_Elapsed;
 
-            user = new user_v0(model.api_id, model.api_hash, phone_number, "5555", logger);
-            user.BusinessBotToggleEvent += User_BusinessBotToggleEvent;
+            if (!string.IsNullOrEmpty(phone_number))
+            {
+                user = new user_v0(model.api_id, model.api_hash, phone_number, "5555", logger);
+                user.BusinessBotToggleEvent += User_BusinessBotToggleEvent;
 
-            user.VerificationCodeRequestEvent += User_VerificationCodeRequestEvent;
-            user.StatusChangedEvent += User_StatusChangedEvent;
+                user.VerificationCodeRequestEvent += User_VerificationCodeRequestEvent;
+                user.StatusChangedEvent += User_StatusChangedEvent;
 
-            marker = (IMarkRead)user;
+                marker = (IMarkRead)user;
+            }
 
             #region commands
             startCmd = ReactiveCommand.CreateFromTask(async () =>
@@ -385,7 +388,7 @@ namespace botplatform.Models.pmprocessor
         }
 
 
-        async Task processBusiness(Telegram.Bot.Types.Update update)
+        public async virtual Task processBusiness(Telegram.Bot.Types.Update update)
         {
 
             string caption = update.BusinessMessage.Caption;
@@ -410,17 +413,17 @@ namespace botplatform.Models.pmprocessor
                 db_storage.User user = null;
                 bool isNew;
 
-                (user, isNew) = dbStorage.createUserIfNeeded(geotag, chat, bcId, fn, ln, un);
+                (user, isNew) = dbStorage.createUserIfNeeded(geotag, chat, bcId, fn, ln, un, ai_on: true);
 
                 if (isNew)
                 {
                     user.ai_on = await checkNeedProcess(chat, fn, ln, un);
                     if (!user.ai_on)
-                        dbStorage.updateUser(geotag, chat, ai_on: false, ai_off_code: "DATE");
+                        dbStorage.updateUserData(geotag, chat, ai_on: false, ai_off_code: "DATE");
                 }
 
                 if (!user.ai_on)
-                    return;                
+                    return;
 
 
                 switch (update.BusinessMessage.Type)
@@ -432,7 +435,8 @@ namespace botplatform.Models.pmprocessor
                     case Telegram.Bot.Types.Enums.MessageType.Text:
 
 
-                        var _ = Task.Run(async () => {
+                        var _ = Task.Run(async () =>
+                        {
 
                             await Task.Delay(20000);
 
@@ -452,7 +456,7 @@ namespace botplatform.Models.pmprocessor
                             await Task.Delay(5000);
                             await bot.SendChatActionAsync(chat, ChatAction.Typing, businessConnectionId: user.bcId);
 
-                        });                        
+                        });
 
                         handleTextMessage(chat, fn, ln, un, update.BusinessMessage.Text);
 
@@ -464,7 +468,7 @@ namespace botplatform.Models.pmprocessor
 
                         var fileId = update.BusinessMessage.Photo.Last().FileId;
                         var fileInfo = await bot.GetFileAsync(fileId);
-                        var filePath = fileInfo.FilePath;   
+                        var filePath = fileInfo.FilePath;
 
                         await bot.DownloadFileAsync(
                                 filePath: filePath,
@@ -482,9 +486,9 @@ namespace botplatform.Models.pmprocessor
                             var quality = 20; // Quality set to 50
                             using (var image = SKImage.FromBitmap(originalBitmap))
                             using (var data = image.Encode(SKEncodedImageFormat.Jpeg, quality))
-                            {                                
-                                data.SaveTo(compressedStream);                                
-                                base64_image = Convert.ToBase64String(compressedStream.ToArray());                                
+                            {
+                                data.SaveTo(compressedStream);
+                                base64_image = Convert.ToBase64String(compressedStream.ToArray());
                             }
 
                         }
@@ -501,7 +505,7 @@ namespace botplatform.Models.pmprocessor
                         compressedStream.Dispose();
 
                         break;
-                        
+
                 }
             }
             catch (Exception ex)
@@ -589,7 +593,7 @@ namespace botplatform.Models.pmprocessor
 
             //if (typings == 0)
             //    typings = 1;
-            
+
             //for (int i = 0; i < typings; i++)
             //{
             //    await bot.SendChatActionAsync(tg_user_id, ChatAction.Typing, businessConnectionId: bcid);
@@ -673,8 +677,9 @@ namespace botplatform.Models.pmprocessor
             //aggregateMessageTimer.Start();
 
             bot.StartReceiving(HandleUpdateAsync, HandleErrorAsync, receiverOptions, cts.Token);
-            
-            await user.Start();
+
+            if (user != null)
+                await user.Start();
 
             is_active = true;
 
@@ -726,12 +731,12 @@ namespace botplatform.Models.pmprocessor
                 switch (response_code)
                 {
                     case "DIALOG_END":
-                        dbStorage.updateUser(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
+                        dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
                         await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
                         break;
 
                     case "DIALOG_ERROR":
-                        dbStorage.updateUser(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
+                        dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
                         await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
                         return;
 

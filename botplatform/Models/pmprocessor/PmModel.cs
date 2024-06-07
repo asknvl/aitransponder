@@ -16,7 +16,8 @@ namespace botplatform.Models.pmprocessor
     public enum PMType
     {
         qualification_pm,        
-        support_pm
+        support_pm,
+        latam_pm
     }
 
 }

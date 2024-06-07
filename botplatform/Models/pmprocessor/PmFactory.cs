@@ -30,7 +30,10 @@ namespace botplatform.Models.pmprocessor
                     return new pm_processor_qual_v0(model, pmStorage, dbStorage, logger);
 
                 case PMType.support_pm:
-                    return new pm_processor_supp_v0(model, pmStorage, dbStorage, logger);   
+                    return new pm_processor_supp_v0(model, pmStorage, dbStorage, logger);
+
+                case PMType.latam_pm:
+                    return new pm_processor_latam_v0(model, pmStorage, dbStorage, logger); 
 
                 default:
                     throw new NotImplementedException();

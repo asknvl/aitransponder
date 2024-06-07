@@ -1,6 +1,7 @@
 ﻿using asknvl.logger;
 using botplatform.Models.messages.pmprocessor.india;
 using botplatform.Models.pmprocessor;
+using System;
 using Telegram.Bot;
 
 namespace botplatform.Models.messages
@@ -24,6 +25,9 @@ namespace botplatform.Models.messages
 
                 case PMType.support_pm:
                     return new MP_india_supp(geotag, token, bot);
+
+                case PMType.latam_pm:
+                    return new MP_latam(geotag, token, bot);
 
                 default:
                     return null;
