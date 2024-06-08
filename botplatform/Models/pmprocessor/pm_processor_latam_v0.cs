@@ -68,14 +68,14 @@ namespace botplatform.Models.pmprocessor
                     if (chat != pmId)
                     {
                         //in
-                        logger.dbg(geotag, $"{pmId} < {userId} message");
+                        logger.dbg(geotag, $"{pmId} < {userId} {fn} {ln} message");
                         dbStorage.updateUserData(geotag, userId, first_msg_id: messageId);
                         await server.MarkFollowerMadeFeedback(geotag, userId, fn, ln, un);
                     }
                     else
                     {
                         //out
-                        logger.dbg(geotag, $"{pmId} > {userId} message");
+                        logger.dbg(geotag, $"{pmId} > {userId} {fn} {ln} message");
                         dbStorage.updateUserData(geotag, userId, is_reply: true);
                         await server.MarkFollowerWasReplied(geotag, userId);
                     }
