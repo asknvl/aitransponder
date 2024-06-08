@@ -413,7 +413,7 @@ namespace botplatform.Models.pmprocessor
                 db_storage.User user = null;
                 bool isNew;
 
-                (user, isNew) = dbStorage.createUserIfNeeded(geotag, chat, bcId, fn, ln, un, ai_on: true);
+                (user, isNew) = dbStorage.createUserIfNeeded_AI(geotag, chat, bcId, fn, ln, un);
 
                 if (isNew)
                 {

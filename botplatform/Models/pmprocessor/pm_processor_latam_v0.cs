@@ -48,7 +48,7 @@ namespace botplatform.Models.pmprocessor
                 db_storage.User user = null;
                 bool needProcess = false;
 
-                (user, needProcess) = dbStorage.createUserIfNeeded(geotag, userId, bcId, fn, ln, un, ai_on: false);
+                (user, needProcess) = dbStorage.createUserIfNeeded_TRCK(geotag, userId, bcId, fn, ln, un);
 
                 if (needProcess)
                 {

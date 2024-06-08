@@ -19,13 +19,12 @@ namespace botplatform.Models.pmprocessor.db_storage
             this.context = context; 
         }
 
-        public (User, bool) createUserIfNeeded(string geotag,
+        public (User, bool) createUserIfNeeded_AI(string geotag,
                                                long tg_id,
                                                string bcId,
                                                string? fn,
                                                string? ln,
-                                               string? un,
-                                               bool? ai_on = false)
+                                               string? un)
         {
             lock (lockObject)
             {
@@ -40,9 +39,39 @@ namespace botplatform.Models.pmprocessor.db_storage
                 } else
                 {
                     User user = new User(geotag, tg_id, bcId, fn: fn, ln: ln, un: un);
+                    context.Users.Add(user);
+                    context.SaveChanges();
+                    return (user, true);
+                }
+            }
+        }
 
-                    if (ai_on.HasValue)
-                        user.ai_on = ai_on.Value;
+        public (User, bool) createUserIfNeeded_TRCK(string geotag,
+                                       long tg_id,
+                                       string bcId,
+                                       string? fn,
+                                       string? ln,
+                                       string? un)
+        {
+            lock (lockObject)
+            {
+                var found = context.Users.FirstOrDefault(u => u.geotag.Equals(geotag) && u.tg_id == tg_id);
+                if (found != null)
+                {
+
+                    bool needProcess = (!found.is_first_msg_rep || found.is_chat_deleted);
+
+                    if (!string.IsNullOrEmpty(bcId) && found.bcId != bcId)
+                    {
+                        found.bcId = bcId;
+                        context.SaveChanges();
+                    }
+                    return (found, needProcess);
+                }
+                else
+                {
+                    User user = new User(geotag, tg_id, bcId, fn: fn, ln: ln, un: un);
+                    user.ai_on = false;
 
                     context.Users.Add(user);
                     context.SaveChanges();

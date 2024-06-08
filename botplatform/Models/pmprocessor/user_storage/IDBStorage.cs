@@ -8,7 +8,8 @@ namespace botplatform.Models.pmprocessor.db_storage
 {
     public interface IDBStorage
     {
-        (User, bool) createUserIfNeeded(string geotag, long tg_id, string bcId, string? fn, string? ln, string? un, bool? ai_on = false);
+        (User, bool) createUserIfNeeded_AI(string geotag, long tg_id, string bcId, string? fn, string? ln, string? un);
+        (User, bool) createUserIfNeeded_TRCK(string geotag, long tg_id, string bcId, string? fn, string? ln, string? un);
         User getUser(string geotag, long tg_id);
         void updateUserData(string geotag, long tg_id,
                         bool? ai_on = null,
