@@ -362,6 +362,11 @@ namespace asknvl
         {
             BusinessBotToggleEvent?.Invoke(tg_user_id, state);
         }
+
+        protected void onMessagesDeletedEvent(int[] messages)
+        {
+            MessagesDeletedEvent?.Invoke(messages); 
+        }
         #endregion    
 
         #region events
@@ -370,7 +375,9 @@ namespace asknvl
         public event Action<long, uint> ChannelMessageViewedEvent;
         public event Action<string> _2FAPasswordChanged;
         public event Action<ITGUser, DropStatus> StatusChangedEvent;
+
         public event Action<long, bool> BusinessBotToggleEvent;
+        public event Action<int[]> MessagesDeletedEvent;
         #endregion
     }
 }

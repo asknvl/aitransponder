@@ -49,6 +49,14 @@ namespace botplatform.Models.pmprocessor.userapi
                         onBusinessBotToggle(ups.peer.ID, true);
                     break;
 
+                case UpdateDeleteMessages udm:
+
+                    if (udm.messages != null)
+                    {
+                        //onMessagesDeletedEvent(udm)
+                    }
+                    break;
+
                 default:
                     break;
             }

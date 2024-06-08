@@ -43,7 +43,20 @@ namespace botplatform.Models.pmprocessor
                 var bc = await bot.GetBusinessConnectionAsync(new GetBusinessConnectionRequest(bcId));
                 var pmId = bc.User.Id;
 
-                var userId = (update.BusinessMessage.From.Id != pmId) ? update.BusinessMessage.From.Id : update.BusinessMessage.Chat.Id;
+                long userId;//= (update.BusinessMessage.From.Id != pmId) ? update.BusinessMessage.From.Id : update.BusinessMessage.Chat.Id;
+
+                if (update.BusinessMessage.From.Id != pmId)
+                {
+                    userId = update.BusinessMessage.From.Id;                    
+
+                } else
+                {
+                    userId = update.BusinessMessage.Chat.Id;
+                    fn = update.BusinessMessage.Chat.FirstName;
+                    ln = update.BusinessMessage.Chat.LastName;
+                    un = update.BusinessMessage.Chat.Username;
+                }
+
 
                 db_storage.User user = null;
                 bool needProcess = false;
