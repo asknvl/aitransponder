@@ -46,7 +46,7 @@ namespace botplatform.rest
                     {
                         try
                         {
-                            await observer.AutoReply(replydata.source, replydata.tg_user_id, replydata.response_сode, replydata.message);
+                            await observer.AutoReply(replydata.source, replydata.tg_user_id, replydata.response_code, replydata.message);
                         } catch (Exception ex)
                         {                            
                         }
@@ -71,7 +71,7 @@ namespace botplatform.rest
     {
         public string source { get; set; }
         public long tg_user_id { get; set; }
-        public string response_сode { get; set; }
+        public string response_code { get; set; }
         public string? message { get; set; }
     }
 }
