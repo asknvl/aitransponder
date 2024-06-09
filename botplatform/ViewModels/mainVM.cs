@@ -9,6 +9,7 @@ using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
 using System.Reactive;
+using System.Threading.Tasks;
 
 namespace botplatform.ViewModels
 {
@@ -104,6 +105,9 @@ namespace botplatform.ViewModels
 
                 messageRequestProcessor.Add(pm);
                 autoReplyRequestProcessor.Add(pm as IAutoReplyObserver);
+
+                var _ = Task.Run(async () => { await pm.Start(); });
+
             }
 
             #region commands
