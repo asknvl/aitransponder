@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Avalonia.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -92,6 +93,19 @@ namespace botplatform.Models.pmprocessor.db_storage
             }
         }
 
+        public User? getUser(string geotag, int message_id)
+        {
+
+            User? res = null;
+
+            lock (lockObject)
+            {
+                res = context.Users.FirstOrDefault(u => u.geotag.Equals(geotag) && u.first_msg_id == message_id);                
+            }
+
+            return res;
+        }
+
         public void updateUserData(string geotag,
                                long tg_id,
                                bool? ai_on = null,
@@ -145,9 +159,7 @@ namespace botplatform.Models.pmprocessor.db_storage
                     if (chat_deleted == true)
                     {
                         found.is_chat_deleted = true;
-                        found.chat_delete_date = DateTime.UtcNow;
-                        found.first_msg_id = null;
-                        found.is_first_msg_rep = false;
+                        found.chat_delete_date = DateTime.UtcNow;                        
                         save = true;
                     }
 

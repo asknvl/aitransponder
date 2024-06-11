@@ -3,6 +3,7 @@ using botplatform.Models.pmprocessor.db_storage;
 using botplatform.Models.storage;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace botplatform.Models.pmprocessor
 
         public pm_processor_latam_v0(PmModel model, IPMStorage pmStorage, IDBStorage dbStorage, ILogger logger) : base(model, pmStorage, dbStorage, logger)
         {
+            if (user != null)
+                user.MessagesDeletedEvent += User_MessagesDeletedEvent;
         }
 
         public string GetChannelTag()
@@ -90,6 +93,23 @@ namespace botplatform.Models.pmprocessor
         #endregion
 
         #region public
+        private void User_MessagesDeletedEvent(int[] messages)
+        {
+            try
+            {
+                int fm_id = messages[0];
+                var user = dbStorage.getUser(geotag, fm_id);                
+                if (user != null)
+                {
+                    logger.warn(geotag, $"chat deleted: {user.tg_id} {user.fn} {user.ln} {user.un}");
+                    dbStorage.updateUserData(user.geotag, user.tg_id, chat_deleted: true);
+                }
+
+            } catch (Exception ex)
+            {
+                logger.err(geotag, $"User_MessagesDeletedEvent: {ex.Message}");
+            }
+        }
         public async Task AutoReply(string channel_tag, long user_tg_id, string status_code, string? message)
         {
             try

@@ -76,6 +76,13 @@ namespace botplatform.ViewModels
             set => this.RaiseAndSetIfChanged(ref _err, value);
         }
 
+        bool _warn = true;
+        public bool WARN
+        {
+            get => _warn;
+            set => this.RaiseAndSetIfChanged(ref _warn, value);
+        }
+
         bool _dbg;
         public bool DBG
         {
@@ -209,6 +216,15 @@ namespace botplatform.ViewModels
             if (DBG)
             {
                 var message = new LogMessage(LogMessageType.dbg, tag, text);
+                post(message);
+            }
+        }
+
+        public void warn(string tag, string text)
+        {
+            if (WARN)
+            {
+                var message = new LogMessage(LogMessageType.warn, tag, text);
                 post(message);
             }
         }

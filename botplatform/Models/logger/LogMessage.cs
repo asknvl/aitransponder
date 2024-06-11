@@ -11,6 +11,7 @@ namespace asknvl.logger
     public enum LogMessageType
     {
         dbg,
+        warn,
         err,
         inf,
         inf_urgent

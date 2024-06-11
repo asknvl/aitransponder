@@ -53,7 +53,7 @@ namespace botplatform.Models.pmprocessor.userapi
 
                     if (udm.messages != null)
                     {
-                        //onMessagesDeletedEvent(udm)
+                        onMessagesDeletedEvent(udm.messages);
                     }
                     break;
 

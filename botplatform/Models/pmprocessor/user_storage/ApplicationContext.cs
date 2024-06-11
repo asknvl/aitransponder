@@ -26,7 +26,11 @@ namespace botplatform.Models.pmprocessor.db_storage
         {
             modelBuilder.Entity<User>()
             .HasIndex(u => new { u.geotag, u.tg_id })
-            .HasDatabaseName("IX_User_geotag_tg_id").IsUnique();            
+            .HasDatabaseName("IX_User_geotag_tg_id").IsUnique();
+
+            modelBuilder.Entity<User>()
+            .HasIndex(u => new { u.geotag, u.first_msg_id })
+            .HasDatabaseName("IX_User_geotag_first_msg_id");
         }
 
     }
