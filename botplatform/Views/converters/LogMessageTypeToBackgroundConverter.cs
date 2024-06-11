@@ -20,7 +20,7 @@ namespace botplatform.Views.converters
                 LogMessageType.inf => new SolidColorBrush(0x00000000),
                 LogMessageType.inf_urgent => new SolidColorBrush(0xFF00FF00),
                 LogMessageType.err => new SolidColorBrush(0xFFFF0000),
-                LogMessageType.warn => new SolidColorBrush(0xFFFFF00),
+                LogMessageType.warn => new SolidColorBrush(0xFFFFFF00),
                 LogMessageType.dbg => new SolidColorBrush(0xFFAAAAAA),
 
                 _ => new SolidColorBrush(0xFF000000)

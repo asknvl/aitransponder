@@ -32,7 +32,7 @@ namespace botplatform.Models.pmprocessor.userapi
                 }
                 catch (Exception ex)
                 {
-                    logger.err(phone_number, $"MarkAsRead {id}: {ex.Message}");
+                    logger.warn(phone_number, $"MarkAsRead {id}: {ex.Message}");
                 }
             }
         }

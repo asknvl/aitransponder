@@ -132,11 +132,7 @@ namespace botplatform.Models.pmprocessor
                 catch (Exception ex)
                 {
                     logger.err(geotag, $"AutoReply: {ex.Message}");
-                }
-                //} catch (Exception ex)
-                //{
-
-                //} 
+                }                
             }
             catch (Exception ex)
             {

@@ -437,25 +437,10 @@ namespace botplatform.Models.pmprocessor
 
                         var _ = Task.Run(async () =>
                         {
-
                             await Task.Delay(20000);
-
-                            //int delay = (int)(message.Length * 0.1 * 1000);
-                            //int typings = delay / 5000;
-
-                            //if (typings == 0)
-                            //    typings = 1;
-
-                            //for (int i = 0; i < typings; i++)
-                            //{
-                            //    await bot.SendChatActionAsync(chat, ChatAction.Typing, businessConnectionId: user.bcId);
-                            //    await Task.Delay(5000);
-                            //}
-
                             await bot.SendChatActionAsync(chat, ChatAction.Typing, businessConnectionId: user.bcId);
                             await Task.Delay(5000);
                             await bot.SendChatActionAsync(chat, ChatAction.Typing, businessConnectionId: user.bcId);
-
                         });
 
                         handleTextMessage(chat, fn, ln, un, update.BusinessMessage.Text);
@@ -581,7 +566,7 @@ namespace botplatform.Models.pmprocessor
 
         private void User_BusinessBotToggleEvent(long tg_user_id, bool state)
         {
-            logger.inf(geotag, $"BusinessBot: {tg_user_id} {state}");
+            logger.warn(geotag, $"BusinessBot: {tg_user_id} {state}");
         }
         #endregion
 

@@ -59,48 +59,58 @@
             </Button>
         </Grid>
 
-        <cust:AutoScrollListBox
-            Grid.Row="1"
-            Items="{Binding Messages}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid
-                        ColumnDefinitions="100, 150, *"
-                        Background="{Binding Type, Converter={StaticResource LogMessageTypeConverter}}">
-                        <TextBlock
-                            Grid.Column="0"
-                            Text="{Binding TAG}"/>
-                        <TextBlock
-                            Grid.Column="1"
-                            Text="{Binding Date}"/>
-                        <TextBox
-                            Classes="TextBox Log"
-                            FontFamily="Consolas"
-                            IsReadOnly="True"
-                            Grid.Column="2"
-                            Margin="2"
-                            Padding="0"
-                            VerticalContentAlignment="Center"
-                            VerticalAlignment="Center"
-                            Text="{Binding Text}"/>
-                        <Grid.Styles>
-                            <Style Selector="TextBlock">
-                                <Setter Property="FontFamily" Value="Consolas"/>
-                            </Style>
-                        </Grid.Styles>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.Styles>
-                <Style Selector="ListBoxItem">
-                    <Setter Property="Margin" Value="0"/>
-                    <Setter Property="Padding" Value="0"/>
-                </Style>
-                <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
-                    <Setter Property="BorderBrush" Value="Transparent"/>
-                </Style>
-            </ListBox.Styles>
-        </cust:AutoScrollListBox>
+        <Border            
+            BorderBrush="LightGray"
+            BorderThickness="1"
+            Margin="2"
+            CornerRadius="2"
+            Grid.Row="1">
+        <ScrollViewer            
+            HorizontalScrollBarVisibility="Visible">
+            <cust:AutoScrollListBox
+                BorderThickness="0"
+                Items="{Binding Messages}">                
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid
+                            ColumnDefinitions="100, 150, *"
+                            Background="{Binding Type, Converter={StaticResource LogMessageTypeConverter}}">
+                            <TextBlock
+                                Grid.Column="0"
+                                Text="{Binding TAG}"/>
+                            <TextBlock
+                                Grid.Column="1"
+                                Text="{Binding Date}"/>
+                            <TextBox
+                                Classes="TextBox Log"
+                                FontFamily="Consolas"
+                                IsReadOnly="True"
+                                Grid.Column="2"
+                                Margin="2"
+                                Padding="0"
+                                VerticalContentAlignment="Center"
+                                VerticalAlignment="Center"
+                                Text="{Binding Text}"/>
+                            <Grid.Styles>
+                                <Style Selector="TextBlock">
+                                    <Setter Property="FontFamily" Value="Consolas"/>
+                                </Style>
+                            </Grid.Styles>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.Styles>
+                    <Style Selector="ListBoxItem">
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="Padding" Value="0"/>
+                    </Style>
+                    <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                    </Style>
+                </ListBox.Styles>
+            </cust:AutoScrollListBox>
+        </ScrollViewer>
+        </Border>
     </Grid>
 
 </UserControl>
