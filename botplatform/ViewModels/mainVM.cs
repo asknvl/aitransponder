@@ -77,9 +77,7 @@ namespace botplatform.ViewModels
 
             AppSettings = new settingsVM();
 
-            Logger = new loggerVM();
-
-            Logger.warn("123", "123 ead adawdadpai djoaiw doaodij aoiwjd oiajwdioh aoiwhd oiahwdoi haoiwdh oiahwdoi hawiodh aiowhdio hawdioh oiahwdo iahwdio haoiwdh oiawd ");
+            Logger = new loggerVM();           
 
             pmStorage = new LocalPmStorage();                        
 
