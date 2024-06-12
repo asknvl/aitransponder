@@ -94,8 +94,7 @@
                 Grid.Column="0">
                 Запустить
             </Button>
-            <Button
-                IsEnabled="{Binding is_active, Mode=TwoWay}"
+            <Button                
                 Command="{Binding stopCmd}"
                 Grid.Column="1">
                 Остановить

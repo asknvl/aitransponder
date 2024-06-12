@@ -32,6 +32,8 @@ namespace botplatform.Models.pmprocessor
     public abstract class PMBase : ViewModelBase, IPM, IMessageObserver
     {
         #region vars
+        PmModel model;
+
         protected ILogger logger;
 
         protected IPMStorage pmStorage;
@@ -158,6 +160,7 @@ namespace botplatform.Models.pmprocessor
 
         public PMBase(PmModel model, IPMStorage pmStorage, IDBStorage dbStorage, ILogger logger)
         {
+            this.model = model;
 
             this.logger = logger;
             this.pmStorage = pmStorage;
@@ -184,17 +187,6 @@ namespace botplatform.Models.pmprocessor
             //aggregateMessageTimer.Interval = 40 * 1000;
             //aggregateMessageTimer.AutoReset = true;
             //aggregateMessageTimer.Elapsed += AggregateMessageTimer_Elapsed;
-
-            if (!string.IsNullOrEmpty(phone_number))
-            {
-                user = new user_v0(model.api_id, model.api_hash, phone_number, "5555", logger);
-                user.BusinessBotToggleEvent += User_BusinessBotToggleEvent;
-
-                user.VerificationCodeRequestEvent += User_VerificationCodeRequestEvent;
-                user.StatusChangedEvent += User_StatusChangedEvent;
-
-                marker = (IMarkRead)user;
-            }
 
             #region commands
             startCmd = ReactiveCommand.CreateFromTask(async () =>
@@ -663,8 +655,23 @@ namespace botplatform.Models.pmprocessor
 
             bot.StartReceiving(HandleUpdateAsync, HandleErrorAsync, receiverOptions, cts.Token);
 
-            if (user != null)
-                await user.Start();
+            //if (user != null)
+            //    await user.Start();
+
+
+            if (!string.IsNullOrEmpty(phone_number))
+            {
+                user = new user_v0(model.api_id, model.api_hash, phone_number, "5555", logger);
+                user.BusinessBotToggleEvent += User_BusinessBotToggleEvent;
+
+                user.VerificationCodeRequestEvent += User_VerificationCodeRequestEvent;
+                user.StatusChangedEvent += User_StatusChangedEvent;
+
+                marker = (IMarkRead)user;
+
+                user.Start();
+            }
+
 
             is_active = true;
 
@@ -675,9 +682,9 @@ namespace botplatform.Models.pmprocessor
         public void Stop()
         {
             cts?.Cancel();
-            //aggregateMessageTimer.Stop();
-            is_active = false;
             logger.inf(geotag, "PM stopped");
+            user?.Stop();
+            is_active = false;            
         }
 
         public string GetGeotag()

@@ -45,7 +45,9 @@ namespace botplatform.Models.pmprocessor.quote_rocessor
             {
                 var found = quotes[tg_id].FirstOrDefault(q => q.response_code.Equals(response_code));
                 if (found != null)
-                    res = found.message_id;
+                {
+                    res = found.message_id;                    
+                }
             }
 
             return res;

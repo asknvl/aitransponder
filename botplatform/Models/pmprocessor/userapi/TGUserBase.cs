@@ -316,8 +316,8 @@ namespace asknvl
         {
             await Task.Run(() =>
             {
-                user?.Dispose();
                 verifyCodeReady.Set();
+                user?.Dispose();                
                 //StoppedEvent?.Invoke(this);                
                 setStatus(DropStatus.stopped);
             });
