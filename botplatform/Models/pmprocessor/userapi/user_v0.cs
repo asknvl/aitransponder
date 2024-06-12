@@ -27,12 +27,12 @@ namespace botplatform.Models.pmprocessor.userapi
                     var peer = new InputPeerUser(foundUser.ID, foundUser.access_hash);
                     //var histoty = await user.Messages_GetHistory(peer);
                     await user.ReadHistory(peer);
-                    logger.err(phone_number, $"MarkeAsRead {id} OK");
+                    logger.warn(phone_number, $"MarkeAsRead {id} OK");
 
                 }
                 catch (Exception ex)
                 {
-                    logger.warn(phone_number, $"MarkAsRead {id}: {ex.Message}");
+                    logger.err(phone_number, $"MarkAsRead {id}: {ex.Message}");
                 }
             }
         }
