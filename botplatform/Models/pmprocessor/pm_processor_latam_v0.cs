@@ -19,8 +19,7 @@ namespace botplatform.Models.pmprocessor
 
         public pm_processor_latam_v0(PmModel model, IPMStorage pmStorage, IDBStorage dbStorage, ILogger logger) : base(model, pmStorage, dbStorage, logger)
         {
-            if (user != null)
-                user.MessagesDeletedEvent += User_MessagesDeletedEvent;
+            
         }
 
         public string GetChannelTag()
@@ -139,6 +138,16 @@ namespace botplatform.Models.pmprocessor
             {
                 logger.err(geotag, $"AutoReply: {ex.Message}");
             }
+        }
+
+        public override Task Start()
+        {
+            return base.Start().ContinueWith((t) => {
+                if (user != null)
+                {
+                    user.MessagesDeletedEvent += User_MessagesDeletedEvent;
+                }
+            });
         }
         #endregion
     }
