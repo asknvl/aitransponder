@@ -21,6 +21,7 @@ namespace asknvl.server
         Task LeadDistributeRequest(long tg_id, string geotag, AssignmentTypes type);
         Task MarkFollowerMadeFeedback(string geotag, long id, string? fn = null, string? ln = null, string? un = null);
         Task MarkFollowerWasReplied(string geotag, long id);
+        Task MarkChatWasDeleted(string geotag, long id);
     }
 
     public enum AssignmentTypes

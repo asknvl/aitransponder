@@ -457,6 +457,8 @@ namespace asknvl.server
             [JsonProperty]
             public bool? is_user_get_auto_answer { get; set; } = null;
             [JsonProperty]
+            public bool? is_chat_deleted { get; set; } = null;
+            [JsonProperty]
             public string? username { get; set; } = null;
             [JsonProperty]
             public string? firstname { get; set; } = null;
@@ -541,6 +543,41 @@ namespace asknvl.server
             catch (Exception ex)
             {
                 throw new Exception($"MarkFollowerWasReplied {ex.Message}");
+            }
+        }
+
+        public virtual async Task MarkChatWasDeleted(string geotag, long id)
+        {
+            tgUsersStatesDto reply = new();
+            reply.users.Add(new tgUserStateDto()
+            {
+                tg_user_id = id,
+                tg_geolocation = geotag,
+                is_chat_deleted = true
+            });
+
+            string json = JsonConvert.SerializeObject(reply, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
+
+            var addr = $"{url}/v1/telegram/userByGeo";
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                var response = await httpClient.PostAsync(addr, data);
+                var result = await response.Content.ReadAsStringAsync();
+                var jres = JObject.Parse(result);
+                bool res = jres["success"].ToObject<bool>();
+                if (!res)
+                    throw new Exception($"success=false");
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"MarkChatWasDeleted {ex.Message}");
             }
         }
     }

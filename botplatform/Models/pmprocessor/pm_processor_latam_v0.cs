@@ -93,7 +93,7 @@ namespace botplatform.Models.pmprocessor
         #endregion
 
         #region public
-        private void User_MessagesDeletedEvent(int[] messages)
+        private async void User_MessagesDeletedEvent(int[] messages)
         {
             try
             {
@@ -103,6 +103,7 @@ namespace botplatform.Models.pmprocessor
                 {
                     logger.warn(geotag, $"chat deleted: {user.tg_id} {user.fn} {user.ln} {user.un}");
                     dbStorage.updateUserData(user.geotag, user.tg_id, chat_deleted: true);
+                    await server.MarkChatWasDeleted(user.geotag, user.tg_id);                    
                 }
 
             } catch (Exception ex)
