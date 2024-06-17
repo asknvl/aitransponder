@@ -585,34 +585,99 @@ namespace botplatform.Models.pmprocessor
 
         protected async Task sendStatusMessage(long tg_user_id, string bcid, string response_code, string message)
         {
+            //try
+            //{
+            //    var m = MessageProcessor.GetMessage(response_code);
+            //    if (m != null)
+            //    {
+            //        //var bcid = bcIds[tg_user_id];
+
+            //        int exists_id = 0;
+            //        bool is_used = false;
+
+            //        (exists_id, is_used) = quoteProcessor.Get(tg_user_id, response_code);
+            //        if (exists_id != -1)
+            //        {
+
+            //            m = MessageProcessor.GetMessage("ALREADY_SENT");
+            //            if (m != null)
+            //            {
+            //                await m.Send(tg_user_id, bot, bcid: bcid, reply_message_id: exists_id);
+            //            }
+            //        }
+
+            //        else
+            //        {
+            //            int id = await m.Send(tg_user_id, bot, bcid: bcid);
+            //            quoteProcessor.Add(tg_user_id, response_code, id);
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    logger.err(geotag, $"sendStatusMessage: {ex.Message}");
+            //}
+
             try
             {
-                var m = MessageProcessor.GetMessage(response_code);
-                if (m != null)
+                //var m = MessageProcessor.GetMessage(response_code);
+                //if (m != null)
+                //{
+                //    //var bcid = bcIds[tg_user_id];
+
+                //    int exists_id = 0;
+                //    bool is_used = false;
+
+                //    (exists_id, is_used) = quoteProcessor.Get(tg_user_id, response_code);
+                //    if (exists_id != -1)
+                //    {
+
+                //        m = MessageProcessor.GetMessage("ALREADY_SENT");
+                //        if (m != null)
+                //        {
+                //            await m.Send(tg_user_id, bot, bcid: bcid, reply_message_id: exists_id);
+                //        }
+                //    }
+
+                //    else
+                //    {
+                //        int id = await m.Send(tg_user_id, bot, bcid: bcid);
+                //        quoteProcessor.Add(tg_user_id, response_code, id);
+                //    }
+                //}
+
+                int exists_id = 0;
+                bool is_used = false;
+
+                (exists_id, is_used) = quoteProcessor.Get(tg_user_id, response_code);
+
+                if (exists_id == -1)
                 {
-                    //var bcid = bcIds[tg_user_id];
+                    var m = MessageProcessor.GetMessage(response_code);
+                    int id = await m.Send(tg_user_id, bot, bcid: bcid);
+                    quoteProcessor.Add(tg_user_id, response_code, id);
+                } 
 
-                    var exists_id = quoteProcessor.Get(tg_user_id, response_code);
-                    if (exists_id != -1)
+                if (exists_id != -1 && is_used == false)
+                {
+                    var m = MessageProcessor.GetMessage("ALREADY_SENT");
+                    if (m != null)
                     {
-
-                        m = MessageProcessor.GetMessage("ALREADY_SENT");
-                        if (m != null)
-                        {
-                            await m.Send(tg_user_id, bot, bcid: bcid, reply_message_id: exists_id);
-                        }
-                    }
-                    else
-                    {
-                        int id = await m.Send(tg_user_id, bot, bcid: bcid);
-                        quoteProcessor.Add(tg_user_id, response_code, id);
+                        await m.Send(tg_user_id, bot, bcid: bcid, reply_message_id: exists_id);
                     }
                 }
+
+                if (exists_id != -1 && is_used == true)
+                {
+                    await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
+                }
+
             }
             catch (Exception ex)
             {
                 logger.err(geotag, $"sendStatusMessage: {ex.Message}");
             }
+
         }
         #endregion
 

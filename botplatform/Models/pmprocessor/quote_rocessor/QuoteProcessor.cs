@@ -37,20 +37,23 @@ namespace botplatform.Models.pmprocessor.quote_rocessor
             }
         }
 
-        public int Get(long tg_id, string response_code)
+        public (int, bool) Get(long tg_id, string response_code)
         {
             int res = -1;
+            bool is_used = false;
 
             if (quotes.ContainsKey(tg_id))
             {
                 var found = quotes[tg_id].FirstOrDefault(q => q.response_code.Equals(response_code));
                 if (found != null)
                 {
-                    res = found.message_id;                    
+                    res = found.message_id;
+                    is_used = found.is_used;
+                    found.is_used = true;
                 }
             }
 
-            return res;
+            return (res, is_used);
         }
         #endregion
 
@@ -59,6 +62,7 @@ namespace botplatform.Models.pmprocessor.quote_rocessor
         {
             public string response_code { get; set; }
             public int message_id { get; set; }
+            public bool is_used { get; set; }
         }
         #endregion
     }
