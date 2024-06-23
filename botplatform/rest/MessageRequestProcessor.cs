@@ -21,6 +21,16 @@ namespace botplatform.rest
                 messageObservers.Add(observer);
         }
 
+        public async Task<(HttpStatusCode, string)> ProcessRequest()
+        {
+            HttpStatusCode code = HttpStatusCode.NotImplemented;
+            string responseText = code.ToString();
+
+            await Task.CompletedTask;
+
+            return (code, responseText);
+        }
+
         public async Task<(HttpStatusCode, string)> ProcessRequestData(string data)
         {            
             HttpStatusCode code = HttpStatusCode.BadRequest;

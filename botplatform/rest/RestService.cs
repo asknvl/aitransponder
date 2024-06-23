@@ -32,13 +32,33 @@ namespace botplatform.rest
         }
 
         #region private
-        async Task<string> processGetRequest(HttpListenerContext context)
+        async Task<(HttpStatusCode, string)> processGetRequest(HttpListenerContext context)
         {
-            string res = string.Empty;
-            await Task.Run(() =>
+            HttpStatusCode code = HttpStatusCode.NotFound;
+            string text = code.ToString();
+
+            await Task.Run(async () =>
             {
+
+                var request = context.Request;
+                string path = request.Url.AbsolutePath;
+
+                using var reader = new StreamReader(request.InputStream, request.ContentEncoding);
+                var splt = path.Split('/');
+
+                switch (splt[1])
+                {
+                    case "diagnostics":
+                        var p = RequestProcessors.FirstOrDefault(p => p is DiagnosticsRequestProcessor);
+                        if (p != null)
+                        {
+                            (code, text) = await p.ProcessRequest();
+                        }
+                        break;
+                }
+
             });
-            return res;
+            return (code, text);
         }
 
         async Task<(HttpStatusCode, string)> processPostRequest(HttpListenerContext context)
@@ -107,7 +127,7 @@ namespace botplatform.rest
             switch (request.HttpMethod)
             {
                 case "GET":
-                    responseText = await processGetRequest(context);
+                    (code, responseText) = await processGetRequest(context);
                     break;
 
                 case "POST":
@@ -141,12 +161,15 @@ namespace botplatform.rest
 #if DEBUG
             listener.Prefixes.Add($"http://*:6000/user/messages/");        
             listener.Prefixes.Add($"http://*:6000/autoreplies/");
+            listener.Prefixes.Add($"http://*:6000/diagnostics/");
 #elif DEBUG_TG_SERV
             listener.Prefixes.Add($"http://localhost:6000/user/messages/");
             listener.Prefixes.Add($"http://localhost:6000/autoreplies/");
+            listener.Prefixes.Add($"http://localhost:6000/diagnostics/");
 #else
             listener.Prefixes.Add($"http://*:6000/user/messages/");            
             listener.Prefixes.Add($"http://*:6000/autoreplies/");
+            listener.Prefixes.Add($"http://*:6000/diagnostics/");
 #endif
             try
             {

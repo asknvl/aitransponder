@@ -6,5 +6,7 @@ namespace botplatform.rest
     public interface IRequestProcessor
     {
         Task<(HttpStatusCode, string)> ProcessRequestData(string data);
+        Task<(HttpStatusCode, string)> ProcessRequest();
+
     }
 }

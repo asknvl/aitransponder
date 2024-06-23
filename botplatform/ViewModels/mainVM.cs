@@ -93,8 +93,12 @@ namespace botplatform.ViewModels
             RestService restService = new RestService(Logger);
             MessageRequestProcessor messageRequestProcessor = new MessageRequestProcessor();
             AutoReplyRequestProcessor autoReplyRequestProcessor = new AutoReplyRequestProcessor();            
+            DiagnosticsRequestProcessor diagnosticsRequestProcessor = new DiagnosticsRequestProcessor();
+
+
             restService.RequestProcessors.Add(messageRequestProcessor);
             restService.RequestProcessors.Add(autoReplyRequestProcessor);
+            restService.RequestProcessors.Add(diagnosticsRequestProcessor);
 
             restService.Listen();
 
@@ -106,6 +110,7 @@ namespace botplatform.ViewModels
 
                 messageRequestProcessor.Add(pm);
                 autoReplyRequestProcessor.Add(pm as IAutoReplyObserver);
+                diagnosticsRequestProcessor.Add(pm);
 
                 var _ = Task.Run(async () => { await pm.Start(); });
 
@@ -155,6 +160,7 @@ namespace botplatform.ViewModels
 
                     messageRequestProcessor.Add(pm);
                     autoReplyRequestProcessor.Add(pm as IAutoReplyObserver);
+                    diagnosticsRequestProcessor.Add(pm);
                 };
 
                 SubContent = addvm;

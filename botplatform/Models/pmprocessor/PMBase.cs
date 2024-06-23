@@ -26,10 +26,11 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using System.IO;
 using SkiaSharp;
+using botplatform.Models.diagnostics;
 
 namespace botplatform.Models.pmprocessor
 {
-    public abstract class PMBase : ViewModelBase, IPM, IMessageObserver
+    public abstract class PMBase : ViewModelBase, IPM, IMessageObserver, IDiagnosticsResulter
     {
         #region vars
         PmModel model;
@@ -62,6 +63,8 @@ namespace botplatform.Models.pmprocessor
         DateTime startDate;
 
         Random random = new Random();
+
+        errorCollector errorCollector;
         #endregion
 
         #region properties
@@ -585,67 +588,8 @@ namespace botplatform.Models.pmprocessor
 
         protected async Task sendStatusMessage(long tg_user_id, string bcid, string response_code, string message)
         {
-            //try
-            //{
-            //    var m = MessageProcessor.GetMessage(response_code);
-            //    if (m != null)
-            //    {
-            //        //var bcid = bcIds[tg_user_id];
-
-            //        int exists_id = 0;
-            //        bool is_used = false;
-
-            //        (exists_id, is_used) = quoteProcessor.Get(tg_user_id, response_code);
-            //        if (exists_id != -1)
-            //        {
-
-            //            m = MessageProcessor.GetMessage("ALREADY_SENT");
-            //            if (m != null)
-            //            {
-            //                await m.Send(tg_user_id, bot, bcid: bcid, reply_message_id: exists_id);
-            //            }
-            //        }
-
-            //        else
-            //        {
-            //            int id = await m.Send(tg_user_id, bot, bcid: bcid);
-            //            quoteProcessor.Add(tg_user_id, response_code, id);
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    logger.err(geotag, $"sendStatusMessage: {ex.Message}");
-            //}
-
             try
-            {
-                //var m = MessageProcessor.GetMessage(response_code);
-                //if (m != null)
-                //{
-                //    //var bcid = bcIds[tg_user_id];
-
-                //    int exists_id = 0;
-                //    bool is_used = false;
-
-                //    (exists_id, is_used) = quoteProcessor.Get(tg_user_id, response_code);
-                //    if (exists_id != -1)
-                //    {
-
-                //        m = MessageProcessor.GetMessage("ALREADY_SENT");
-                //        if (m != null)
-                //        {
-                //            await m.Send(tg_user_id, bot, bcid: bcid, reply_message_id: exists_id);
-                //        }
-                //    }
-
-                //    else
-                //    {
-                //        int id = await m.Send(tg_user_id, bot, bcid: bcid);
-                //        quoteProcessor.Add(tg_user_id, response_code, id);
-                //    }
-                //}
-
+            {        
                 int exists_id = 0;
                 bool is_used = false;
 
@@ -700,6 +644,8 @@ namespace botplatform.Models.pmprocessor
             bot = new TelegramBotClient(bot_token);
 #endif
 
+            errorCollector = new errorCollector();
+
             var u = await bot.GetMeAsync();
             bot_username = u.Username;
 
@@ -711,7 +657,7 @@ namespace botplatform.Models.pmprocessor
 
             var receiverOptions = new ReceiverOptions
             {
-                AllowedUpdates = new UpdateType[] { UpdateType.Message, UpdateType.BusinessConnection, UpdateType.BusinessMessage }
+                AllowedUpdates = new UpdateType[] { UpdateType.Message, UpdateType.BusinessConnection, UpdateType.BusinessMessage, UpdateType.EditedBusinessMessage }
             };
 
             initMessageProcessor();
@@ -735,6 +681,7 @@ namespace botplatform.Models.pmprocessor
                 marker = (IMarkRead)user;
 
                 user.Start();
+                
             }
 
 
@@ -833,8 +780,31 @@ namespace botplatform.Models.pmprocessor
                 logger.err(geotag, $"Update: {ex.Message}");
             }
         }
+
+        public async Task<DiagnosticsResult> GetDiagnosticsResult()
+        {
+            DiagnosticsResult result = new DiagnosticsResult();
+
+            result.Geotag = geotag;
+
+            if (user.status != DropStatus.active)
+            {
+                result.isOk = false;
+                result.errorsList.Add($"Номер {user.phone_number} не активeн");
+            }
+
+            if (!is_active)
+            {
+                result.isOk = false;
+                result.errorsList.Add($"Бот {bot_username} не активен");
+            }
+
+            await Task.CompletedTask;
+            return result;
+        }
         #endregion
     }
+
     public class userInfo
     {
         public long tg_user_id { get; set; }
