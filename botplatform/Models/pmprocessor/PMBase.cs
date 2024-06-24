@@ -51,8 +51,7 @@ namespace botplatform.Models.pmprocessor
         protected CancellationTokenSource cts;
 
         List<int> ignoredMesageIds = new();
-        MessageHistory history;
-
+        
         PmModel tmpPmModel;
 
         QuoteProcessor quoteProcessor = new QuoteProcessor();
@@ -61,10 +60,9 @@ namespace botplatform.Models.pmprocessor
         protected ITGBotFollowersStatApi server;
 
         DateTime startDate;
-
         Random random = new Random();
 
-        errorCollector errorCollector;
+        protected errorCollector errorCollector = new();
         #endregion
 
         #region properties
@@ -177,19 +175,10 @@ namespace botplatform.Models.pmprocessor
 
             startDate = model.start_date;
 
-            //dbStorage = new JsondbStorage(geotag);            
-
             messageProcessorFactory = new MessageProcessorFactory(logger);
-
-            history = new MessageHistory();
 
             ai = new AIServer("https://gpt.raceup.io");
             server = new TGBotFollowersStatApi("https://ru.flopasda.site");
-
-            //aggregateMessageTimer = new System.Timers.Timer();
-            //aggregateMessageTimer.Interval = 40 * 1000;
-            //aggregateMessageTimer.AutoReset = true;
-            //aggregateMessageTimer.Elapsed += AggregateMessageTimer_Elapsed;
 
             #region commands
             startCmd = ReactiveCommand.CreateFromTask(async () =>
@@ -644,8 +633,6 @@ namespace botplatform.Models.pmprocessor
             bot = new TelegramBotClient(bot_token);
 #endif
 
-            errorCollector = new errorCollector();
-
             var u = await bot.GetMeAsync();
             bot_username = u.Username;
 
@@ -797,6 +784,16 @@ namespace botplatform.Models.pmprocessor
             {
                 result.isOk = false;
                 result.errorsList.Add($"Бот {bot_username} не активен");
+            }
+
+            var errors = await errorCollector.Get();
+            if (errors.Length > 0)
+            {                
+                result.isOk = false;
+                foreach (var error in errors)
+                {
+                    result.errorsList.Add(error);
+                }
             }
 
             await Task.CompletedTask;

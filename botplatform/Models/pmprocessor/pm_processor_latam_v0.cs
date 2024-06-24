@@ -124,6 +124,8 @@ namespace botplatform.Models.pmprocessor
                 dbStorage.updateUserData(user.geotag, user_tg_id, was_autoreply: true);
 
                 var m = MessageProcessor.GetMessage(status_code);
+                if (m == null)
+                    await errorCollector.Add($"Не установлен автоответ {status_code}");
 
                 try
                 {
