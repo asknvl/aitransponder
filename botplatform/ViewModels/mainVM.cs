@@ -119,31 +119,6 @@ namespace botplatform.ViewModels
             #region commands
             addCmd = ReactiveCommand.Create(() => {
 
-                //SelectedBot = null;
-
-                //var addvm = new addBotVM();
-                //addvm.BotCreatedEvent += (model) => {
-                //    try
-                //    {
-                //        botStorage.Add(model);
-                //    } catch (Exception ex)
-                //    {
-                //        throw;                        
-                //    }
-
-                //    var bot = botFactory.Get(model, logger);
-                //    Bots.Add(bot);
-
-                //    operatorStorage.Add(model.geotag);                
-                //};
-
-                //addvm.CancelledEvent += () => {                    
-                //};
-
-                //SubContent = addvm;
-
-                //SelectedPm = null;
-
                 var addvm = new addPmVM();
                 addvm.CreatedEvent += (model) => { 
 

@@ -63,6 +63,10 @@ namespace botplatform.Models.pmprocessor
         Random random = new Random();
 
         protected errorCollector errorCollector = new();
+
+        System.Timers.Timer businessUpdatesCheckTimer;
+        uint businessUpdatesCounter = 0;
+        uint businessUpdatesCounter_prev = 0;
         #endregion
 
         #region properties
@@ -180,6 +184,11 @@ namespace botplatform.Models.pmprocessor
             ai = new AIServer("https://gpt.raceup.io");
             server = new TGBotFollowersStatApi("https://ru.flopasda.site");
 
+            businessUpdatesCheckTimer = new System.Timers.Timer();
+            businessUpdatesCheckTimer.Interval = 1 * 60 * 60 * 1000; // в часах
+            businessUpdatesCheckTimer.AutoReset = true;
+            businessUpdatesCheckTimer.Elapsed += ActivityTimer_Elapsed;
+
             #region commands
             startCmd = ReactiveCommand.CreateFromTask(async () =>
             {
@@ -229,6 +238,16 @@ namespace botplatform.Models.pmprocessor
             });
             #endregion
 
+        }
+
+        private void ActivityTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (businessUpdatesCounter == businessUpdatesCounter_prev)
+            {
+
+            }
+
+            businessUpdatesCounter_prev = businessUpdatesCounter;   
         }
 
         #region helpers
@@ -515,6 +534,7 @@ namespace botplatform.Models.pmprocessor
                     case UpdateType.BusinessMessage:
                         if (update.BusinessMessage != null)
                         {
+                            businessUpdatesCounter++;
                             await processBusiness(update);
                         }
                         break;
@@ -536,16 +556,16 @@ namespace botplatform.Models.pmprocessor
             }
         }
 
-        Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
+        async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
         {
             var ErrorMessage = exception switch
             {
                 ApiRequestException apiRequestException
-                    => $"{geotag} Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}",
+                    => $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}",
                 _ => exception.ToString()
             };
-            logger.err(geotag, ErrorMessage);
-            return Task.CompletedTask;
+            await errorCollector.Add(ErrorMessage);
+            logger.err(geotag, ErrorMessage);        
         }
 
         private void User_BusinessBotToggleEvent(long tg_user_id, bool state)
@@ -672,6 +692,8 @@ namespace botplatform.Models.pmprocessor
             }
 
 
+            businessUpdatesCheckTimer.Start();
+
             is_active = true;
 
             logger.inf(geotag, $"Starting PM, posting={posting_type}");
@@ -680,6 +702,7 @@ namespace botplatform.Models.pmprocessor
 
         public void Stop()
         {
+            businessUpdatesCheckTimer?.Stop();
             cts?.Cancel();
             logger.inf(geotag, "PM stopped");
             user?.Stop();
