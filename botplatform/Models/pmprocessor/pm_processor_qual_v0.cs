@@ -14,5 +14,12 @@ namespace botplatform.Models.pmprocessor
         public pm_processor_qual_v0(PmModel model, IPMStorage pmStorage, IDBStorage dbStorage, ILogger logger) : base(model, pmStorage, dbStorage, logger)
         {
         }
+
+        public override Task Start()
+        {
+            return base.Start().ContinueWith(t => {
+                businessUpdatesCheckTimer?.Start();
+            });
+        }
     }
 }

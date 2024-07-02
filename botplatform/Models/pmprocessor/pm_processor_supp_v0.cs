@@ -96,5 +96,12 @@ namespace botplatform.Models.pmprocessor
             }
 
         }
+
+        public override Task Start()
+        {
+            return base.Start().ContinueWith(t => {
+                businessUpdatesCheckTimer?.Start();
+            });
+        }
     }
 }

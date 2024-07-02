@@ -64,7 +64,7 @@ namespace botplatform.Models.pmprocessor
 
         protected errorCollector errorCollector = new();
 
-        System.Timers.Timer businessUpdatesCheckTimer;
+        protected System.Timers.Timer businessUpdatesCheckTimer;
         uint businessUpdatesCounter = 0;
         uint businessUpdatesCounter_prev = 0;
         #endregion
@@ -240,11 +240,11 @@ namespace botplatform.Models.pmprocessor
 
         }
 
-        private void ActivityTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+        private async void ActivityTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             if (businessUpdatesCounter == businessUpdatesCounter_prev)
             {
-
+                await errorCollector.Add($"ИИ не был активен в течение часа");
             }
 
             businessUpdatesCounter_prev = businessUpdatesCounter;   
@@ -690,9 +690,6 @@ namespace botplatform.Models.pmprocessor
                 user.Start();
                 
             }
-
-
-            businessUpdatesCheckTimer.Start();
 
             is_active = true;
 
