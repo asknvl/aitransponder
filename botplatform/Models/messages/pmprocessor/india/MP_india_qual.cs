@@ -67,7 +67,14 @@ namespace botplatform.Models.messages.pmprocessor.india
                 {
                     Code = "ALREADY_SENT",
                     Description = "Reply-подпись"
+                },
+
+                new messageControlVM(this)
+                {
+                    Code = "PUSH",
+                    Description = "Пуш для диалога"
                 }
+                
             };
         }
 

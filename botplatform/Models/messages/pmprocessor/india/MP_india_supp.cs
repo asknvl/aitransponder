@@ -43,6 +43,11 @@ namespace botplatform.Models.messages.pmprocessor.india
                 {
                     Code = "DIALOG_LIMIT_END",
                     Description = "Диалог окончен (лимит)"
+                },
+                new messageControlVM(this)
+                {
+                    Code = "PUSH",
+                    Description = "Пуш для диалога"
                 }
             };
         }
