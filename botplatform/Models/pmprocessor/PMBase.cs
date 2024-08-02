@@ -317,11 +317,13 @@ namespace botplatform.Models.pmprocessor
 
             if (userData.Count != 0)
             {
-                var datedSubscribes = userData.Where(s => !string.IsNullOrEmpty(s.subscribe_date));
-                var maxDateSub = datedSubscribes.Max(s => DateTime.Parse(s.subscribe_date));
+                
                 //var sdate = userData[0].subscribe_date;                
                 try
                 {
+                    var datedSubscribes = userData.Where(s => !string.IsNullOrEmpty(s.subscribe_date));
+                    var maxDateSub = datedSubscribes.Max(s => DateTime.Parse(s.subscribe_date));
+
                     //var date = DateTime.Parse(sdate);
                     //needProcess = date > startDate;
                     needProcess = maxDateSub > startDate;
@@ -331,7 +333,10 @@ namespace botplatform.Models.pmprocessor
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    var msg = $"checkNeedProcess: {chat} {ex.Message} (1)";
+                    await errorCollector.Add(msg);
+                    logger.err(geotag, msg);
+
                 }
 
 #if DEBUG_TG_SERV
@@ -420,9 +425,28 @@ namespace botplatform.Models.pmprocessor
 
                 if (isNew)
                 {
-                    user.ai_on = await checkNeedProcess(chat, fn, ln, un);
-                    if (!user.ai_on)
-                        dbStorage.updateUserData(geotag, chat, ai_on: false, ai_off_code: "DATE");
+                    try
+                    {
+                        user.ai_on = await checkNeedProcess(chat, fn, ln, un);
+                        
+                    } catch (Exception ex)
+                    {
+                        var msg = $"checkNeedProcess: {chat} {ex.Message} (2)";
+                        await errorCollector.Add(msg);
+                        logger.err(geotag, msg);
+                    }
+
+                    try
+                    {
+                        if (!user.ai_on)
+                            dbStorage.updateUserData(geotag, chat, ai_on: false, ai_off_code: "DATE");
+
+                    } catch (Exception ex)
+                    {
+                        var msg = $"updateUserData: {chat} {ex.Message}";
+                        await errorCollector.Add(msg);
+                        logger.err(geotag, msg);
+                    }
                 }
 
                 if (!user.ai_on)
