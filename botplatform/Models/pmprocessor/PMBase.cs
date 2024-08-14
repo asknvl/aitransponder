@@ -27,6 +27,7 @@ using Telegram.Bot.Types.Enums;
 using System.IO;
 using SkiaSharp;
 using botplatform.Models.diagnostics;
+using TL;
 
 namespace botplatform.Models.pmprocessor
 {
@@ -414,9 +415,30 @@ namespace botplatform.Models.pmprocessor
                 var un = update.BusinessMessage.From.Username;
 
                 //check self
-                var bc = await bot.GetBusinessConnectionAsync(new GetBusinessConnectionRequest(bcId));
+                var bc = await bot.GetBusinessConnectionAsync(new GetBusinessConnectionRequest(bcId));               
+
                 if (chat == bc.User.Id)
+                {
+                    var userId = update.BusinessMessage.Chat.Id;
+
+                    var found = dbStorage.getUser(geotag, userId);
+                    if (found != null)
+                    {
+                        if (!found.is_first_msg_rep)
+                        {
+                            dbStorage.updateUserData(geotag, userId, is_reply: true);
+                            try
+                            {
+                                await server.MarkFollowerWasReplied(geotag, userId);
+                            } catch (Exception ex)
+                            {
+                                logger.err(geotag, $"{ex.Message}");
+                            }
+                        }
+                    }
+
                     return;
+                }
 
                 db_storage.User user = null;
                 bool isNew;
@@ -425,6 +447,17 @@ namespace botplatform.Models.pmprocessor
 
                 if (isNew)
                 {
+
+                    dbStorage.updateUserData(geotag, chat, first_msg_id: update.BusinessMessage.MessageId);
+
+                    try
+                    {
+                        await server.MarkFollowerMadeFeedback(geotag, chat, fn, ln, un);
+                    } catch (Exception ex)
+                    {
+                        logger.err(geotag, $"{ex.Message}");
+                    }
+
                     try
                     {
                         user.ai_on = await checkNeedProcess(chat, fn, ln, un);
@@ -802,6 +835,24 @@ namespace botplatform.Models.pmprocessor
                         {
                             await sendTextMessage(tg_user_id, user.bcId, message);
                         }
+
+                        var found = dbStorage.getUser(geotag, tg_user_id);
+                        if (found != null)
+                        {
+                            if (!found.is_first_msg_rep)
+                            {
+                                dbStorage.updateUserData(geotag, tg_user_id, is_reply: true);
+                                try
+                                {
+                                    await server.MarkFollowerWasReplied(geotag, tg_user_id);
+                                }
+                                catch (Exception ex)
+                                {
+                                    logger.err(geotag, $"{ex.Message}");
+                                }
+                            }
+                        }
+
                     });
                 }
 

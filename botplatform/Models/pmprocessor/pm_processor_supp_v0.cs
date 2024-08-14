@@ -87,6 +87,23 @@ namespace botplatform.Models.pmprocessor
                             await sendTextMessage(tg_user_id, user.bcId, message);
                         }
                     });
+
+                    var found = dbStorage.getUser(geotag, tg_user_id);
+                    if (found != null)
+                    {
+                        if (!found.is_first_msg_rep)
+                        {
+                            dbStorage.updateUserData(geotag, tg_user_id, is_reply: true);
+                            try
+                            {
+                                await server.MarkFollowerWasReplied(geotag, tg_user_id);
+                            }
+                            catch (Exception ex)
+                            {
+                                logger.err(geotag, $"{ex.Message}");
+                            }
+                        }
+                    }
                 }
 
             }
