@@ -334,10 +334,9 @@ namespace botplatform.Models.pmprocessor
                 }
                 catch (Exception ex)
                 {
-                    var msg = $"checkNeedProcess: {chat} {ex.Message} (1)";
-                    await errorCollector.Add(msg);
-                    logger.err(geotag, msg);
-
+                    //var msg = $"checkNeedProcess: {chat} {ex.Message} (1)";
+                    //await errorCollector.Add(msg);
+                    //logger.err(geotag, msg);
                 }
 
 #if DEBUG_TG_SERV
