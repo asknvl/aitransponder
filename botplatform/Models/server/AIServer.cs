@@ -130,6 +130,28 @@ namespace botplatform.Models.server
             }
         }
 
+        public async Task<linkDto> GetLink(string geotag, long tg_user_id)
+        {
+            linkDto res = null;
+            var addr = $"{url}/api/leads/link?source={geotag}&tgUserId={tg_user_id}";
+
+            try
+            {
+                var response = await httpClient.GetAsync(addr);                
+                response.EnsureSuccessStatusCode();
+
+                var result = await response.Content.ReadAsStringAsync();
+                var resp = JsonConvert.DeserializeObject<linkDto>(result);
+
+                return resp;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"GetLink {ex.Message}");
+            }
+        }
+
         public class historyDto
         {
             public List<HistoryItem> messages { get; set; } = new();

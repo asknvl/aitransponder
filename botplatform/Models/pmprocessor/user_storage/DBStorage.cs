@@ -113,7 +113,8 @@ namespace botplatform.Models.pmprocessor.db_storage
                                int? first_msg_id = null,
                                bool? is_reply = null,
                                bool? chat_deleted = null,
-                               bool? was_autoreply = null)
+                               bool? was_autoreply = null, 
+                               int? message_counter = null)
         {
             lock (lockObject)
             {
@@ -167,6 +168,12 @@ namespace botplatform.Models.pmprocessor.db_storage
                     {
                         found.was_autoreply = true;
                         found.autoreply_date = DateTime.UtcNow;
+                        save = true;
+                    }
+
+                    if (message_counter.HasValue)
+                    {
+                        found.message_counter = message_counter.Value;
                         save = true;
                     }
 

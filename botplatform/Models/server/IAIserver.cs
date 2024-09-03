@@ -13,6 +13,7 @@ namespace botplatform.Models.server
         Task SendMessageToAI(string geotag, long tg_user_id, string text);
         Task SendHistoryToAI(string geotag, long tg_user_id, string fn, string ln, string un, List<HistoryItem> messages);
         Task SendToAI(string geotag, long tg_user_id, string fn, string ln, string un, string? message = null, string? base64_image = null);
+        Task<linkDto> GetLink(string geotag, long tg_user_id);
     }
 
     public class universalMessageDto
@@ -88,5 +89,13 @@ namespace botplatform.Models.server
         {
             url = $"data:image/jpeg;base64,{base64_image}";
         }
+    }
+
+    public class linkDto
+    {
+        public string link { get; set; }
+        public string uuid { get; set; }
+        public string telegram_id { get; set; }
+        public string source_name { get; set; }
     }
 }

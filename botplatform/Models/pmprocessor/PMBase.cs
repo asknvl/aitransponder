@@ -57,7 +57,7 @@ namespace botplatform.Models.pmprocessor
 
         QuoteProcessor quoteProcessor = new QuoteProcessor();
 
-        IAIserver ai;
+        protected IAIserver ai;
         protected ITGBotFollowersStatApi server;
 
         DateTime startDate;
@@ -311,7 +311,7 @@ namespace botplatform.Models.pmprocessor
             }
         }
 
-        async Task<bool> checkNeedProcess(long chat, string fn, string ln, string un)
+        protected async Task<bool> checkNeedProcess(long chat, string fn, string ln, string un)
         {
             bool needProcess = true;
             var userData = await server.GetFollowerSubscriprion(geotag, chat);
@@ -348,13 +348,13 @@ namespace botplatform.Models.pmprocessor
             return needProcess;
         }
 
-        void handleSticker(long chat, string? fn, string? ln, string? un, Sticker? sticker)
+        protected void handleSticker(long chat, string? fn, string? ln, string? un, Sticker? sticker)
         {
             if (sticker != null)
                 handleTextMessage(chat, fn, ln, un, sticker.Emoji);
         }
 
-        void handleTextMessage(long chat, string? fn, string? ln, string? un, string? text)
+        protected void handleTextMessage(long chat, string? fn, string? ln, string? un, string? text)
         {
             if (text != null)
             {
