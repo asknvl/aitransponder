@@ -127,7 +127,7 @@ namespace botplatform.Models.pmprocessor
                 dbStorage.updateUserData(geotag, chat, message_counter: ++counter);
                 logger.warn(geotag, $"updateCounter: {chat} {fn} {ln} counter={counter}");
 
-                if (/*counter == 2*/true)
+                if (counter == 2)
                 {
                     logger.warn(geotag, $"linkMessage: {chat} {fn} {ln} counter={counter}");
 
@@ -142,7 +142,7 @@ namespace botplatform.Models.pmprocessor
                             try
                             {
                                 var m = MessageProcessor.GetMessage("LINK", link: link);
-                                await Task.Delay(/*30000*/2000);
+                                await Task.Delay(30000);
                                 var id = await m.Send(chat, bot, bcid: bcId);
                                 await bot.PinChatMessageAsync(chat, id, businessConnectionId: bcId);
                                 
