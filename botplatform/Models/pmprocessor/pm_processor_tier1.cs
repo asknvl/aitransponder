@@ -45,7 +45,7 @@ namespace botplatform.Models.pmprocessor
                 var un = update.BusinessMessage.From.Username;
 
                 //check self                
-                var bc = await bot.GetBusinessConnectionAsync(new GetBusinessConnectionRequest(bcId));
+                var bc = await bot.GetBusinessConnection(bcId);
 
                 if (chat == bc.User.Id)
                 {
