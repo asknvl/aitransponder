@@ -79,11 +79,14 @@ namespace botplatform.Models.messages
 
         public StateMessage Clone()
         {
-            var serialized = JsonConvert.SerializeObject(this);
-            return JsonConvert.DeserializeObject<StateMessage>(serialized, new JsonSerializerSettings {
-                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto
-            });
-
+            //var serialized = JsonConvert.SerializeObject(this);
+            //return JsonConvert.DeserializeObject<StateMessage>(serialized, new JsonSerializerSettings {
+            //    TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto
+            //});
+            var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
+            var json = JsonConvert.SerializeObject(this, typeof(StateMessage), settings);
+            var deserializedObj = JsonConvert.DeserializeObject<StateMessage>(json, settings);
+            return deserializedObj;
 
 
         }
