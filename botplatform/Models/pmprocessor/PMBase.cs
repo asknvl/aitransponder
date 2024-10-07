@@ -68,6 +68,8 @@ namespace botplatform.Models.pmprocessor
         protected System.Timers.Timer businessUpdatesCheckTimer;
         uint businessUpdatesCounter = 0;
         uint businessUpdatesCounter_prev = 0;
+
+        long userID = 0;
         #endregion
 
         #region properties
@@ -471,7 +473,13 @@ namespace botplatform.Models.pmprocessor
                     try
                     {
                         if (!user.ai_on)
+                        {
                             dbStorage.updateUserData(geotag, chat, ai_on: false, ai_off_code: "DATE");
+                            await notifyAIstate(chat, false);
+                        } else
+                        {
+                            await notifyAIstate(chat, true);
+                        }
 
                     } catch (Exception ex)
                     {
@@ -650,7 +658,6 @@ namespace botplatform.Models.pmprocessor
             //history.Add(MessageFrom.PM, tg_user_id, msg_to_ai);
             logger.inf_urgent(geotag, $"{tg_user_id}>{message}");
         }
-
         protected async Task sendStatusMessage(long tg_user_id, string bcid, string response_code, string message)
         {
             try
@@ -688,6 +695,21 @@ namespace botplatform.Models.pmprocessor
             }
 
         }
+        protected async Task notifyAIstate(long tg_id, bool isActive)
+        {
+            try
+            {
+                var state = isActive ? "ON" : "OFF";
+                var message = $"AI:STATE:{tg_id}:{state}";
+                await bot.SendTextMessageAsync(user.tg_id, message);
+            }
+            catch (Exception ex)
+            {
+                logger.err(geotag, $"notifyAIstate: {tg_id} isActive={isActive} {ex.Message}");
+                errorCollector.Add($"Не удалось передать данные о состоянии ИИ {tg_id}");
+            }            
+        }
+
         #endregion
 
         #region public
@@ -743,8 +765,7 @@ namespace botplatform.Models.pmprocessor
 
                 marker = (IMarkRead)user;
 
-                user.Start();
-                
+                await user.Start();
             }
 
             is_active = true;
@@ -800,11 +821,13 @@ namespace botplatform.Models.pmprocessor
                     case "DIALOG_END":
                         dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
                         await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
+                        notifyAIstate(tg_user_id, false);
                         break;
 
                     case "DIALOG_ERROR":
                         dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
                         await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
+                        notifyAIstate(tg_user_id, false);
                         return;
 
                     default:

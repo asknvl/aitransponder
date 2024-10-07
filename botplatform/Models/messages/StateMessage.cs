@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types;
 using Telegram.Bot;
+using System.Data;
 
 namespace botplatform.Models.messages 
 {
@@ -79,10 +80,16 @@ namespace botplatform.Models.messages
 
         public StateMessage Clone()
         {
-            var serialized = JsonConvert.SerializeObject(this);
-            return JsonConvert.DeserializeObject<StateMessage>(serialized, new JsonSerializerSettings {
-                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto
-            });
+
+            var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
+            var json = JsonConvert.SerializeObject(this, typeof(StateMessage), settings);
+            var deserializedObj = JsonConvert.DeserializeObject<StateMessage>(json, settings);
+            return deserializedObj;
+
+            //var serialized = JsonConvert.SerializeObject(this);
+            //return JsonConvert.DeserializeObject<StateMessage>(serialized, new JsonSerializerSettings {
+            //    TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto
+            //});
 
 
 

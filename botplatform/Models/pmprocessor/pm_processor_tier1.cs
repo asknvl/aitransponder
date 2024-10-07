@@ -104,7 +104,13 @@ namespace botplatform.Models.pmprocessor
                     try
                     {
                         if (!user.ai_on)
-                            dbStorage.updateUserData(geotag, chat, ai_on: false, ai_off_code: "DATE");                        
+                        {
+                            dbStorage.updateUserData(geotag, chat, ai_on: false, ai_off_code: "DATE");
+                            await notifyAIstate(chat, false);
+                        } else
+                        {
+                            await notifyAIstate(chat, true);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -137,7 +143,9 @@ namespace botplatform.Models.pmprocessor
                             {
                                 var m = MessageProcessor.GetMessage("LINK", link: link);
                                 await Task.Delay(30000);
-                                await m.Send(chat, bot, bcid: bcId);
+                                var id = await m.Send(chat, bot, bcid: bcId);
+                                await bot.PinChatMessageAsync(chat, id);
+                                
                             } catch (Exception ex)
                             {
                                 logger.err(geotag, $"sendLinkMesage: {ex.Message}");
