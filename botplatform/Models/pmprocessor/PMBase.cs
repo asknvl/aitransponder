@@ -820,13 +820,25 @@ namespace botplatform.Models.pmprocessor
                 {
                     case "DIALOG_END":
                         dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
-                        await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
+                        try
+                        {
+                            await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
+                        } catch(Exception ex)
+                        {
+                        }
+
                         notifyAIstate(tg_user_id, false);
                         break;
 
                     case "DIALOG_ERROR":
                         dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
-                        await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
+                        try
+                        {
+                            await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
+                        } catch (Exception ex)
+                        {
+
+                        }
                         notifyAIstate(tg_user_id, false);
                         return;
 
