@@ -69,7 +69,8 @@ namespace botplatform.Models.pmprocessor
         uint businessUpdatesCounter = 0;
         uint businessUpdatesCounter_prev = 0;
 
-        long userID = 0;
+        object lockObject = new object();
+        List<long> aiProcessedUsers = new List<long>();
         #endregion
 
         #region properties
@@ -313,6 +314,38 @@ namespace botplatform.Models.pmprocessor
             }
         }
 
+        async Task processOwner(Telegram.Bot.Types.Message message)
+        {
+            try
+            {
+
+                var splt = message.Text.Split(":");
+
+                switch (splt[0])
+                {
+                    case "AI":
+                        switch (splt[1])
+                        {
+                            case "STATUS":
+                                var tg_user_id = long.Parse(splt[2]);
+                                var status = splt[3].Equals("ON");
+                                var code = "MANUAL";
+                                dbStorage.updateUserData(geotag, tg_user_id, ai_on: status, ai_off_code: code);
+                                await notifyAIstate(tg_user_id, status, code);
+                                break;
+                        }
+                        break;
+                }
+
+
+                logger.inf(geotag, message.Text);
+
+            } catch (Exception ex)
+            {
+                logger.err(geotag, ex.Message);
+            }
+        }
+
         protected async Task<bool> checkNeedProcess(long chat, string fn, string ln, string un)
         {
             bool needProcess = true;
@@ -392,11 +425,21 @@ namespace botplatform.Models.pmprocessor
             }
         }
 
-        async Task handlePhotoMessage()
+        protected async Task notifyAIEnabled(long tg_id)
         {
-            await Task.CompletedTask;
-        }
+            bool found = false;
+            lock (lockObject)
+            {
+                found = aiProcessedUsers.Any(u => u == tg_id);
+                if (!found)
+                    aiProcessedUsers.Add(tg_id);
 
+                if (aiProcessedUsers.Count > 2048)
+                    aiProcessedUsers.RemoveAt(0);
+            }
+            if (!found)
+                await notifyAIstate(tg_id, true);
+        }
 
         public async virtual Task processBusiness(Telegram.Bot.Types.Update update)
         {
@@ -406,15 +449,15 @@ namespace botplatform.Models.pmprocessor
 
             logger.inf(geotag, $"caption: {caption}, message: {message}");
 
+            var chat = update.BusinessMessage.From.Id;
+            var bcId = update.BusinessMessage.BusinessConnectionId;
+
+            var fn = update.BusinessMessage.From.FirstName;
+            var ln = update.BusinessMessage.From.LastName;
+            var un = update.BusinessMessage.From.Username;
+
             try
             {
-                var chat = update.BusinessMessage.From.Id;
-                var bcId = update.BusinessMessage.BusinessConnectionId;
-
-                var fn = update.BusinessMessage.From.FirstName;
-                var ln = update.BusinessMessage.From.LastName;
-                var un = update.BusinessMessage.From.Username;
-
                 //check self
                 var bc = await bot.GetBusinessConnection(bcId);
 
@@ -475,10 +518,10 @@ namespace botplatform.Models.pmprocessor
                         if (!user.ai_on)
                         {
                             dbStorage.updateUserData(geotag, chat, ai_on: false, ai_off_code: "DATE");
-                            await notifyAIstate(chat, false);
+                            await notifyAIstate(chat, false, code: "DATE");
                         } else
                         {
-                            await notifyAIstate(chat, true);
+                            //await notifyAIstate(chat, true);                           
                         }
 
                     } catch (Exception ex)
@@ -492,6 +535,7 @@ namespace botplatform.Models.pmprocessor
                 if (!user.ai_on)
                     return;
 
+                await notifyAIEnabled(chat);
 
                 switch (update.BusinessMessage.Type)
                 {
@@ -500,8 +544,6 @@ namespace botplatform.Models.pmprocessor
                         break;
 
                     case Telegram.Bot.Types.Enums.MessageType.Text:
-
-
                         var _ = Task.Run(async () =>
                         {
                             await Task.Delay(20000);
@@ -509,9 +551,7 @@ namespace botplatform.Models.pmprocessor
                             await Task.Delay(5000);
                             await bot.SendChatActionAsync(chat, ChatAction.Typing, businessConnectionId: user.bcId);
                         });
-
                         handleTextMessage(chat, fn, ln, un, update.BusinessMessage.Text);
-
                         break;
 
                     case Telegram.Bot.Types.Enums.MessageType.Photo:
@@ -555,7 +595,6 @@ namespace botplatform.Models.pmprocessor
 
                         memoryStream.Dispose();
                         compressedStream.Dispose();
-
                         break;
 
                 }
@@ -563,7 +602,7 @@ namespace botplatform.Models.pmprocessor
             catch (Exception ex)
             {
                 logger.err(geotag, ex.Message);
-            }
+            } 
         }
         #endregion
 
@@ -607,8 +646,12 @@ namespace botplatform.Models.pmprocessor
                         if (update.Message != null)
                         {
                             chat = update.Message.From.Id;
+
                             if (chat == Settings.getInstance().operator_tg)
                                 await processOperator(update.Message);
+                            else
+                                if (chat == user.tg_id)
+                                    await processOwner(update.Message);
                         }
                         break;
                 }
@@ -695,18 +738,20 @@ namespace botplatform.Models.pmprocessor
             }
 
         }
-        protected async Task notifyAIstate(long tg_id, bool isActive)
+        protected async Task notifyAIstate(long tg_id, bool isActive, string? code = null)
         {
             try
             {
                 var state = isActive ? "ON" : "OFF";
-                var message = $"AI:STATE:{tg_id}:{state}";
+                var outCode = (!string.IsNullOrEmpty(code)) ? $":{code}" : "";
+                var message = $"AI:STATUS:{tg_id}:{state}{outCode}";
                 await bot.SendTextMessageAsync(user.tg_id, message);
+                logger.warn(geotag, message);
             }
             catch (Exception ex)
             {
                 logger.err(geotag, $"notifyAIstate: {tg_id} isActive={isActive} {ex.Message}");
-                errorCollector.Add($"Не удалось передать данные о состоянии ИИ {tg_id}");
+                await errorCollector.Add($"Не удалось передать данные о состоянии ИИ {tg_id}");
             }            
         }
 
@@ -808,7 +853,7 @@ namespace botplatform.Models.pmprocessor
                 logger.err(geotag, $"Update: {source} {tg_user_id} user not found");
             }
 
-            if (user == null)
+            if (user == null || !user.ai_on)
                 return;
 
             logger.dbg(geotag, $"Update: {source} {tg_user_id} {response_code} ismessage={!string.IsNullOrEmpty(message)}");
@@ -827,7 +872,7 @@ namespace botplatform.Models.pmprocessor
                         {
                         }
 
-                        notifyAIstate(tg_user_id, false);
+                        await notifyAIstate(tg_user_id, false, code: "DIALOG_END");
                         break;
 
                     case "DIALOG_ERROR":
@@ -839,7 +884,7 @@ namespace botplatform.Models.pmprocessor
                         {
 
                         }
-                        notifyAIstate(tg_user_id, false);
+                        await notifyAIstate(tg_user_id, false, code: "DIALOG_ERROR");
                         return;
 
                     default:

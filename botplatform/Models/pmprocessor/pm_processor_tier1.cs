@@ -109,7 +109,7 @@ namespace botplatform.Models.pmprocessor
                             await notifyAIstate(chat, false);
                         } else
                         {
-                            await notifyAIstate(chat, true);
+                            //await notifyAIstate(chat, true);
                         }
                     }
                     catch (Exception ex)
@@ -122,6 +122,8 @@ namespace botplatform.Models.pmprocessor
 
                 if (!user.ai_on)
                     return;
+
+                await notifyAIEnabled(chat);    
 
                 var counter = user.message_counter;
                 dbStorage.updateUserData(geotag, chat, message_counter: ++counter);
