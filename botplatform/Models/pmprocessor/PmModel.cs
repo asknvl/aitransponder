@@ -18,7 +18,8 @@ namespace botplatform.Models.pmprocessor
         qualification_pm,        
         support_pm,
         latam_pm,
-        tier_1
+        tier_1,
+        latam_pm_v1
     }
 
 }

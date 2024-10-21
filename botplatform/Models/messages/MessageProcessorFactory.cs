@@ -30,7 +30,10 @@ namespace botplatform.Models.messages
                     return new MP_latam(geotag, token, bot);
 
                 case PMType.tier_1:
-                    return new MP_tier1(geotag, token, bot);    
+                    return new MP_tier1(geotag, token, bot);
+
+                case PMType.latam_pm_v1:
+                    return new MP_latam(geotag, token, bot);
 
                 default:
                     return null;

@@ -38,6 +38,9 @@ namespace botplatform.Models.pmprocessor
                 case PMType.tier_1:
                     return new pm_processor_tier1(model, pmStorage, dbStorage, logger);
 
+                case PMType.latam_pm_v1:
+                    return new pm_processor_latam_v1(model, pmStorage, dbStorage, logger);
+
                 default:
                     throw new NotImplementedException();
             }
