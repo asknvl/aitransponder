@@ -351,7 +351,7 @@ namespace botplatform.Models.pmprocessor
                                 var linkData = await ai.GetLink(geotag, tg_user_id);
                                 var link = $"{linkData.link}?uuid={linkData.uuid}";
 
-                                var _ = Task.Run(async () => {
+                                await Task.Run(async () => {
                                     try
                                     {
                                         var m = MessageProcessor.GetMessage("LINK", link: link);
