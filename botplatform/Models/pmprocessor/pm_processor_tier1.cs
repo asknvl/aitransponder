@@ -1,4 +1,5 @@
 ﻿using asknvl.logger;
+using asknvl.server;
 using botplatform.Models.pmprocessor.db_storage;
 using botplatform.Models.storage;
 using SkiaSharp;
@@ -12,6 +13,7 @@ using Telegram.Bot;
 using Telegram.Bot.Requests;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+
 
 namespace botplatform.Models.pmprocessor
 {
@@ -125,41 +127,41 @@ namespace botplatform.Models.pmprocessor
 
                 await notifyAIEnabled(chat);    
 
-                var counter = user.message_counter;
-                dbStorage.updateUserData(geotag, chat, message_counter: ++counter);
-                logger.warn(geotag, $"updateCounter: {chat} {fn} {ln} counter={counter}");
+                //var counter = user.message_counter;
+                //dbStorage.updateUserData(geotag, chat, message_counter: ++counter);
+                //logger.warn(geotag, $"updateCounter: {chat} {fn} {ln} counter={counter}");
 
-                if (counter == 2)
-                {
-                    logger.warn(geotag, $"linkMessage: {chat} {fn} {ln} counter={counter}");
+                //if (counter == 2)
+                //{
+                //    logger.warn(geotag, $"linkMessage: {chat} {fn} {ln} counter={counter}");
 
-                    try
-                    {
-                        //https://raceup-top1.space?uuid=o497t4gjzt
+                //    try
+                //    {
+                //        //https://raceup-top1.space?uuid=o497t4gjzt
 
-                        var linkData = await ai.GetLink(geotag, chat);
-                        var link = $"{linkData.link}?uuid={linkData.uuid}";
+                //        var linkData = await ai.GetLink(geotag, chat);
+                //        var link = $"{linkData.link}?uuid={linkData.uuid}";
 
-                        var _ = Task.Run(async() => {
-                            try
-                            {
-                                var m = MessageProcessor.GetMessage("LINK", link: link);
-                                await Task.Delay(30000);
-                                var id = await m.Send(chat, bot, bcid: bcId);
-                                await bot.PinChatMessageAsync(chat, id, businessConnectionId: bcId);
+                //        var _ = Task.Run(async() => {
+                //            try
+                //            {
+                //                var m = MessageProcessor.GetMessage("LINK", link: link);
+                //                await Task.Delay(30000);
+                //                var id = await m.Send(chat, bot, bcid: bcId);
+                //                await bot.PinChatMessageAsync(chat, id, businessConnectionId: bcId);
                                 
-                            } catch (Exception ex)
-                            {
-                                logger.err(geotag, $"sendLinkMesage: {ex.Message}");
-                            }
-                        });
+                //            } catch (Exception ex)
+                //            {
+                //                logger.err(geotag, $"sendLinkMesage: {ex.Message}");
+                //            }
+                //        });
 
-                    } catch (Exception ex)
-                    {
-                        logger.err(geotag, $"linkMessage: {chat} {fn} {ln} {ex.Message}");
-                    }
+                //    } catch (Exception ex)
+                //    {
+                //        logger.err(geotag, $"linkMessage: {chat} {fn} {ln} {ex.Message}");
+                //    }
 
-                }
+                //}
 
                 switch (update.BusinessMessage.Type)
                 {
@@ -230,6 +232,155 @@ namespace botplatform.Models.pmprocessor
             catch (Exception ex)
             {
                 logger.err(geotag, ex.Message);
+            }
+        }
+
+        public override async Task Update(string source, long tg_user_id, string response_code, string message)
+        {
+
+            if (!source.Equals(geotag))
+            {
+                logger.err(geotag, $"Update: source {source} not equals {geotag}");
+                return;
+            }
+
+
+            db_storage.User user = null;
+            try
+            {
+                user = dbStorage.getUser(source, tg_user_id);
+            }
+            catch (Exception ex)
+            {
+                logger.err(geotag, $"Update: {source} {tg_user_id} user not found");
+            }
+
+            if (user == null /*|| !user.ai_on*/)
+                return;
+
+            logger.dbg(geotag, $"Update: {source} {tg_user_id} {response_code} ismessage={!string.IsNullOrEmpty(message)}");
+
+            try
+            {
+                //system codes
+                switch (response_code)
+                {
+                    case "DIALOG_END":
+                        dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
+                        try
+                        {
+                            await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+
+                        await notifyAIstate(tg_user_id, false, code: "DIALOG_END");
+                        break;
+
+                    case "DIALOG_ERROR":
+                        dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
+                        try
+                        {
+                            await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                        await notifyAIstate(tg_user_id, false, code: "DIALOG_ERROR");
+                        return;
+
+                    default:
+                        break;
+                }
+
+
+                if (!string.IsNullOrEmpty(message) || !string.IsNullOrEmpty(response_code))
+                {
+                    var _ = Task.Run(async () =>
+                    {
+
+                        if (!response_code.Equals("UNKNOWN"))
+                        {
+                            var m = MessageProcessor.GetMessage(response_code);
+                            if (m != null)
+                            {
+                                await sendStatusMessage(tg_user_id, user.bcId, response_code, message);
+                            }
+                            else
+                            {
+                                await sendTextMessage(tg_user_id, user.bcId, message);
+                            }
+
+                        }
+                        else
+                        {
+                            await sendTextMessage(tg_user_id, user.bcId, message);
+                        }
+
+                        var found = dbStorage.getUser(geotag, tg_user_id);
+                        if (found != null)
+                        {
+                            if (!found.is_first_msg_rep)
+                            {
+                                dbStorage.updateUserData(geotag, tg_user_id, is_reply: true);
+                                try
+                                {
+                                    await server.MarkFollowerWasReplied(geotag, tg_user_id);
+                                }
+                                catch (Exception ex)
+                                {
+                                    logger.err(geotag, $"{ex.Message}");
+                                }
+                            }
+                        }
+
+                        var counter = user.message_counter;
+                        dbStorage.updateUserData(geotag, tg_user_id, message_counter: ++counter);
+                        logger.warn(geotag, $"updateCounter: {tg_user_id} {user.fn} {user.ln} counter={counter}");
+
+                        if (counter == 2)
+                        {
+                            logger.warn(geotag, $"linkMessage: {tg_user_id} {user.fn} {user.ln} counter={counter}");
+
+                            try
+                            {
+                                //https://raceup-top1.space?uuid=o497t4gjzt
+
+                                var linkData = await ai.GetLink(geotag, tg_user_id);
+                                var link = $"{linkData.link}?uuid={linkData.uuid}";
+
+                                var _ = Task.Run(async () => {
+                                    try
+                                    {
+                                        var m = MessageProcessor.GetMessage("LINK", link: link);
+                                        await Task.Delay(3000);
+                                        var id = await m.Send(tg_user_id, bot, bcid: user.bcId);
+                                        await bot.PinChatMessageAsync(tg_user_id, id, businessConnectionId: user.bcId);
+
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        logger.err(geotag, $"sendLinkMesage: {ex.Message}");
+                                    }
+                                });
+
+                            }
+                            catch (Exception ex)
+                            {
+                                logger.err(geotag, $"linkMessage: {tg_user_id} {user.fn} {user.ln} {ex.Message}");
+                            }
+
+                        }
+
+                    });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                logger.err(geotag, $"Update: {ex.Message}");
             }
         }
     }
