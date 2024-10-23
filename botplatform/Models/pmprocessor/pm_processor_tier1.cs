@@ -298,7 +298,7 @@ namespace botplatform.Models.pmprocessor
 
                 if (!string.IsNullOrEmpty(message) || !string.IsNullOrEmpty(response_code))
                 {
-                    var _ = Task.Run(async () =>
+                    await Task.Run(async () =>
                     {
 
                         if (!response_code.Equals("UNKNOWN"))

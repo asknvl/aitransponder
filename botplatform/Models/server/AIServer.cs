@@ -18,19 +18,22 @@ namespace botplatform.Models.server
     public class AIServer : IAIserver
     {
         #region const
-        string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYm90MDEiLCJpYXQiOjE3MTMwNzgyMzJ9.ibCadqPOLluTcpp5_QPTlKc_AZMvDNkcN_2zSPzJdOM";
+        //string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYm90MDEiLCJpYXQiOjE3MTMwNzgyMzJ9.ibCadqPOLluTcpp5_QPTlKc_AZMvDNkcN_2zSPzJdOM";
         #endregion
 
         #region vars
         string url;
+        string token;
         ServiceCollection serviceCollection;
         IHttpClientFactory httpClientFactory;
         HttpClient httpClient;
         #endregion
 
-        public AIServer(string url)
+        public AIServer(string url, string token)
         {
             this.url = url;
+            this.token = token; 
+
             serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             var services = serviceCollection.BuildServiceProvider();

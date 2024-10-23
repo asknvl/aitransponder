@@ -19,19 +19,22 @@ namespace asknvl.server
     public class TGBotFollowersStatApi : ITGBotFollowersStatApi
     {
         #region const
-        string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImxldHRlcl9pZCI6IllCIiwiaWF0IjoxNjU5MTk2Nzc1fQ.8qzVaYVky9m4m3aa0f8mMFI6mk3-wyhAiSZVmiHKwmg";
+        //string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImxldHRlcl9pZCI6IllCIiwiaWF0IjoxNjU5MTk2Nzc1fQ.8qzVaYVky9m4m3aa0f8mMFI6mk3-wyhAiSZVmiHKwmg";
         #endregion
 
         #region vars
         string url;
+        string token;
         ServiceCollection serviceCollection;
         IHttpClientFactory httpClientFactory;
         HttpClient httpClient;
         #endregion
 
-        public TGBotFollowersStatApi(string url)
+        public TGBotFollowersStatApi(string url, string token)
         {
             this.url = url;
+            this.token = token;
+
             serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             var services = serviceCollection.BuildServiceProvider();

@@ -34,6 +34,9 @@ namespace botplatform.Models.settings
 
             operator_tg = prmtrs.operator_id;
             ai_server = prmtrs.ai_server;
+            ai_token = prmtrs.ai_token;
+            stat_server = prmtrs.stat_server;
+            stat_token = prmtrs.stat_token;
         }
         #endregion
 
@@ -41,6 +44,9 @@ namespace botplatform.Models.settings
         [JsonProperty]
         public long operator_tg { get; set; } = 0;
         public string ai_server { get; set; } = "";
+        public string ai_token { get; set; } = "";
+        public string stat_server { get; set; } = "";
+        public string stat_token { get; set; } = "";
         #endregion
 
         #region public
@@ -50,6 +56,9 @@ namespace botplatform.Models.settings
 
             p.operator_id = operator_tg;
             p.ai_server = ai_server;    
+            p.ai_token = ai_token;
+            p.stat_server = stat_server;
+            p.stat_token = stat_token;  
 
             storage.save(p);
         }
@@ -60,6 +69,9 @@ namespace botplatform.Models.settings
     {
         public long operator_id { get; set; }
         public string ai_server { get; set; } = "";
+        public string ai_token { get; set; } = "";
+        public string stat_server { get; set; } = "";
+        public string stat_token { get; set; } = "";
     }
 
 }

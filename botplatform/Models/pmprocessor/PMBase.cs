@@ -185,8 +185,13 @@ namespace botplatform.Models.pmprocessor
 
             messageProcessorFactory = new MessageProcessorFactory(logger);
 
-            ai = new AIServer("https://gpt.raceup.io");
-            server = new TGBotFollowersStatApi("https://ru.flopasda.site");
+            var settings = Settings.getInstance();
+
+            //ai = new AIServer("https://gpt.raceup.io");
+            ai = new AIServer(settings.ai_server, settings.ai_token);
+
+            //server = new TGBotFollowersStatApi("https://ru.flopasda.site");
+            server = new TGBotFollowersStatApi(settings.stat_server, settings.stat_token);  
 
             businessUpdatesCheckTimer = new System.Timers.Timer();
             businessUpdatesCheckTimer.Interval = 1 * 60 * 60 * 1000; // в часах
