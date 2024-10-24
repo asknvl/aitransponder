@@ -17,8 +17,7 @@ namespace botplatform.Models.server
 {
     public class AIServer : IAIserver
     {
-        #region const
-        //string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYm90MDEiLCJpYXQiOjE3MTMwNzgyMzJ9.ibCadqPOLluTcpp5_QPTlKc_AZMvDNkcN_2zSPzJdOM";
+        #region const        
         #endregion
 
         #region vars
@@ -112,11 +111,11 @@ namespace botplatform.Models.server
             }
         }
 
-        public async Task SendToAI(string geotag, long tg_user_id, string? fn, string? ln, string? un, string? message = null, string? base64_image = null)
+        public async Task SendToAI(string geotag, long tg_user_id, string? fn, string? ln, string? un, string? message = null, string? base64_image = null, string? direction = null)
         {
             var addr = $"{url}/api/message";
 
-            universalMessageDto msg = new universalMessageDto(geotag, tg_user_id, fn, ln, un, text: message, base64_image: base64_image);
+            universalMessageDto msg = new universalMessageDto(geotag, tg_user_id, fn, ln, un, text: message, base64_image: base64_image, direction: direction);
 
             var json = JsonConvert.SerializeObject(msg, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             var data = new StringContent(json, Encoding.UTF8, "application/json");

@@ -12,7 +12,7 @@ namespace botplatform.Models.server
     {
         Task SendMessageToAI(string geotag, long tg_user_id, string text);
         Task SendHistoryToAI(string geotag, long tg_user_id, string fn, string ln, string un, List<HistoryItem> messages);
-        Task SendToAI(string geotag, long tg_user_id, string fn, string ln, string un, string? message = null, string? base64_image = null);
+        Task SendToAI(string geotag, long tg_user_id, string fn, string ln, string un, string? message = null, string? base64_image = null, string? direction = null);
         Task<linkDto> GetLink(string geotag, long tg_user_id);
     }
 
@@ -26,8 +26,9 @@ namespace botplatform.Models.server
         public string? lastname { get; set; }
         public string? username { get; set; }
         public bool is_test { get; set; }
+        public string? direction { get; set; }
 
-        public universalMessageDto(string source, long tg_user_id,  string? fn, string? ln, string? un, string? text = null, string? base64_image = null, bool? is_test = null) {
+        public universalMessageDto(string source, long tg_user_id,  string? fn, string? ln, string? un, string? text = null, string? base64_image = null, string? direction = null, bool? is_test = null) {
 
             this.source = source;
             this.tg_user_id = tg_user_id;            
@@ -35,6 +36,7 @@ namespace botplatform.Models.server
             firstname = fn;
             lastname = ln;
             username = un;
+            this.direction = direction;
 
             if (is_test != null)
                 this.is_test = (bool)is_test;

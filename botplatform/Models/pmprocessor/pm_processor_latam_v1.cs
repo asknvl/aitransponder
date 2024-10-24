@@ -17,7 +17,7 @@ namespace botplatform.Models.pmprocessor
 {
     public class pm_processor_latam_v1 : PMBase, IAutoReplyObserver
     {
-        public pm_processor_latam_v1(PmModel model, IPMStorage pmStorage, IDBStorage dbStorage, ILogger logger) : base(model, pmStorage, dbStorage, logger)
+        public pm_processor_latam_v1(PmModel model, IPMStorage pmStorage, IDBStorage dbStorage, ILogger logger) : base(model, pmStorage, dbStorage, logger, direction: "latam")
         {
         }
 

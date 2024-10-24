@@ -35,6 +35,7 @@ namespace botplatform.Models.pmprocessor
     {
         #region vars
         PmModel model;
+        protected string? direction = null;
 
         protected ILogger logger;
 
@@ -167,9 +168,10 @@ namespace botplatform.Models.pmprocessor
         public ReactiveCommand<Unit, Unit> verifyCmd { get; }
         #endregion
 
-        public PMBase(PmModel model, IPMStorage pmStorage, IDBStorage dbStorage, ILogger logger)
+        public PMBase(PmModel model, IPMStorage pmStorage, IDBStorage dbStorage, ILogger logger, string? direction = null)
         {
             this.model = model;
+            this.direction = direction;
 
             this.logger = logger;
             this.pmStorage = pmStorage;
@@ -409,7 +411,7 @@ namespace botplatform.Models.pmprocessor
                     try
                     {
                         //await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
-                        await ai.SendToAI(geotag, chat, fn, ln, un, message: text);
+                        await ai.SendToAI(geotag, chat, fn, ln, un, message: text, direction: direction);
 
                         logger.inf(geotag, $"{fn} {ln} {un} {chat}>{text}");
                     }
@@ -595,7 +597,7 @@ namespace botplatform.Models.pmprocessor
                         //var base64_image = Convert.ToBase64String(memoryStream.ToArray());
                         if (base64_image != null)
                         {
-                            await ai.SendToAI(geotag, chat, fn, ln, un, message: update.BusinessMessage.Caption, base64_image: base64_image);
+                            await ai.SendToAI(geotag, chat, fn, ln, un, message: update.BusinessMessage.Caption, base64_image: base64_image, direction: direction);
                         }
 
                         memoryStream.Dispose();
