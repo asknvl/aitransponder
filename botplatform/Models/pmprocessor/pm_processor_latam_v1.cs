@@ -211,7 +211,7 @@ namespace botplatform.Models.pmprocessor
             if (user == null /*|| !user.ai_on*/)
                 return;
 
-            logger.dbg(geotag, $"Update: {source} {tg_user_id} {response_code} ismessage={!string.IsNullOrEmpty(message)}");
+            logger.dbg(geotag, $"Update: {source} {tg_user_id} {response_code} message={message}");
 
             try
             {
