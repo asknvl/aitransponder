@@ -235,8 +235,46 @@ namespace botplatform.Models.pmprocessor
 
                 if (!string.IsNullOrEmpty(message) || !string.IsNullOrEmpty(response_code))
                 {
-                    var _ = Task.Run(async () =>
-                    {
+                    //var _ = Task.Run(async () =>
+                    //{
+                    //    if (!response_code.Equals("UNKNOWN"))
+                    //    {
+                    //        var m = MessageProcessor.GetMessage(response_code);
+                    //        if (m != null)
+                    //        {
+                    //            await sendStatusMessage(tg_user_id, user.bcId, response_code, message);
+                    //        }
+                    //        else
+                    //        {
+                    //            await sendTextMessage(tg_user_id, user.bcId, message);
+                    //        }
+
+                    //    }
+                    //    else
+                    //    {
+                    //        await sendTextMessage(tg_user_id, user.bcId, message);
+                    //    }
+
+                    //    var found = dbStorage.getUser(geotag, tg_user_id);
+                    //    if (found != null)
+                    //    {
+                    //        if (!found.is_first_msg_rep)
+                    //        {
+                    //            dbStorage.updateUserData(geotag, tg_user_id, is_reply: true);
+                    //            try
+                    //            {
+                    //                await server.MarkFollowerWasReplied(geotag, tg_user_id);
+                    //            }
+                    //            catch (Exception ex)
+                    //            {
+                    //                logger.err(geotag, $"{ex.Message}");
+                    //            }
+                    //        }
+                    //    }
+
+                    //});
+
+                    var _ = Task.Run(async () => {
 
                         if (!response_code.Equals("UNKNOWN"))
                         {
@@ -245,16 +283,10 @@ namespace botplatform.Models.pmprocessor
                             {
                                 await sendStatusMessage(tg_user_id, user.bcId, response_code, message);
                             }
-                            else
-                            {
-                                await sendTextMessage(tg_user_id, user.bcId, message);
-                            }
+                        }
 
-                        }
-                        else
-                        {
+                        if (!string.IsNullOrEmpty(message))
                             await sendTextMessage(tg_user_id, user.bcId, message);
-                        }
 
                         var found = dbStorage.getUser(geotag, tg_user_id);
                         if (found != null)
@@ -274,6 +306,7 @@ namespace botplatform.Models.pmprocessor
                         }
 
                     });
+
                 }
 
             }
