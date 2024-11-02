@@ -1,6 +1,7 @@
 ﻿using asknvl.logger;
 using asknvl.server;
 using botplatform.Models.pmprocessor.db_storage;
+using botplatform.Models.pmprocessor.quote_rocessor;
 using botplatform.Models.storage;
 using SkiaSharp;
 using System;
@@ -188,7 +189,57 @@ namespace botplatform.Models.pmprocessor
             return geotag;
         }
 
-        public virtual async Task Update(string source, long tg_user_id, string response_code, string message)
+        override protected async Task sendStatusMessage(long tg_user_id, string bcid, string response_code, string message)
+        {
+            try
+            {
+                int exists_id = 0;
+                bool is_used = false;
+
+                (exists_id, is_used) = quoteProcessor.Get(tg_user_id, response_code);
+
+                if (exists_id == -1)
+                {
+                    var m = MessageProcessor.GetMessage(response_code);
+                    if (m != null)
+                    {
+                        try
+                        {
+                            int id = await m.Send(tg_user_id, bot, bcid: bcid);
+                            quoteProcessor.Add(tg_user_id, response_code, id);
+                            await Task.Delay(3000);
+                        } catch (Exception ex) { }
+                    }
+                    await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
+                   
+                } else
+                {
+                    await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
+                }
+
+                //if (exists_id != -1 && is_used == false)
+                //{
+                //    var m = MessageProcessor.GetMessage("ALREADY_SENT");
+                //    if (m != null)
+                //    {
+                //        await m.Send(tg_user_id, bot, bcid: bcid, reply_message_id: exists_id);
+                //    }
+                //}
+
+                //if (exists_id != -1 && is_used == true)
+                //{
+                //    await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
+                //}
+
+            }
+            catch (Exception ex)
+            {
+                logger.err(geotag, $"sendStatusMessage: {ex.Message}");
+            }
+
+        }
+
+        public override async Task Update(string source, long tg_user_id, string response_code, string message)
         {
 
             if (!source.Equals(geotag))
@@ -233,60 +284,19 @@ namespace botplatform.Models.pmprocessor
                 }
 
 
-                if (!string.IsNullOrEmpty(message) || !string.IsNullOrEmpty(response_code))
-                {
-                    //var _ = Task.Run(async () =>
-                    //{
-                    //    if (!response_code.Equals("UNKNOWN"))
-                    //    {
-                    //        var m = MessageProcessor.GetMessage(response_code);
-                    //        if (m != null)
-                    //        {
-                    //            await sendStatusMessage(tg_user_id, user.bcId, response_code, message);
-                    //        }
-                    //        else
-                    //        {
-                    //            await sendTextMessage(tg_user_id, user.bcId, message);
-                    //        }
+                var _ = Task.Run(async () => {
 
-                    //    }
-                    //    else
-                    //    {
-                    //        await sendTextMessage(tg_user_id, user.bcId, message);
-                    //    }
-
-                    //    var found = dbStorage.getUser(geotag, tg_user_id);
-                    //    if (found != null)
-                    //    {
-                    //        if (!found.is_first_msg_rep)
-                    //        {
-                    //            dbStorage.updateUserData(geotag, tg_user_id, is_reply: true);
-                    //            try
-                    //            {
-                    //                await server.MarkFollowerWasReplied(geotag, tg_user_id);
-                    //            }
-                    //            catch (Exception ex)
-                    //            {
-                    //                logger.err(geotag, $"{ex.Message}");
-                    //            }
-                    //        }
-                    //    }
-
-                    //});
-
-                    var _ = Task.Run(async () => {
+                    try
+                    {
 
                         if (!response_code.Equals("UNKNOWN"))
                         {
-                            var m = MessageProcessor.GetMessage(response_code);
-                            if (m != null)
-                            {
-                                await sendStatusMessage(tg_user_id, user.bcId, response_code, message);
-                            }
+                            await sendStatusMessage(tg_user_id, user.bcId, response_code, message);                            
+                        } else
+                        {
+                            if (!string.IsNullOrEmpty(message))
+                                await sendTextMessage(tg_user_id, user.bcId, message);
                         }
-
-                        if (!string.IsNullOrEmpty(message))
-                            await sendTextMessage(tg_user_id, user.bcId, message);
 
                         var found = dbStorage.getUser(geotag, tg_user_id);
                         if (found != null)
@@ -304,10 +314,59 @@ namespace botplatform.Models.pmprocessor
                                 }
                             }
                         }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.err(geotag, $"Update send: {ex.Message}");
+                    }
 
-                    });
+                });
 
-                }
+
+                //if (!string.IsNullOrEmpty(message) || !string.IsNullOrEmpty(response_code))
+                //{
+                //    //var _ = Task.Run(async () =>
+                //    //{
+                //    //    if (!response_code.Equals("UNKNOWN"))
+                //    //    {
+                //    //        var m = MessageProcessor.GetMessage(response_code);
+                //    //        if (m != null)
+                //    //        {
+                //    //            await sendStatusMessage(tg_user_id, user.bcId, response_code, message);
+                //    //        }
+                //    //        else
+                //    //        {
+                //    //            await sendTextMessage(tg_user_id, user.bcId, message);
+                //    //        }
+
+                //    //    }
+                //    //    else
+                //    //    {
+                //    //        await sendTextMessage(tg_user_id, user.bcId, message);
+                //    //    }
+
+                //    //    var found = dbStorage.getUser(geotag, tg_user_id);
+                //    //    if (found != null)
+                //    //    {
+                //    //        if (!found.is_first_msg_rep)
+                //    //        {
+                //    //            dbStorage.updateUserData(geotag, tg_user_id, is_reply: true);
+                //    //            try
+                //    //            {
+                //    //                await server.MarkFollowerWasReplied(geotag, tg_user_id);
+                //    //            }
+                //    //            catch (Exception ex)
+                //    //            {
+                //    //                logger.err(geotag, $"{ex.Message}");
+                //    //            }
+                //    //        }
+                //    //    }
+
+                //    //});
+
+
+
+                //}
 
             }
             catch (Exception ex)

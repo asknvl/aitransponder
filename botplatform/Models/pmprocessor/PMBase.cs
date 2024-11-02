@@ -56,7 +56,7 @@ namespace botplatform.Models.pmprocessor
         
         PmModel tmpPmModel;
 
-        QuoteProcessor quoteProcessor = new QuoteProcessor();
+        protected QuoteProcessor quoteProcessor = new QuoteProcessor();
 
         protected IAIserver ai;
         protected ITGBotFollowersStatApi server;
@@ -708,7 +708,7 @@ namespace botplatform.Models.pmprocessor
             //history.Add(MessageFrom.PM, tg_user_id, msg_to_ai);
             logger.inf_urgent(geotag, $"{tg_user_id}>{message}");
         }
-        protected async Task sendStatusMessage(long tg_user_id, string bcid, string response_code, string message)
+        protected virtual async Task sendStatusMessage(long tg_user_id, string bcid, string response_code, string message)
         {
             try
             {        
