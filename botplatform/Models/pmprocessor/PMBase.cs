@@ -56,7 +56,7 @@ namespace botplatform.Models.pmprocessor
         
         PmModel tmpPmModel;
 
-        protected QuoteProcessor quoteProcessor = new QuoteProcessor();
+        protected QuoteProcessor quoteProcessor;
 
         protected IAIserver ai;
         protected ITGBotFollowersStatApi server;
@@ -184,6 +184,8 @@ namespace botplatform.Models.pmprocessor
             posting_type = model.posting_type;
 
             startDate = model.start_date;
+
+            quoteProcessor = new QuoteProcessor(geotag);
 
             messageProcessorFactory = new MessageProcessorFactory(logger);
 
@@ -338,7 +340,7 @@ namespace botplatform.Models.pmprocessor
                                 var status = splt[3].Equals("ON");
                                 var code = "MANUAL";
                                 dbStorage.updateUserData(geotag, tg_user_id, ai_on: status, ai_off_code: code);
-                                await notifyAIstate(tg_user_id, status, code);
+                                await processAIState(tg_user_id, status, code);
                                 break;
                         }
                         break;
@@ -445,7 +447,7 @@ namespace botplatform.Models.pmprocessor
                     aiProcessedUsers.RemoveAt(0);
             }
             if (!found)
-                await notifyAIstate(tg_id, true);
+                await processAIState(tg_id, true);
         }
 
         public async virtual Task processBusiness(Telegram.Bot.Types.Update update)
@@ -525,7 +527,7 @@ namespace botplatform.Models.pmprocessor
                         if (!user.ai_on)
                         {
                             dbStorage.updateUserData(geotag, chat, ai_on: false, ai_off_code: "DATE");
-                            await notifyAIstate(chat, false, code: "DATE");
+                            await processAIState(chat, false, code: "DATE");
                         } else
                         {
                             //await notifyAIstate(chat, true);                           
@@ -745,11 +747,15 @@ namespace botplatform.Models.pmprocessor
             }
 
         }
-        protected async Task notifyAIstate(long tg_id, bool isActive, string? code = null)
+        protected async Task processAIState(long tg_id, bool isActive, string? code = null)
         {
             try
             {
                 var state = isActive ? "ON" : "OFF";
+
+                if (!isActive) 
+                    quoteProcessor.Remove(tg_id);
+
                 var outCode = (!string.IsNullOrEmpty(code)) ? $":{code}" : "";
                 var message = $"AI:STATUS:{tg_id}:{state}{outCode}";
                 await bot.SendTextMessageAsync(user.tg_id, message);
@@ -879,7 +885,7 @@ namespace botplatform.Models.pmprocessor
                         {
                         }
 
-                        await notifyAIstate(tg_user_id, false, code: "DIALOG_END");
+                        await processAIState(tg_user_id, false, code: "DIALOG_END");
                         break;
 
                     case "DIALOG_ERROR":
@@ -891,7 +897,7 @@ namespace botplatform.Models.pmprocessor
                         {
 
                         }
-                        await notifyAIstate(tg_user_id, false, code: "DIALOG_ERROR");
+                        await processAIState(tg_user_id, false, code: "DIALOG_ERROR");
                         return;
 
                     default:

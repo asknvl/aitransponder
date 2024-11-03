@@ -108,7 +108,7 @@ namespace botplatform.Models.pmprocessor
                         if (!user.ai_on)
                         {
                             dbStorage.updateUserData(geotag, chat, ai_on: false, ai_off_code: "DATE");
-                            await notifyAIstate(chat, false);
+                            await processAIState(chat, false);
                         } else
                         {
                             //await notifyAIstate(chat, true);
@@ -275,7 +275,7 @@ namespace botplatform.Models.pmprocessor
                         {
                         }
 
-                        await notifyAIstate(tg_user_id, false, code: "DIALOG_END");
+                        await processAIState(tg_user_id, false, code: "DIALOG_END");
                         break;
 
                     case "DIALOG_ERROR":
@@ -288,7 +288,7 @@ namespace botplatform.Models.pmprocessor
                         {
 
                         }
-                        await notifyAIstate(tg_user_id, false, code: "DIALOG_ERROR");
+                        await processAIState(tg_user_id, false, code: "DIALOG_ERROR");
                         return;
 
                     default:

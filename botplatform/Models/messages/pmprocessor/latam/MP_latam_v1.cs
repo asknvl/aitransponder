@@ -18,12 +18,7 @@ namespace botplatform.Models.messages.pmprocessor.india
         public MP_latam_v1(string geotag, string token, ITelegramBotClient bot) : base(geotag, token, bot)
         {
             MessageTypes = new ObservableCollection<messageControlVM>()
-            {
-                new messageControlVM(this)
-                {
-                    Code = $"AUTORESPONSE01",
-                    Description = $"Автоответ личка"
-                },
+            {               
                 new messageControlVM(this)
                 {
                     Code = $"CONCERN_ABOUT_COST",

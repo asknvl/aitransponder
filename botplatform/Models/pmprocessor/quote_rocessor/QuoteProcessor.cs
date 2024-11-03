@@ -1,4 +1,5 @@
-﻿using System;
+﻿using asknvl.storage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -9,31 +10,51 @@ namespace botplatform.Models.pmprocessor.quote_rocessor
 {
     public class QuoteProcessor
     {
-        #region vars
+        #region vars        
         Dictionary<long, List<quoteInfo>> quotes = new();
+        IStorage<Dictionary<long, List<quoteInfo>>> quotesStorage;
+        object quoteLocker = new object();  
         #endregion
 
-        public QuoteProcessor() {
+        public QuoteProcessor(string geotag) {            
+            quotesStorage = new Storage<Dictionary<long, List<quoteInfo>>>($"{geotag}.json", "quotes", quotes);
+            quotes = quotesStorage.load();
         }
 
         #region public
         public void Add(long tg_id, string response_code, int message_id)
         {
-            if (quotes.ContainsKey(tg_id))
+            lock (quoteLocker)
             {
-                var found = quotes[tg_id].FirstOrDefault(q => q.response_code.Equals(response_code));
-                if (found == null)
+                if (quotes.ContainsKey(tg_id))
                 {
-                    quotes[tg_id].Add(new quoteInfo()
+                    var found = quotes[tg_id].FirstOrDefault(q => q.response_code.Equals(response_code));
+                    if (found == null)
                     {
-                        response_code = response_code,
-                        message_id = message_id
-                    });
+                        quotes[tg_id].Add(new quoteInfo()
+                        {
+                            response_code = response_code,
+                            message_id = message_id
+                        });
+                    }
                 }
-            } 
-            else
+                else
+                {
+                    quotes.Add(tg_id, new List<quoteInfo>() { new quoteInfo() { response_code = response_code, message_id = message_id } });
+                }
+
+                quotesStorage.save(quotes);
+            }
+        }
+
+        public void Remove(long tg_id)
+        {
+            lock (quoteLocker)
             {
-                quotes.Add(tg_id, new List<quoteInfo>() { new quoteInfo() { response_code = response_code, message_id = message_id } });
+                if (quotes.ContainsKey(tg_id)) {
+                    quotes.Remove(tg_id);
+                    quotesStorage.save(quotes);
+                }
             }
         }
 
@@ -47,10 +68,17 @@ namespace botplatform.Models.pmprocessor.quote_rocessor
                 var found = quotes[tg_id].FirstOrDefault(q => q.response_code.Equals(response_code));
                 if (found != null)
                 {
-                    res = found.message_id;
-                    is_used = found.is_used;
-                    found.is_used = true;
+                    lock (quoteLocker)
+                    {
+                        res = found.message_id;
+                        is_used = found.is_used;
+                        found.is_used = true;
+
+                        quotesStorage.save(quotes);
+                    }                   
                 }
+
+                
             }
 
             return (res, is_used);

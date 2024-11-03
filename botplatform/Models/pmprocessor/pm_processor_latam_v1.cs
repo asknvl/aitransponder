@@ -101,7 +101,7 @@ namespace botplatform.Models.pmprocessor
                         if (!user.ai_on)
                         {
                             dbStorage.updateUserData(geotag, chat, ai_on: false, ai_off_code: "DATE");
-                            await notifyAIstate(chat, false);
+                            await processAIState(chat, false);
                         }
                         else
                         {
@@ -216,21 +216,6 @@ namespace botplatform.Models.pmprocessor
                 {
                     await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
                 }
-
-                //if (exists_id != -1 && is_used == false)
-                //{
-                //    var m = MessageProcessor.GetMessage("ALREADY_SENT");
-                //    if (m != null)
-                //    {
-                //        await m.Send(tg_user_id, bot, bcid: bcid, reply_message_id: exists_id);
-                //    }
-                //}
-
-                //if (exists_id != -1 && is_used == true)
-                //{
-                //    await bot.SendTextMessageAsync(tg_user_id, message, businessConnectionId: bcid);
-                //}
-
             }
             catch (Exception ex)
             {
@@ -271,12 +256,12 @@ namespace botplatform.Models.pmprocessor
                 {
                     case "DIALOG_END":
                         dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
-                        await notifyAIstate(tg_user_id, false, code: "DIALOG_END");
+                        await processAIState(tg_user_id, false, code: "DIALOG_END");
                         break;
 
                     case "DIALOG_ERROR":
                         dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);                        
-                        await notifyAIstate(tg_user_id, false, code: "DIALOG_ERROR");
+                        await processAIState(tg_user_id, false, code: "DIALOG_ERROR");
                         return;
 
                     default:
@@ -321,53 +306,6 @@ namespace botplatform.Models.pmprocessor
                     }
 
                 });
-
-
-                //if (!string.IsNullOrEmpty(message) || !string.IsNullOrEmpty(response_code))
-                //{
-                //    //var _ = Task.Run(async () =>
-                //    //{
-                //    //    if (!response_code.Equals("UNKNOWN"))
-                //    //    {
-                //    //        var m = MessageProcessor.GetMessage(response_code);
-                //    //        if (m != null)
-                //    //        {
-                //    //            await sendStatusMessage(tg_user_id, user.bcId, response_code, message);
-                //    //        }
-                //    //        else
-                //    //        {
-                //    //            await sendTextMessage(tg_user_id, user.bcId, message);
-                //    //        }
-
-                //    //    }
-                //    //    else
-                //    //    {
-                //    //        await sendTextMessage(tg_user_id, user.bcId, message);
-                //    //    }
-
-                //    //    var found = dbStorage.getUser(geotag, tg_user_id);
-                //    //    if (found != null)
-                //    //    {
-                //    //        if (!found.is_first_msg_rep)
-                //    //        {
-                //    //            dbStorage.updateUserData(geotag, tg_user_id, is_reply: true);
-                //    //            try
-                //    //            {
-                //    //                await server.MarkFollowerWasReplied(geotag, tg_user_id);
-                //    //            }
-                //    //            catch (Exception ex)
-                //    //            {
-                //    //                logger.err(geotag, $"{ex.Message}");
-                //    //            }
-                //    //        }
-                //    //    }
-
-                //    //});
-
-
-
-                //}
-
             }
             catch (Exception ex)
             {
