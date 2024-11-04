@@ -76,11 +76,8 @@ namespace botplatform.Models.pmprocessor.quote_rocessor
 
                         quotesStorage.save(quotes);
                     }                   
-                }
-
-                
+                }                
             }
-
             return (res, is_used);
         }
         #endregion
