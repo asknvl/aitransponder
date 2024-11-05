@@ -132,7 +132,7 @@ namespace asknvl
                     username = usr.username;
                     tg_id = usr.ID;
 
-                    var dialogs = await user.Messages_GetAllDialogs();
+                    var dialogs = await user.Messages_GetDialogs(limit: 100);
                     dialogs.CollectUsersChats(updateManager.Users, updateManager.Chats);
 
                     //chats = await user.Messages_GetAllChats();
