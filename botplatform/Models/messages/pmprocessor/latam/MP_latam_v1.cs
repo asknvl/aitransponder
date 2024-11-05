@@ -53,7 +53,22 @@ namespace botplatform.Models.messages.pmprocessor.india
                 {
                     Code = $"DREAM_ANSWER",
                     Description = $"Мечты"
-                }                
+                },
+                new messageControlVM(this)
+                {
+                    Code = $"PUSH_3H",
+                    Description = $"Пуш 3 часа"
+                },
+                new messageControlVM(this)
+                {
+                    Code = $"PUSH_6H",
+                    Description = $"Пуш 6 часов"
+                },
+                new messageControlVM(this)
+                {
+                    Code = $"PUSH_24H",
+                    Description = $"Пуш 24 часа"
+                }
             };
         }
 

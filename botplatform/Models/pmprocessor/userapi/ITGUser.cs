@@ -17,8 +17,7 @@ namespace asknvl
 
         Task Start();        
         Task Stop();
-        void SetVerifyCode(string code);
-        void ClearSession();
+        void SetVerifyCode(string code);        
 
         event Action<ITGUser> VerificationCodeRequestEvent;        
         event Action<ITGUser, DropStatus> StatusChangedEvent;

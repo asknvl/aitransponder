@@ -23,11 +23,16 @@ namespace botplatform.Models.pmprocessor.userapi
                 try
                 {
                     TL.User foundUser = null;
-                    var found = users.TryGetValue(id, out foundUser);
-                    var peer = new InputPeerUser(foundUser.ID, foundUser.access_hash);
-                    //var histoty = await user.Messages_GetHistory(peer);
-                    await user.ReadHistory(peer);
-                    logger.warn(phone_number, $"MarkeAsRead {id} OK");
+                    var found = updateManager.Users.TryGetValue(id, out foundUser);
+
+                    if (found != null)
+                    {
+                        var peer = new InputPeerUser(foundUser.ID, foundUser.access_hash);
+                        //var histoty = await user.Messages_GetHistory(peer);
+                        await user.ReadHistory(peer);
+                        logger.warn(phone_number, $"MarkeAsRead {id} OK");
+                    } else
+                        logger.err(phone_number, $"MarkAsRead {id} user not found");
 
                 }
                 catch (Exception ex)

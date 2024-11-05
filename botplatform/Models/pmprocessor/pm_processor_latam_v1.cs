@@ -273,6 +273,24 @@ namespace botplatform.Models.pmprocessor
 
                     try
                     {
+                        if (response_code.Contains("PUSH"))
+                        {
+                            var m = MessageProcessor.GetMessage(response_code);
+                            if (m != null)
+                            {
+                                try
+                                {
+                                    int id = await m.Send(tg_user_id, bot, bcid: user.bcId);
+                                    logger.inf(geotag, $"Push: {tg_user_id} {response_code}");
+                                }
+                                catch (Exception ex) {
+
+                                    logger.err(geotag, $"Update: {ex.Message}");
+                                }
+                            }
+
+                            return;
+                        }
 
                         if (!response_code.Equals("UNKNOWN"))
                         {
