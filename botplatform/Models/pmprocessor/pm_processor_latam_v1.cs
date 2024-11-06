@@ -244,7 +244,7 @@ namespace botplatform.Models.pmprocessor
                 logger.err(geotag, $"Update: {source} {tg_user_id} user not found");
             }
 
-            if (user == null /*|| !user.ai_on*/)
+            if (user == null || !user.ai_on)
                 return;
 
             logger.dbg(geotag, $"Update: {source} {tg_user_id} {response_code} message={message}");
@@ -327,7 +327,7 @@ namespace botplatform.Models.pmprocessor
             }
             catch (Exception ex)
             {
-                logger.err(geotag, $"Update: {ex.Message}");
+                logger.err(geotag, $"Update: id={tg_user_id} code={response_code} {ex.Message}");
             }
         }
     }
