@@ -866,7 +866,7 @@ namespace botplatform.Models.pmprocessor
                 logger.err(geotag, $"Update: {source} {tg_user_id} user not found");
             }
 
-            if (user == null /*|| !user.ai_on*/)
+            if (user == null || !user.ai_on)
                 return;
 
             logger.dbg(geotag, $"Update: {source} {tg_user_id} {response_code} ismessage={!string.IsNullOrEmpty(message)}");

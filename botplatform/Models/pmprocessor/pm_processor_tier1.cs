@@ -25,7 +25,8 @@ namespace botplatform.Models.pmprocessor
 
         public override Task Start()
         {
-            return base.Start().ContinueWith(t => {
+            return base.Start().ContinueWith(t =>
+            {
                 businessUpdatesCheckTimer?.Start();
             });
         }
@@ -109,7 +110,8 @@ namespace botplatform.Models.pmprocessor
                         {
                             dbStorage.updateUserData(geotag, chat, ai_on: false, ai_off_code: "DATE");
                             await processAIState(chat, false);
-                        } else
+                        }
+                        else
                         {
                             //await notifyAIstate(chat, true);
                         }
@@ -125,7 +127,7 @@ namespace botplatform.Models.pmprocessor
                 if (!user.ai_on)
                     return;
 
-                await notifyAIEnabled(chat);    
+                await notifyAIEnabled(chat);
 
                 //var counter = user.message_counter;
                 //dbStorage.updateUserData(geotag, chat, message_counter: ++counter);
@@ -149,7 +151,7 @@ namespace botplatform.Models.pmprocessor
                 //                await Task.Delay(30000);
                 //                var id = await m.Send(chat, bot, bcid: bcId);
                 //                await bot.PinChatMessageAsync(chat, id, businessConnectionId: bcId);
-                                
+
                 //            } catch (Exception ex)
                 //            {
                 //                logger.err(geotag, $"sendLinkMesage: {ex.Message}");
@@ -255,7 +257,7 @@ namespace botplatform.Models.pmprocessor
                 logger.err(geotag, $"Update: {source} {tg_user_id} user not found");
             }
 
-            if (user == null /*|| !user.ai_on*/)
+            if (user == null || !user.ai_on)
                 return;
 
             logger.dbg(geotag, $"Update: {source} {tg_user_id} {response_code} ismessage={!string.IsNullOrEmpty(message)}");
@@ -267,27 +269,11 @@ namespace botplatform.Models.pmprocessor
                 {
                     case "DIALOG_END":
                         dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
-                        try
-                        {
-                            await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
-                        }
-                        catch (Exception ex)
-                        {
-                        }
-
                         await processAIState(tg_user_id, false, code: "DIALOG_END");
                         break;
 
                     case "DIALOG_ERROR":
                         dbStorage.updateUserData(geotag, tg_user_id, ai_on: false, ai_off_code: response_code);
-                        try
-                        {
-                            await server.LeadDistributeRequest(tg_user_id, geotag, AssignmentTypes.RD);
-                        }
-                        catch (Exception ex)
-                        {
-
-                        }
                         await processAIState(tg_user_id, false, code: "DIALOG_ERROR");
                         return;
 
@@ -295,11 +281,30 @@ namespace botplatform.Models.pmprocessor
                         break;
                 }
 
-
-                if (!string.IsNullOrEmpty(message) || !string.IsNullOrEmpty(response_code))
+                var _ = Task.Run(async () =>
                 {
-                    await Task.Run(async () =>
+
+                    try
                     {
+                        if (response_code.Contains("PUSH"))
+                        {
+                            var m = MessageProcessor.GetMessage(response_code);
+                            if (m != null)
+                            {
+                                try
+                                {
+                                    int id = await m.Send(tg_user_id, bot, bcid: user.bcId);
+                                    logger.inf(geotag, $"Push: {tg_user_id} {response_code}");
+                                }
+                                catch (Exception ex)
+                                {
+
+                                    logger.err(geotag, $"Update: {ex.Message}");
+                                }
+                            }
+
+                            return;
+                        }
 
                         if (!response_code.Equals("UNKNOWN"))
                         {
@@ -351,7 +356,8 @@ namespace botplatform.Models.pmprocessor
                                 var linkData = await ai.GetLink(geotag, tg_user_id);
                                 var link = $"{linkData.link}?uuid={linkData.uuid}";
 
-                                await Task.Run(async () => {
+                                await Task.Run(async () =>
+                                {
                                     try
                                     {
                                         var m = MessageProcessor.GetMessage("LINK", link: link);
@@ -374,8 +380,13 @@ namespace botplatform.Models.pmprocessor
 
                         }
 
-                    });
-                }
+                    } catch (Exception ex)
+                    {
+                        logger.err(geotag, $"Update send: {ex.Message}");
+                    }
+
+                });
+
 
             }
             catch (Exception ex)
