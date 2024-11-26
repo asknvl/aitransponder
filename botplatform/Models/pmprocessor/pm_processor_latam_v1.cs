@@ -79,6 +79,7 @@ namespace botplatform.Models.pmprocessor
                     try
                     {
                         await server.MarkFollowerMadeFeedback(geotag, chat, fn, ln, un, fb_event: isNew);
+                        logger.inf(geotag, $"markFolloweMadeFeedBack: {chat} {fn} {ln} need_event={isNew}");
                     }
                     catch (Exception ex)
                     {
