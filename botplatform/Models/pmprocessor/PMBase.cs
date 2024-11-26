@@ -415,11 +415,14 @@ namespace botplatform.Models.pmprocessor
                         //await ai.SendHistoryToAI(geotag, chat, fn, ln, un, hitem);
                         await ai.SendToAI(geotag, chat, fn, ln, un, message: text, direction: direction);
 
+
                         logger.inf(geotag, $"{fn} {ln} {un} {chat}>{text}");
                     }
                     catch (Exception ex)
                     {
+                        await processAIState(chat, false, "ERROR");
                         logger.err(geotag, $"processBusiness: {ex.Message}");
+                        return;
                     }
 
                     await Task.Delay(random.Next(5, 21) * 1000);
