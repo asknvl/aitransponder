@@ -19,7 +19,7 @@ namespace asknvl.server
         Task<List<getIdUserInfoDto>> GetUserInfoByPlayerId(string player_id);
         Task<List<subscriptionDto>> GetFollowerSubscriprion(string geotag, long tg_id);
         Task LeadDistributeRequest(long tg_id, string geotag, AssignmentTypes type);
-        Task MarkFollowerMadeFeedback(string geotag, long id, string? fn = null, string? ln = null, string? un = null);
+        Task MarkFollowerMadeFeedback(string geotag, long id, string? fn = null, string? ln = null, string? un = null, bool? fb_event = null);
         Task MarkFollowerWasReplied(string geotag, long id);
         Task MarkChatWasDeleted(string geotag, long id);
     }

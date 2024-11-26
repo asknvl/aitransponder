@@ -467,6 +467,8 @@ namespace asknvl.server
             public string? firstname { get; set; } = null;
             [JsonProperty]
             public string? lastname { get; set; } = null;
+            [JsonProperty]
+            public bool? fb_event_send_message { get; set; } = null;    
         }
         public class tgUsersStatesDto
         {
@@ -474,11 +476,12 @@ namespace asknvl.server
             public List<tgUserStateDto> users { get; set; } = new();
         }
 
-        public virtual async Task MarkFollowerMadeFeedback(string geotag, long id, string? fn = null, string? ln = null, string? un = null)
+        public virtual async Task MarkFollowerMadeFeedback(string geotag, long id, string? fn = null, string? ln = null, string? un = null, bool? fb_event = null)
         {
 
             tgUsersStatesDto feedback = new();
-            feedback.users.Add(new tgUserStateDto()
+
+            var userStatus = new tgUserStateDto()
             {
                 tg_user_id = id,
                 tg_geolocation = geotag,
@@ -487,7 +490,12 @@ namespace asknvl.server
                 firstname = fn,
                 lastname = ln,
                 username = un,
-            });
+            };
+
+            if (fb_event == true)
+                userStatus.fb_event_send_message = true;
+
+            feedback.users.Add(userStatus);
 
             string json = JsonConvert.SerializeObject(feedback, Formatting.Indented, new JsonSerializerSettings
             {
