@@ -86,7 +86,7 @@ namespace botplatform.Models.pmprocessor
 
                     try
                     {
-                        await server.MarkFollowerMadeFeedback(geotag, chat, fn, ln, un);
+                        await server.MarkFollowerMadeFeedback(geotag, chat, fn, ln, un, fb_event: isNew);
                     }
                     catch (Exception ex)
                     {
