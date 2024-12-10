@@ -87,6 +87,7 @@ namespace botplatform.Models.pmprocessor
                     try
                     {
                         await server.MarkFollowerMadeFeedback(geotag, chat, fn, ln, un, fb_event: isNew);
+                        logger.inf(geotag, $"markFolloweMadeFeedBack: {chat} {fn} {ln} need_event={isNew}");
                     }
                     catch (Exception ex)
                     {
@@ -176,7 +177,7 @@ namespace botplatform.Models.pmprocessor
 
                         var _ = Task.Run(async () =>
                         {
-                            await Task.Delay(20000);
+                            await Task.Delay(40000);
                             await bot.SendChatActionAsync(chat, ChatAction.Typing, businessConnectionId: user.bcId);
                             await Task.Delay(5000);
                             await bot.SendChatActionAsync(chat, ChatAction.Typing, businessConnectionId: user.bcId);
@@ -345,40 +346,40 @@ namespace botplatform.Models.pmprocessor
                         dbStorage.updateUserData(geotag, tg_user_id, message_counter: ++counter);
                         logger.warn(geotag, $"updateCounter: {tg_user_id} {user.fn} {user.ln} counter={counter}");
 
-                        if (counter == 2)
-                        {
-                            logger.warn(geotag, $"linkMessage: {tg_user_id} {user.fn} {user.ln} counter={counter}");
+                        //if (counter == 2)
+                        //{
+                        //    logger.warn(geotag, $"linkMessage: {tg_user_id} {user.fn} {user.ln} counter={counter}");
 
-                            try
-                            {
-                                //https://raceup-top1.space?uuid=o497t4gjzt
+                        //    try
+                        //    {
+                        //        //https://raceup-top1.space?uuid=o497t4gjzt
 
-                                var linkData = await ai.GetLink(geotag, tg_user_id);
-                                var link = $"{linkData.link}?uuid={linkData.uuid}";
+                        //        var linkData = await ai.GetLink(geotag, tg_user_id);
+                        //        var link = $"{linkData.link}?uuid={linkData.uuid}";
 
-                                await Task.Run(async () =>
-                                {
-                                    try
-                                    {
-                                        var m = MessageProcessor.GetMessage("LINK", link: link);
-                                        await Task.Delay(3000);
-                                        var id = await m.Send(tg_user_id, bot, bcid: user.bcId);
-                                        await bot.PinChatMessageAsync(tg_user_id, id, businessConnectionId: user.bcId);
+                        //        await Task.Run(async () =>
+                        //        {
+                        //            try
+                        //            {
+                        //                var m = MessageProcessor.GetMessage("LINK", link: link);
+                        //                await Task.Delay(3000);
+                        //                var id = await m.Send(tg_user_id, bot, bcid: user.bcId);
+                        //                await bot.PinChatMessageAsync(tg_user_id, id, businessConnectionId: user.bcId);
 
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        logger.err(geotag, $"sendLinkMesage: {ex.Message}");
-                                    }
-                                });
+                        //            }
+                        //            catch (Exception ex)
+                        //            {
+                        //                logger.err(geotag, $"sendLinkMesage: {ex.Message}");
+                        //            }
+                        //        });
 
-                            }
-                            catch (Exception ex)
-                            {
-                                logger.err(geotag, $"linkMessage: {tg_user_id} {user.fn} {user.ln} {ex.Message}");
-                            }
+                        //    }
+                        //    catch (Exception ex)
+                        //    {
+                        //        logger.err(geotag, $"linkMessage: {tg_user_id} {user.fn} {user.ln} {ex.Message}");
+                        //    }
 
-                        }
+                        //}
 
                     } catch (Exception ex)
                     {

@@ -15,7 +15,8 @@ namespace botplatform.Models
             PMType.support_pm,
             PMType.latam_pm,
             PMType.tier_1,
-            PMType.latam_pm_v1            
+            PMType.latam_pm_v1,
+            PMType.tier_1_events
        };
     }
 }

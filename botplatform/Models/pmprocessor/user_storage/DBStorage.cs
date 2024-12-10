@@ -59,21 +59,17 @@ namespace botplatform.Models.pmprocessor.db_storage
                 var found = context.Users.FirstOrDefault(u => u.geotag.Equals(geotag) && u.tg_id == tg_id);
                 if (found != null)
                 {
-
-                    bool needProcess = (!found.is_first_msg_rep || found.is_chat_deleted);
-
                     if (!string.IsNullOrEmpty(bcId) && found.bcId != bcId)
                     {
                         found.bcId = bcId;
                         context.SaveChanges();
                     }
-                    return (found, needProcess);
+                    return (found, false);
                 }
                 else
                 {
                     User user = new User(geotag, tg_id, bcId, fn: fn, ln: ln, un: un);
                     user.ai_on = false;
-
                     context.Users.Add(user);
                     context.SaveChanges();
                     return (user, true);

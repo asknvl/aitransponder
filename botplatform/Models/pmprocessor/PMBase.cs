@@ -425,7 +425,7 @@ namespace botplatform.Models.pmprocessor
                         return;
                     }
 
-                    await Task.Delay(random.Next(5, 21) * 1000);
+                    await Task.Delay(random.Next(20, 40) * 1000);
                     try
                     {
                         await marker?.MarkAsRead(chat);
@@ -509,6 +509,7 @@ namespace botplatform.Models.pmprocessor
                     try
                     {
                         await server.MarkFollowerMadeFeedback(geotag, chat, fn, ln, un, fb_event: isNew);
+                        logger.inf(geotag, $"markFolloweMadeFeedBack: {chat} {fn} {ln} need_event={isNew}");
                     } catch (Exception ex)
                     {
                         logger.err(geotag, $"{ex.Message}");

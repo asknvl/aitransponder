@@ -19,7 +19,8 @@ namespace botplatform.Models.pmprocessor
         support_pm,
         latam_pm,
         tier_1,
-        latam_pm_v1
+        latam_pm_v1,
+        tier_1_events
     }
 
 }
