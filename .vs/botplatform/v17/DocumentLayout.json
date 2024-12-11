@@ -250,8 +250,7 @@
               "RelativeToolTip": "botplatform\\Models\\common.cs",
               "ViewState": "AQIAAAQAAAAAAAAAAAAawBAAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T20:20:49.635Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-07T20:20:49.635Z"
             },
             {
               "$type": "Document",
@@ -259,9 +258,9 @@
               "Title": "pm_processor_tier1.cs",
               "DocumentMoniker": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\pm_processor_tier1.cs",
               "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\pm_processor_tier1.cs",
-              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\pm_processor_tier1.cs",
-              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\pm_processor_tier1.cs",
-              "ViewState": "AQIAAKIAAAAAAAAAAAAMwLMAAAAuAAAA",
+              "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\pm_processor_tier1.cs*",
+              "RelativeToolTip": "botplatform\\Models\\pmprocessor\\pm_processor_tier1.cs*",
+              "ViewState": "AQIAAG0BAAAAMDMzM7MSwGgBAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-29T07:32:22.454Z",
               "EditorCaption": ""
@@ -416,7 +415,7 @@
               "RelativeDocumentMoniker": "botplatform\\Models\\pmprocessor\\PMBase.cs",
               "ToolTip": "C:\\sources\\aitransponder\\botplatform\\Models\\pmprocessor\\PMBase.cs",
               "RelativeToolTip": "botplatform\\Models\\pmprocessor\\PMBase.cs",
-              "ViewState": "AQIAAJEBAAAAAAAAAAAAwKsBAAAyAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAKsBAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-04T19:12:30.184Z",
               "EditorCaption": ""
@@ -431,8 +430,7 @@
               "RelativeToolTip": "botplatform\\Models\\pmprocessor\\pm_processor_tier1_events.cs",
               "ViewState": "AQIAAD8AAAAAMzMzMzMXwE8AAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-29T07:36:32.101Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-29T07:36:32.101Z"
             },
             {
               "$type": "Document",
