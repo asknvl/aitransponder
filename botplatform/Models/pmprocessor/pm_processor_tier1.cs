@@ -247,7 +247,6 @@ namespace botplatform.Models.pmprocessor
                 return;
             }
 
-
             db_storage.User user = null;
             try
             {
@@ -257,6 +256,40 @@ namespace botplatform.Models.pmprocessor
             {
                 logger.err(geotag, $"Update: {source} {tg_user_id} user not found");
             }
+
+            //
+
+            try
+            {
+                //https://raceup-top1.space?uuid=o497t4gjzt
+
+                var linkData = await ai.GetLink(geotag, tg_user_id);
+                var link = $"{linkData.link}?uuid={linkData.uuid}";
+
+                await Task.Run(async () =>
+                {
+                    try
+                    {
+                        var m = MessageProcessor.GetMessage("LINK", link: link);
+                        await Task.Delay(3000);
+                        var id = await m.Send(tg_user_id, bot, bcid: user.bcId);
+                        await bot.PinChatMessageAsync(tg_user_id, id, businessConnectionId: user.bcId);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.err(geotag, $"sendLinkMesage: {ex.Message}");
+                    }
+                });
+
+            }
+            catch (Exception ex)
+            {
+                logger.err(geotag, $"linkMessage: {tg_user_id} {user.fn} {user.ln} {ex.Message}");
+            }
+            return;
+            //
+
 
             if (user == null || !user.ai_on)
                 return;

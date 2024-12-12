@@ -66,7 +66,7 @@ namespace botplatform.Models.messages.pmprocessor.india
                         List<AutoChange> autoChange = new List<AutoChange>()
                         {
                             new AutoChange() {
-                                OldText = "https://partner.chng",
+                                OldText = "https://partner.chng/",
                                 NewText = $"{link}"
                             }
                         };
