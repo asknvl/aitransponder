@@ -19,7 +19,7 @@ namespace botplatform.Models.pmprocessor
     public class pm_processor_latam_v1 : PMBase, IAutoReplyObserver
     {
         public pm_processor_latam_v1(PmModel model, IPMStorage pmStorage, IDBStorage dbStorage, ILogger logger) : base(model, pmStorage, dbStorage, logger, direction: "latam")
-        {
+        {            
         }
 
         public override async Task processBusiness(Update update)
@@ -88,7 +88,7 @@ namespace botplatform.Models.pmprocessor
 
                     try
                     {
-                        user.ai_on = await checkNeedProcess(chat, fn, ln, un);
+                        user.ai_on = await checkNeedProcess(chat, fn, ln, un) && is_ai_enabled;
                     }
                     catch (Exception ex)
                     {
@@ -102,7 +102,8 @@ namespace botplatform.Models.pmprocessor
                         if (!user.ai_on)
                         {
                             dbStorage.updateUserData(geotag, chat, ai_on: false, ai_off_code: "DATE");
-                            await processAIState(chat, false);
+                            if (is_ai_enabled)
+                                await processAIState(chat, false);
                         }
                         else
                         {
@@ -245,7 +246,7 @@ namespace botplatform.Models.pmprocessor
                 logger.err(geotag, $"Update: {source} {tg_user_id} user not found");
             }
 
-            if (user == null || !user.ai_on)
+            if (user == null || !user.ai_on || !is_ai_enabled)
                 return;
 
             logger.dbg(geotag, $"Update: {source} {tg_user_id} {response_code} message={message}");
@@ -284,7 +285,8 @@ namespace botplatform.Models.pmprocessor
                                     int id = await m.Send(tg_user_id, bot, bcid: user.bcId);
                                     logger.inf(geotag, $"Push: {tg_user_id} {response_code}");
                                 }
-                                catch (Exception ex) {
+                                catch (Exception ex)
+                                {
 
                                     logger.err(geotag, $"Update: {ex.Message}");
                                 }
@@ -293,7 +295,7 @@ namespace botplatform.Models.pmprocessor
                             return;
                         }
 
-                        if (!response_code.Equals("UNKNOWN"))
+                        if (!response_code.Equals("UNKNOWN") && !response_code.Contains("PUSH"))
                         {
                             await sendStatusMessage(tg_user_id, user.bcId, response_code, message);                            
                         } else

@@ -157,6 +157,13 @@ namespace botplatform.Models.pmprocessor
             get => messageProcessor;
             set => this.RaiseAndSetIfChanged(ref messageProcessor, value);
         }
+
+        bool _is_ai_enabled = true;
+        public bool is_ai_enabled
+        {
+            get => _is_ai_enabled;
+            set => this.RaiseAndSetIfChanged(ref _is_ai_enabled, value);
+        }
         #endregion
 
         #region commands
@@ -182,7 +189,7 @@ namespace botplatform.Models.pmprocessor
             phone_number = model.phone_number;
             bot_token = model.bot_token;
             posting_type = model.posting_type;
-
+            is_ai_enabled = model.is_ai_enabled;
             startDate = model.start_date;
 
             quoteProcessor = new QuoteProcessor(geotag);
@@ -339,6 +346,10 @@ namespace botplatform.Models.pmprocessor
                                 var tg_user_id = long.Parse(splt[2]);
                                 var status = splt[3].Equals("ON");
                                 var code = "MANUAL";
+
+                                if (!is_ai_enabled && status)
+                                    return;
+
                                 dbStorage.updateUserData(geotag, tg_user_id, ai_on: status, ai_off_code: code);
                                 await processAIState(tg_user_id, status, code);
                                 break;
