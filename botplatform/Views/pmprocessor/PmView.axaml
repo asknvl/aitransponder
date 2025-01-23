@@ -83,6 +83,17 @@
                     SelectedItem="{Binding posting_type}">
                 </ComboBox>
             </Grid>
+            <Grid
+                ColumnDefinitions="100, 220">
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="0">
+                    ИИ обработка:
+                </TextBlock>
+                <CheckBox
+                    Grid.Column="1"
+                    IsChecked="{Binding is_ai_enabled}"/>
+            </Grid>
         </StackPanel>
         <Grid
             ColumnDefinitions="Auto, Auto, Auto"

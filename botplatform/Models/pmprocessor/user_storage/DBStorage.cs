@@ -102,6 +102,18 @@ namespace botplatform.Models.pmprocessor.db_storage
             return res;
         }
 
+        public List<User> getAIUsers(string geotag)
+        {
+            List<User> users = new();
+
+            lock (lockObject)
+            {
+                users = context.Users.Where(u => u.geotag.Equals(geotag) && u.ai_on).ToList();
+            }
+
+            return users;
+        }
+
         public void updateUserData(string geotag,
                                long tg_id,
                                bool? ai_on = null,

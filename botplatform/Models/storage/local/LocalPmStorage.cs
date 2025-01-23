@@ -73,6 +73,8 @@ namespace botplatform.Models.storage.local
                     found.bot_token = pm.bot_token;
                     found.phone_number = pm.phone_number;                    
                     found.posting_type = pm.posting_type;
+                    found.is_ai_enabled = pm.is_ai_enabled;
+                    found.start_date = pm.start_date;
 
                     storage.save(PmModels);
                 }

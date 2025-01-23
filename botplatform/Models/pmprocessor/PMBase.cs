@@ -28,6 +28,8 @@ using System.IO;
 using SkiaSharp;
 using botplatform.Models.diagnostics;
 using TL;
+using Avalonia.X11;
+using DynamicData;
 
 namespace botplatform.Models.pmprocessor
 {
@@ -162,7 +164,51 @@ namespace botplatform.Models.pmprocessor
         public bool is_ai_enabled
         {
             get => _is_ai_enabled;
-            set => this.RaiseAndSetIfChanged(ref _is_ai_enabled, value);
+            set
+            {
+
+                var model = new PmModel()
+                {
+                    geotag = geotag,
+                    phone_number = phone_number,
+                    bot_token = bot_token,
+                    posting_type = posting_type,
+                };
+
+                if (value)
+                    model.start_date = DateTime.Now.AddMinutes(5);
+                else
+                {
+                    _ = Task.Run(async () => { 
+                        try
+                        {
+                            var users = dbStorage.getAIUsers(geotag);                        
+                            foreach (var user in users)
+                            {
+                                try
+                                {
+                                    logger.inf(geotag, $"AI OFF {user.tg_id}");
+                                    dbStorage.updateUserData(geotag, user.tg_id, ai_on: false, ai_off_code: "ALL");
+                                    await processAIState(user.tg_id, false, "ALL");
+                                } catch (Exception ex)
+                                {
+                                    logger.err(geotag, $"AI off: {user.tg_id} {ex.Message}");
+                                }
+                            }
+                        } catch (Exception ex)
+                        {
+                            logger.err(geotag, $"AI off: {ex.Message}");
+                        }
+                    });
+                }
+
+                model.is_ai_enabled = value;
+
+                pmStorage.Update(geotag, model);
+
+                this.RaiseAndSetIfChanged(ref _is_ai_enabled, value);
+                logger.inf(geotag, $"is_ai_enabled={value}");
+            }
         }
         #endregion
 
