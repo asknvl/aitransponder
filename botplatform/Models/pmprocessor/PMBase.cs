@@ -176,13 +176,18 @@ namespace botplatform.Models.pmprocessor
                 };
 
                 if (value)
-                    model.start_date = DateTime.Now.AddMinutes(5);
+                {
+                    startDate = DateTime.Now.AddMinutes(5);
+                    model.start_date = startDate;
+                    
+                }
                 else
                 {
-                    _ = Task.Run(async () => { 
+                    _ = Task.Run(async () =>
+                    {
                         try
                         {
-                            var users = dbStorage.getAIUsers(geotag);                        
+                            var users = dbStorage.getAIUsers(geotag);
                             foreach (var user in users)
                             {
                                 try
@@ -190,12 +195,14 @@ namespace botplatform.Models.pmprocessor
                                     logger.inf(geotag, $"AI OFF {user.tg_id}");
                                     dbStorage.updateUserData(geotag, user.tg_id, ai_on: false, ai_off_code: "ALL");
                                     await processAIState(user.tg_id, false, "ALL");
-                                } catch (Exception ex)
+                                }
+                                catch (Exception ex)
                                 {
                                     logger.err(geotag, $"AI off: {user.tg_id} {ex.Message}");
                                 }
                             }
-                        } catch (Exception ex)
+                        }
+                        catch (Exception ex)
                         {
                             logger.err(geotag, $"AI off: {ex.Message}");
                         }
