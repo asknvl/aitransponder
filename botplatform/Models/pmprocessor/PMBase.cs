@@ -419,7 +419,7 @@ namespace botplatform.Models.pmprocessor
             }
         }
 
-        protected async Task<bool> checkNeedProcess(long chat, string fn, string ln, string un)
+        protected virtual async Task<bool> checkNeedProcess(long chat, string fn, string ln, string un)
         {
             bool needProcess = true;
             var userData = await server.GetFollowerSubscriprion(geotag, chat);

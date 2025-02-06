@@ -21,7 +21,8 @@ namespace botplatform.Models.pmprocessor
         latam_pm,
         tier_1,
         latam_pm_v1,
-        tier_1_events
+        tier_1_events,
+        inda_nonstop
     }
 
 }

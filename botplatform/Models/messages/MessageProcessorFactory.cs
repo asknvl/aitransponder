@@ -35,6 +35,9 @@ namespace botplatform.Models.messages
                 case PMType.latam_pm_v1:
                     return new MP_latam_v1(geotag, token, bot);
 
+                case PMType.inda_nonstop:
+                    return new MP_india_qual(geotag, token, bot);
+
                 default:
                     return null;
             }

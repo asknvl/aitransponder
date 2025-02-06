@@ -44,6 +44,9 @@ namespace botplatform.Models.pmprocessor
                 case PMType.tier_1_events:
                     return new pm_processor_tier1_events(model, pmStorage, dbStorage, logger);
 
+                case PMType.inda_nonstop:
+                    return new pm_processor_nostop(model, pmStorage, dbStorage, logger);
+
                 default:
                     throw new NotImplementedException();
             }
